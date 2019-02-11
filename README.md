@@ -38,10 +38,12 @@ You may also extend the recommended configuration like so:
 
 ```json
 {
-  "extends": ["wc/recommended"]
+  "extends": ["plugin:wc/recommended"]
 }
 ```
 
 # Supported Rules
 
-N/A
+* valid-element-name
+* no-self-class
+* no-constructor-handlers
