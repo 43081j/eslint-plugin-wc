@@ -1,6 +1,6 @@
 /**
  * @fileoverview Disallows closed shadow roots
- * @author James Garbutt <htttps://github.com/43081j>
+ * @author James Garbutt <https://github.com/43081j>
  */
 
 //------------------------------------------------------------------------------

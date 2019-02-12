@@ -3,6 +3,10 @@
 Closed shadow roots are very rarely used and can hinder development/interaction
 with an element.
 
+More information on closed shadow roots and why they may not be of much
+use can be found
+[here](https://developers.google.com/web/fundamentals/web-components/shadowdom#closed).
+
 ## Rule Details
 
 This rule disallows use of closed shadow roots on all elements.
