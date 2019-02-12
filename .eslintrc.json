@@ -9,8 +9,10 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "indent": "off",
     "max-len": ["error", {
-      "ignoreTemplateLiterals": true
+      "ignoreTemplateLiterals": true,
+      "ignoreStrings": true
     }],
     "no-unused-vars": "off",
     "spaced-comment": "off",
