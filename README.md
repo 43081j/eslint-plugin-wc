@@ -45,3 +45,4 @@ You may also extend the recommended configuration like so:
 # Supported Rules
 
 * [wc/no-constructor-attributes](docs/no-constructor-attributes.md)
+* [wc/no-closed-shadow-root](docs/no-closed-shadow-root.md)
