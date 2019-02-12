@@ -44,6 +44,4 @@ You may also extend the recommended configuration like so:
 
 # Supported Rules
 
-* valid-element-name
-* no-self-class
-* no-constructor-handlers
+* [wc/no-invalid-element-name](docs/no-invalid-element-name.md)

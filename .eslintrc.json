@@ -10,6 +10,7 @@
   ],
   "rules": {
     "max-len": ["error", {
+      "code": 80,
       "ignoreTemplateLiterals": true
     }],
     "no-unused-vars": "off",
