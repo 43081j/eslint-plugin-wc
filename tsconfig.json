@@ -14,10 +14,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*.ts",
-    "custom_types/*.d.ts"
-  ]
+  "include": ["src/**/*.ts", "custom_types/*.d.ts"]
 }
