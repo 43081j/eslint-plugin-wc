@@ -13,16 +13,26 @@ This rule disallows interaction with the DOM inside element constructors.
 The following patterns are considered warnings:
 
 ```ts
-constructor() {
-  this.setAttribute('foo', 'bar');
+class MyElement extends HTMLElement {
+  constructor() {
+    this.setAttribute('foo', 'bar');
+  }
 }
 ```
 
 The following patterns are not warnings:
 
 ```ts
-myMethod() {
-  this.setAttribute('foo', 'bar');
+class MyClass {
+  myMethod() {
+    this.setAttribute('foo', 'bar');
+  }
+}
+
+class OtherClass {
+  constructor() {
+    this.setAtrribute('foo', 'bar');
+  }
 }
 ```
 
