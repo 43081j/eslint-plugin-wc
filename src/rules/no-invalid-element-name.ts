@@ -52,20 +52,22 @@ const rule: Rule.RuleModule = {
             node.callee.property.name === 'define')
         ) {
           const firstArg = node.arguments[0];
-          if (firstArg && firstArg.type === 'Literal') {
-            if (typeof firstArg.value === 'string') {
-              const validationResult = validate(firstArg.value);
-              const options = context.options[0];
-              const isWarning =
-                !(options && options.loose) &&
-                validationResult.message !== undefined;
+          if (
+            firstArg &&
+            firstArg.type === 'Literal' &&
+            typeof firstArg.value === 'string'
+          ) {
+            const validationResult = validate(firstArg.value);
+            const options = context.options[0];
+            const isWarning =
+              !(options && options.loose) &&
+              validationResult.message !== undefined;
 
-              if (!validationResult.isValid || isWarning) {
-                context.report({
-                  message: validationResult.message,
-                  node: firstArg
-                });
-              }
+            if (!validationResult.isValid || isWarning) {
+              context.report({
+                message: validationResult.message,
+                node: firstArg
+              });
             }
           }
         }
