@@ -7,7 +7,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule = require('../../rules/no-invalid-element-name');
+import rule from '../../rules/no-invalid-element-name';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------
@@ -68,7 +68,8 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('my-App', class extends HTMLElement {})`,
       errors: [
         {
-          message: 'Custom element names must not contain uppercase ASCII characters.',
+          message:
+            'Custom element names must not contain uppercase ASCII characters.',
           line: 1,
           column: 23
         }
@@ -78,7 +79,8 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('app', class extends HTMLElement {})`,
       errors: [
         {
-          message: 'Custom element names must contain a hyphen. Example: unicorn-cake',
+          message:
+            'Custom element names must contain a hyphen. Example: unicorn-cake',
           line: 1,
           column: 23
         }
@@ -128,7 +130,8 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('polymer-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: 'Custom element names should not start with `polymer-`.\nSee: http://webcomponents.github.io/articles/how-should-i-name-my-element',
+          message:
+            'Custom element names should not start with `polymer-`.\nSee: http://webcomponents.github.io/articles/how-should-i-name-my-element',
           line: 1,
           column: 23
         }
@@ -138,7 +141,8 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('x-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: 'Custom element names should not start with `x-`.\nSee: http://webcomponents.github.io/articles/how-should-i-name-my-element/',
+          message:
+            'Custom element names should not start with `x-`.\nSee: http://webcomponents.github.io/articles/how-should-i-name-my-element/',
           line: 1,
           column: 23
         }
@@ -148,7 +152,8 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('ng-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: 'Custom element names should not start with `ng-`.\nSee: http://docs.angularjs.org/guide/directive#creating-directives',
+          message:
+            'Custom element names should not start with `ng-`.\nSee: http://docs.angularjs.org/guide/directive#creating-directives',
           line: 1,
           column: 23
         }
@@ -178,7 +183,8 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('my--app', class extends HTMLElement {})`,
       errors: [
         {
-          message: 'Custom element names should not contain consecutive hyphens.',
+          message:
+            'Custom element names should not contain consecutive hyphens.',
           line: 1,
           column: 23
         }
