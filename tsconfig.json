@@ -16,8 +16,5 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src/**/*.ts",
-    "custom_types/*.d.ts"
-  ]
+  "include": ["custom_typings/*.d.ts", "src/**/*.ts"]
 }

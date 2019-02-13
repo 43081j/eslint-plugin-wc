@@ -16,9 +16,7 @@ Add `wc` to the plugins section of your `.eslintrc` file:
 
 ```json
 {
-  "plugins": [
-    "wc"
-  ]
+  "plugins": ["wc"]
 }
 ```
 
@@ -44,5 +42,6 @@ You may also extend the recommended configuration like so:
 
 # Supported Rules
 
-* [wc/no-constructor-attributes](docs/no-constructor-attributes.md)
-* [wc/no-closed-shadow-root](docs/no-closed-shadow-root.md)
+- [wc/no-constructor-attributes](docs/no-constructor-attributes.md)
+- [wc/no-closed-shadow-root](docs/no-closed-shadow-root.md)
+- [wc/no-invalid-element-name](docs/no-invalid-element-name.md)

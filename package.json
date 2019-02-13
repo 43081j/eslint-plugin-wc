@@ -26,7 +26,9 @@
     "url": "https://github.com/43081j/eslint-plugin-wc/issues"
   },
   "homepage": "https://github.com/43081j/eslint-plugin-wc#readme",
-  "dependencies": {},
+  "dependencies": {
+    "validate-element-name": "^2.1.1"
+  },
   "peerDependencies": {
     "eslint": ">= 5"
   },
