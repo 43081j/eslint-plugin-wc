@@ -49,22 +49,24 @@ const rule: Rule.RuleModule = {
           (node.callee.object.type === 'Identifier' &&
             node.callee.object.name === 'customElements') &&
           (node.callee.property.type === 'Identifier' &&
-            node.callee.property.name === 'define') &&
-          node.arguments[0] &&
-          node.arguments[0].type === 'Literal'
+            node.callee.property.name === 'define')
         ) {
-          // @ts-ignore
-          const validationResult = validate(node.arguments[0].value);
+          const firstArg = node.arguments[0];
+          if (firstArg && firstArg.type === 'Literal') {
+            if (typeof firstArg.value === 'string') {
+              const validationResult = validate(firstArg.value);
+              const options = context.options[0];
+              const isWarning =
+                !(options && options.loose) &&
+                validationResult.message !== undefined;
 
-          const isWarning =
-            !(context.options[0] && context.options[0].loose) &&
-            validationResult.message !== undefined;
-
-          if (!validationResult.isValid || isWarning) {
-            context.report({
-              message: validationResult.message,
-              node: node.arguments[0]
-            });
+              if (!validationResult.isValid || isWarning) {
+                context.report({
+                  message: validationResult.message,
+                  node: firstArg
+                });
+              }
+            }
           }
         }
       }
