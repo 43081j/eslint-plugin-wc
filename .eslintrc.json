@@ -10,6 +10,7 @@
   ],
   "rules": {
     "indent": "off",
+    "quote-props": "off",
     "max-len": ["error", {
       "ignoreTemplateLiterals": true,
       "ignoreStrings": true
