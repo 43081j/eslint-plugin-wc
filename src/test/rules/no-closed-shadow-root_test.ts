@@ -20,6 +20,9 @@ const ruleTester = new RuleTester({
   }
 });
 
+const errorMessage =
+  'Closed shadow roots are rarely needed and generally not recommended';
+
 ruleTester.run('no-closed-shadow-root', rule, {
   valid: [
     {code: `this.attachShadow({ mode: 'open' })`},
@@ -33,9 +36,7 @@ ruleTester.run('no-closed-shadow-root', rule, {
       code: `this.attachShadow({ mode: 'closed' })`,
       errors: [
         {
-          message:
-            'Closed shadow roots are rarely needed and generally ' +
-            'not recommended',
+          message: errorMessage,
           line: 1,
           column: 21
         }
@@ -45,9 +46,7 @@ ruleTester.run('no-closed-shadow-root', rule, {
       code: `this.attachShadow({ 'mode': 'closed' })`,
       errors: [
         {
-          message:
-            'Closed shadow roots are rarely needed and generally ' +
-            'not recommended',
+          message: errorMessage,
           line: 1,
           column: 21
         }
@@ -57,9 +56,7 @@ ruleTester.run('no-closed-shadow-root', rule, {
       code: `foo.bar.baz.attachShadow({ mode: 'closed' })`,
       errors: [
         {
-          message:
-            'Closed shadow roots are rarely needed and generally ' +
-            'not recommended',
+          message: errorMessage,
           line: 1,
           column: 28
         }
@@ -69,9 +66,7 @@ ruleTester.run('no-closed-shadow-root', rule, {
       code: `function f(n) { n.attachShadow({ mode: 'closed' }); }`,
       errors: [
         {
-          message:
-            'Closed shadow roots are rarely needed and generally ' +
-            'not recommended',
+          message: errorMessage,
           line: 1,
           column: 34
         }
@@ -85,9 +80,7 @@ ruleTester.run('no-closed-shadow-root', rule, {
       })`,
       errors: [
         {
-          message:
-            'Closed shadow roots are rarely needed and generally ' +
-            'not recommended',
+          message: errorMessage,
           line: 3,
           column: 9
         }
