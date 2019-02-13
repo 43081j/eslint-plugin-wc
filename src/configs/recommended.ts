@@ -1,8 +1,7 @@
 const config = {
   plugins: ['wc'],
 
-  rules: {
-  }
+  rules: {}
 };
 
 export default config;

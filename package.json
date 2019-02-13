@@ -8,7 +8,7 @@
     "build": "npm run lint && tsc",
     "build:watch": "tsc -w",
     "test": "mocha \"lib/test/**/*_test.js\"",
-    "format": "prettier --write src/**/*.ts"
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
