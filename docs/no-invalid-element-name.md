@@ -41,4 +41,4 @@ customElements.define('my--app', class extends HTMLElement {});
 
 ## When Not To Use It
 
-You should always use this rule, however for relaxed yet still valid names use the `loose` option.
+If you wish to allow any names to be used for elements, you should not use this rule.
