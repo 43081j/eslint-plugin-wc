@@ -5,7 +5,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-const validate = require('validate-element-name');
+import validate = require('validate-element-name');
 
 //------------------------------------------------------------------------------
 // Rule Definition

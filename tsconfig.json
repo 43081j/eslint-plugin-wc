@@ -17,5 +17,5 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "custom_types/*.d.ts"]
+  "include": ["custom_typings/*.d.ts", "src/**/*.ts", "custom_types/*.d.ts"]
 }
