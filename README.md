@@ -43,6 +43,7 @@ You may also extend the recommended configuration like so:
 # Supported Rules
 
 - [wc/attach-shadow-constructor](docs/rules/attach-shadow-constructor.md)
+- [wc/guard-super-call](docs/rules/guard-super-call.md)
 - [wc/no-constructor-attributes](docs/rules/no-constructor-attributes.md)
 - [wc/no-closed-shadow-root](docs/rules/no-closed-shadow-root.md)
 - [wc/no-invalid-element-name](docs/rules/no-invalid-element-name.md)
