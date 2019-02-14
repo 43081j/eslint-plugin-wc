@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "ESLint plugin for Web Components",
   "main": "lib/index.js",
+  "files": [
+    "lib/!(test)",
+    "docs/"
+  ],
   "scripts": {
     "lint": "eslint \"src/**/*.ts\"",
     "build": "npm run lint && tsc",
@@ -20,7 +24,7 @@
     "webcomponents",
     "wc"
   ],
-  "author": "James Garbutt <https://github.com/43081j>",
+  "author": "James Garbutt (https://github.com/43081j)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/43081j/eslint-plugin-wc/issues"
