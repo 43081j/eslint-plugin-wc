@@ -5,8 +5,7 @@
   "main": "lib/index.js",
   "files": [
     "lib/",
-    "docs/",
-    "README.md"
+    "docs/"
   ],
   "scripts": {
     "lint": "eslint \"src/**/*.ts\"",
