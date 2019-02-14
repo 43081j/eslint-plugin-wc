@@ -25,7 +25,7 @@
     "webcomponents",
     "wc"
   ],
-  "author": "James Garbutt <https://github.com/43081j>",
+  "author": "James Garbutt (https://github.com/43081j)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/43081j/eslint-plugin-wc/issues"
