@@ -4,7 +4,7 @@
   "description": "ESLint plugin for Web Components",
   "main": "lib/index.js",
   "files": [
-    "lib/",
+    "lib/!(test)",
     "docs/"
   ],
   "scripts": {
