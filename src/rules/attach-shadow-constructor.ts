@@ -1,5 +1,5 @@
 /**
- * @fileoverview Disallows attaching shadow root outside of the constructor
+ * @fileoverview Disallows attaching a shadow root outside the constructor
  * @author Michael Stramel <https://github.com/stramel>
  */
 
@@ -14,10 +14,10 @@ import {isCustomElement} from '../util';
 const rule: Rule.RuleModule = {
   meta: {
     docs: {
-      description: 'Disallows attaching shadow root outside of the constructor',
+      description: 'Disallows attaching a shadow root outside the constructor',
       category: 'Best Practices',
       url:
-        'https://developers.google.com/web/fundamentals/web-components/best-practices#create-your-shadow-root-in-the-constructor'
+        'https://github.com/43081j/eslint-plugin-lit/blob/master/docs/rules/attach-shadow-constructor.md'
     },
     messages: {
       attachShadowConstructor:

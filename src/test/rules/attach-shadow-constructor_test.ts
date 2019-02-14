@@ -50,6 +50,13 @@ ruleTester.run('attach-shadow-constructor', rule, {
         this.attachShadow({ mode: 'open'});
       }
     }`
+    },
+    {
+      code: `class A extends HTMLElement {
+      initialize(node) {
+        node.attachShadow({ mode: 'open'});
+      }
+    }`
     }
     // {
     //   code: `/**
