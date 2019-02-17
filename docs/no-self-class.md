@@ -18,6 +18,7 @@ class MyElement extends HTMLElement {
   method() {
     this.classList.add('foo');
     this.className += 'bar';
+    this.setAttribute('class', 'baz');
   }
 }
 ```
@@ -29,6 +30,7 @@ class MyElement extends HTMLElement {
   method(node) {
     node.classList.add('foo');
     node.className += 'bar';
+    node.setAttribute('class', 'baz');
   }
 }
 
