@@ -42,14 +42,21 @@ const rule: Rule.RuleModule = {
      * @return {boolean}
      */
     function isBannedCallExpr(node: ESTree.CallExpression): boolean {
+      const firstArg = node.arguments[0];
       return (
         node.callee.type === 'MemberExpression' &&
-        node.callee.object.type === 'MemberExpression' &&
-        node.callee.object.object.type === 'ThisExpression' &&
-        node.callee.object.property.type === 'Identifier' &&
-        node.callee.object.property.name === 'classList' &&
-        node.callee.property.type === 'Identifier' &&
-        bannedClassListMethods.includes(node.callee.property.name)
+        ((node.callee.object.type === 'MemberExpression' &&
+          node.callee.object.object.type === 'ThisExpression' &&
+          node.callee.object.property.type === 'Identifier' &&
+          node.callee.object.property.name === 'classList' &&
+          node.callee.property.type === 'Identifier' &&
+          bannedClassListMethods.includes(node.callee.property.name)) ||
+          (node.callee.object.type === 'ThisExpression' &&
+            node.callee.property.type === 'Identifier' &&
+            node.callee.property.name === 'setAttribute' &&
+            firstArg !== undefined &&
+            firstArg.type === 'Literal' &&
+            firstArg.value === 'class'))
       );
     }
 

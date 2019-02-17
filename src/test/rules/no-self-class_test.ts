@@ -68,6 +68,13 @@ ruleTester.run('no-self-class', rule, {
         node.className += 'foo';
       }
     }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+      method(node) {
+        node.setAttribute('class', 'x');
+      }
+    }`
     }
   ],
 
@@ -175,6 +182,20 @@ ruleTester.run('no-self-class', rule, {
           message: errorMessage,
           line: 5,
           column: 15
+        }
+      ]
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        method() {
+          this.setAttribute('class', 'foo');
+        }
+      }`,
+      errors: [
+        {
+          message: errorMessage,
+          line: 3,
+          column: 11
         }
       ]
     }
