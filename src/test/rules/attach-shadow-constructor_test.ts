@@ -57,17 +57,17 @@ ruleTester.run('attach-shadow-constructor', rule, {
         node.attachShadow({ mode: 'open'});
       }
     }`
+    },
+    {
+      code: `/**
+     * @customElement
+     */
+    class A extends Element {
+      constructor() {
+        this.attachShadow();
+      }
+    }`
     }
-    // {
-    //   code: `/**
-    //  * @customElement
-    //  */
-    // class A extends Element {
-    //   constructor() {
-    //     this.attachShadow();
-    //   }
-    // }`
-    // }
   ],
 
   invalid: [
@@ -112,23 +112,23 @@ ruleTester.run('attach-shadow-constructor', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `/**
+       * @customElement
+       */
+      class A extends Element {
+        connectedCallback() {
+          this.attachShadow();
+        }
+      }`,
+      errors: [
+        {
+          message: errorMessage,
+          line: 6,
+          column: 11
+        }
+      ]
     }
-    // {
-    //   code: `/**
-    //    * @customElement
-    //    */
-    //   class A extends Element {
-    //     connectedCallback() {
-    //       this.attachShadow();
-    //     }
-    //   }`,
-    //   errors: [
-    //     {
-    //       message: errorMessage,
-    //       line: 3,
-    //       column: 11
-    //     }
-    //   ]
-    // }
   ]
 });
