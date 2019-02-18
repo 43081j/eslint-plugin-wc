@@ -30,6 +30,7 @@ const rule: Rule.RuleModule = {
     // variables should be defined here
     let insideElement = false;
     const bannedClassListMethods = ['add', 'remove', 'toggle', 'replace'];
+    const source = context.getSourceCode();
 
     //----------------------------------------------------------------------
     // Helpers
@@ -87,7 +88,7 @@ const rule: Rule.RuleModule = {
         if (
           (node.type === 'ClassExpression' ||
             node.type === 'ClassDeclaration') &&
-          isCustomElement(node)
+          isCustomElement(node, source.getJSDocComment(node))
         ) {
           insideElement = true;
         }
