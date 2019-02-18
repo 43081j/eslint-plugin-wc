@@ -511,6 +511,24 @@ ruleTester.run('no-constructor-attributes', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `/** @customElement **/
+      class Foo extends Bar {
+        constructor() {
+          super();
+          this.setAttribute('x', 'y');
+        }
+      }`,
+      errors: [
+        {
+          message:
+            'Attributes must not be interacted with in the ' +
+            'constructor as the element may not be ready yet.',
+          line: 5,
+          column: 11
+        }
+      ]
     }
   ]
 });
