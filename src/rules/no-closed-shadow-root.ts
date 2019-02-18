@@ -20,8 +20,7 @@ const rule: Rule.RuleModule = {
     },
     messages: {
       closedRoot:
-        'Closed shadow roots are rarely needed and generally ' +
-        'not recommended'
+        'Closed shadow roots are rarely needed and generally not recommended'
     }
   },
 

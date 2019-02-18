@@ -126,7 +126,7 @@ const rule: Rule.RuleModule = {
           insideElement = true;
         }
       },
-      'ClassDeclaration,ClassExpression:exit': (_node: ESTree.Node): void => {
+      'ClassDeclaration,ClassExpression:exit': (): void => {
         insideElement = false;
       },
       MethodDefinition: (node: ESTree.Node): void => {
@@ -141,7 +141,7 @@ const rule: Rule.RuleModule = {
           insideConstructor = true;
         }
       },
-      'MethodDefinition:exit': (_node: ESTree.Node): void => {
+      'MethodDefinition:exit': (): void => {
         insideConstructor = false;
       },
       CallExpression: (node: ESTree.Node): void => {
