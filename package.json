@@ -8,14 +8,15 @@
     "docs/"
   ],
   "scripts": {
-    "clean": "rm -rf lib",
+    "clean": "rimraf ./lib",
     "lint": "eslint \"src/**/*.ts\"",
-    "prebuild": "npm run lint && npm run clean",
+    "prebuild": "npm run clean",
     "build": "tsc",
     "build:watch": "tsc -w",
     "test": "mocha \"lib/test/**/*_test.js\"",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepublishOnly": "npm run build && npm run test"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "eslint-config-google": "^0.12.0",
     "mocha": "^5.2.0",
     "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
     "typescript": "^3.3.3"
   }
 }
