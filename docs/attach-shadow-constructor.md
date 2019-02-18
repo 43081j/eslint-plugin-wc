@@ -1,9 +1,8 @@
 # Disallows attaching a shadow root outside the constructor (attach-shadow-constructor)
 
-TODO
+Shadow roots should always be attached inside the constructor as doing so in another method means you must have further checks to ensure nothing already altered the current element or DOM tree.
 
-More information on closed shadow roots and why they may not be of much
-use can be found
+More information on attaching shadow root in the constructor can be found
 [here](https://developers.google.com/web/fundamentals/web-components/best-practices#create-your-shadow-root-in-the-constructor).
 
 ## Rule Details
