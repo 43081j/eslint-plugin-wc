@@ -3,12 +3,21 @@
   "version": "0.0.1",
   "description": "ESLint plugin for Web Components",
   "main": "lib/index.js",
+  "files": [
+    "lib/!(test)",
+    "docs/"
+  ],
   "scripts": {
+    "clean": "rimraf ./lib",
     "lint": "eslint \"src/**/*.ts\"",
-    "build": "npm run lint && tsc",
-    "build:watch": "tsc -w",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "start": "watch 'npm run dev' src",
+    "dev": "npm run lint && npm run build && npm run test",
     "test": "mocha \"lib/test/**/*_test.js\"",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
@@ -20,7 +29,7 @@
     "webcomponents",
     "wc"
   ],
-  "author": "James Garbutt <https://github.com/43081j>",
+  "author": "James Garbutt (https://github.com/43081j)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/43081j/eslint-plugin-wc/issues"
@@ -42,6 +51,8 @@
     "eslint-config-google": "^0.12.0",
     "mocha": "^5.2.0",
     "prettier": "^1.16.4",
-    "typescript": "^3.3.3"
+    "rimraf": "^2.6.3",
+    "typescript": "^3.3.3",
+    "watch": "^1.0.2"
   }
 }
