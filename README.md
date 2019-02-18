@@ -45,3 +45,4 @@ You may also extend the recommended configuration like so:
 - [wc/no-constructor-attributes](docs/no-constructor-attributes.md)
 - [wc/no-closed-shadow-root](docs/no-closed-shadow-root.md)
 - [wc/no-invalid-element-name](docs/no-invalid-element-name.md)
+- [wc/no-self-class](docs/no-self-class.md)
