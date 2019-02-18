@@ -55,6 +55,7 @@ const rule: Rule.RuleModule = {
       'lastChild',
       'attributes'
     ];
+    const source = context.getSourceCode();
 
     //----------------------------------------------------------------------
     // Helpers
@@ -120,7 +121,7 @@ const rule: Rule.RuleModule = {
         if (
           (node.type === 'ClassExpression' ||
             node.type === 'ClassDeclaration') &&
-          isCustomElement(node)
+          isCustomElement(node, source.getJSDocComment(node))
         ) {
           insideElement = true;
         }

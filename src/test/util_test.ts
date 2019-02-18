@@ -1,7 +1,8 @@
 import * as util from '../util';
-import { parse } from 'espree';
-import { expect } from 'chai';
+import {parse} from 'espree';
+import {expect} from 'chai';
 import * as ESTree from 'estree';
+import {AST} from 'eslint';
 
 const parseExpr = (expr: string): ESTree.Node => {
   const parsed = parse(expr, {
@@ -12,17 +13,26 @@ const parseExpr = (expr: string): ESTree.Node => {
   return (parsed as ESTree.Program).body[0];
 };
 
-describe.only('util', () => {
-  describe.only('isCustomElement', () => {
+describe('util', () => {
+  describe('isCustomElement', () => {
     it('should parse direct sub classes of HTMLElement', () => {
       const doc = parseExpr(`class Foo extends HTMLElement {}`);
       expect(util.isCustomElement(doc)).to.equal(true);
     });
 
-    it.only('should parse annotated classes', () => {
+    it('should parse annotated classes', () => {
+      const jsdoc: AST.Token = {
+        type: 'String',
+        value: '/** @customElement **/',
+        range: [0, 0],
+        loc: {
+          start: {line: 0, column: 0},
+          end: {line: 0, column: 0}
+        }
+      };
       const doc = parseExpr(`/** @customElement **/
         class Foo extends Bar {}`);
-      expect(util.isCustomElement(doc)).to.equal(true);
+      expect(util.isCustomElement(doc, jsdoc)).to.equal(true);
     });
 
     it('should be false for normal classes', () => {

@@ -198,6 +198,21 @@ ruleTester.run('no-self-class', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `/** @customElement **/
+      class Foo extends Bar {
+        method() {
+          this.className += 'test';
+        }
+      }`,
+      errors: [
+        {
+          message: errorMessage,
+          line: 4,
+          column: 11
+        }
+      ]
     }
   ]
 });
