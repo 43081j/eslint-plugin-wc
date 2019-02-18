@@ -7,6 +7,7 @@ import * as ESTree from 'estree';
  * @return {boolean}
  */
 export function isCustomElement(node: ESTree.Node): node is ESTree.Class {
+  console.log(node, node.leadingComments); // eslint-disable-line
   return (
     (node.type === 'ClassExpression' || node.type === 'ClassDeclaration') &&
     ((node.superClass &&

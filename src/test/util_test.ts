@@ -12,10 +12,25 @@ const parseExpr = (expr: string): ESTree.Node => {
   return (parsed as ESTree.Program).body[0];
 };
 
-describe('util', () => {
-  describe('isCustomElement', () => {
-    const doc = parseExpr(`class Foo extends HTMLElement {
-    }`);
-    expect(util.isCustomElement(doc)).to.equal(true);
+describe.only('util', () => {
+  describe.only('isCustomElement', () => {
+    it('should parse direct sub classes of HTMLElement', () => {
+      const doc = parseExpr(`class Foo extends HTMLElement {}`);
+      expect(util.isCustomElement(doc)).to.equal(true);
+    });
+
+    it.only('should parse annotated classes', () => {
+      const doc = parseExpr(`/** @customElement **/
+        class Foo extends Bar {}`);
+      expect(util.isCustomElement(doc)).to.equal(true);
+    });
+
+    it('should be false for normal classes', () => {
+      let doc = parseExpr(`class Foo extends Bar {}`);
+      expect(util.isCustomElement(doc)).to.equal(false);
+
+      doc = parseExpr(`class Foo {}`);
+      expect(util.isCustomElement(doc)).to.equal(false);
+    });
   });
 });
