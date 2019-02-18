@@ -39,7 +39,7 @@ export function isNativeCustomElement(node: ESTree.Node): node is ESTree.Class {
   );
 }
 
-const min = (
+const levenshteinMin = (
   d0: number,
   d1: number,
   d2: number,
@@ -123,10 +123,10 @@ export function levenshtein(a: string, b: string): number {
     for (y = 0; y < len; y += 2) {
       dy = vector[y];
       ay = vector[y + 1];
-      d0 = min(dy, d0, d1, bx0, ay);
-      d1 = min(d0, d1, d2, bx1, ay);
-      d2 = min(d1, d2, d3, bx2, ay);
-      dd = min(d2, d3, dd, bx3, ay);
+      d0 = levenshteinMin(dy, d0, d1, bx0, ay);
+      d1 = levenshteinMin(d0, d1, d2, bx1, ay);
+      d2 = levenshteinMin(d1, d2, d3, bx2, ay);
+      dd = levenshteinMin(d2, d3, dd, bx3, ay);
       vector[y] = dd;
       d3 = d2;
       d2 = d1;
@@ -140,7 +140,7 @@ export function levenshtein(a: string, b: string): number {
     dd = ++x;
     for (y = 0; y < len; y += 2) {
       dy = vector[y];
-      vector[y] = dd = min(dy, d0, dd, bx0, vector[y + 1]);
+      vector[y] = dd = levenshteinMin(dy, d0, dd, bx0, vector[y + 1]);
       d0 = dy;
     }
   }

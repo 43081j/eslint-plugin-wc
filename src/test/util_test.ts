@@ -23,7 +23,7 @@ describe('util', () => {
     it('should parse annotated classes', () => {
       const jsdoc: AST.Token = {
         type: 'String',
-        value: '/** @customElement **/',
+        value: '* @customElement *',
         range: [0, 0],
         loc: {
           start: {line: 0, column: 0},
