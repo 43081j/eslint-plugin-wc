@@ -15,7 +15,7 @@
     "start": "watch 'npm run dev' src",
     "dev": "npm run lint && npm run build && npm run test",
     "test": "nyc --reporter=html --reporter=text-summary mocha \"lib/test/**/*_test.js\"",
-    "test:coverage": "nyc report --report=text-lcov | coveralls",
+    "test:coverage": "nyc report --reporter=text-lcov | coveralls",
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint && npm run test"
