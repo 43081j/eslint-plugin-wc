@@ -107,22 +107,11 @@ const rule: Rule.RuleModule = {
         return isUnguardedSuperHook(node.consequent, hook);
       } else if (
         node.type === 'BlockStatement' &&
-        node.body.some(checkNodeForUnguardedSuperHook(hook))
+        node.body.some((n) => isUnguardedSuperHook(n, hook))
       ) {
         return true;
       }
       return false;
-    }
-
-    /**
-     * Allows for currying the hook to the isUnguardedSuperHook call
-     * @param {string} hook hook to test
-     * @return {function}
-     */
-    function checkNodeForUnguardedSuperHook(
-      hook: string
-    ): (n: ESTree.Node) => boolean {
-      return (node: ESTree.Node) => isUnguardedSuperHook(node, hook);
     }
 
     //----------------------------------------------------------------------
@@ -153,10 +142,7 @@ const rule: Rule.RuleModule = {
         if (
           node.key.type === 'Identifier' &&
           node.value.type === 'FunctionExpression' &&
-          node.value.body.type === 'BlockStatement' &&
-          node.value.body.body.some(
-            checkNodeForUnguardedSuperHook(node.key.name)
-          )
+          isUnguardedSuperHook(node.value.body, node.key.name)
         ) {
           context.report({
             node: errNode,
