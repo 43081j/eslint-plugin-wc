@@ -14,7 +14,7 @@
     "build": "tsc",
     "start": "watch 'npm run dev' src",
     "dev": "npm run lint && npm run build && npm run test",
-    "test": "mocha \"lib/test/**/*_test.js\"",
+    "test": "nyc --reporter=html --reporter=text-summary mocha \"lib/test/**/*_test.js\"",
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint && npm run test"
@@ -53,6 +53,7 @@
     "eslint-config-google": "^0.12.0",
     "espree": "^5.0.1",
     "mocha": "^5.2.0",
+    "nyc": "^13.3.0",
     "prettier": "^1.16.4",
     "rimraf": "^2.6.3",
     "typescript": "^3.3.3",
