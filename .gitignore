@@ -1,3 +1,5 @@
 node_modules/
 lib/
 *.swp
+coverage/
+.nyc_output/
