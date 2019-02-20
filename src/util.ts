@@ -22,3 +22,19 @@ export function isCustomElement(
         jsdoc.value.includes('@customElement')))
   );
 }
+
+/**
+ * Determines if a node is an extension of HTMLElement class or not.
+ *
+ * @param {ESTree.Node} node Node to test
+ * @return {boolean}
+ */
+export function isNativeCustomElement(node: ESTree.Node): node is ESTree.Class {
+  return (
+    (node.type === 'ClassExpression' || node.type === 'ClassDeclaration') &&
+    node.superClass !== undefined &&
+    node.superClass !== null &&
+    node.superClass.type === 'Identifier' &&
+    node.superClass.name === 'HTMLElement'
+  );
+}
