@@ -42,8 +42,8 @@ You may also extend the recommended configuration like so:
 
 # Supported Rules
 
-- [wc/attach-shadow-constructor](docs/attach-shadow-constructor.md)
-- [wc/no-constructor-attributes](docs/no-constructor-attributes.md)
-- [wc/no-closed-shadow-root](docs/no-closed-shadow-root.md)
-- [wc/no-invalid-element-name](docs/no-invalid-element-name.md)
-- [wc/no-self-class](docs/no-self-class.md)
+- [wc/attach-shadow-constructor](docs/rules/attach-shadow-constructor.md)
+- [wc/no-constructor-attributes](docs/rules/no-constructor-attributes.md)
+- [wc/no-closed-shadow-root](docs/rules/no-closed-shadow-root.md)
+- [wc/no-invalid-element-name](docs/rules/no-invalid-element-name.md)
+- [wc/no-self-class](docs/rules/no-self-class.md)
