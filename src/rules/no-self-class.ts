@@ -17,7 +17,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallows class mutations on self',
       category: 'Best Practices',
       url:
-        'https://github.com/43081j/eslint-plugin-lit/blob/master/docs/rules/no-self-class.md'
+        'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-self-class.md'
     },
     messages: {
       selfClass:
