@@ -1,6 +1,6 @@
 # eslint-plugin-wc
 
-[![Build Status](https://travis-ci.org/43081j/eslint-plugin-wc.svg?branch=master)](https://travis-ci.org/43081j/eslint-plugin-wc)
+[![Build Status](https://travis-ci.com/43081j/eslint-plugin-wc.svg?branch=master)](https://travis-ci.com/43081j/eslint-plugin-wc)
 
 ESLint plugin for Web Components.
 
