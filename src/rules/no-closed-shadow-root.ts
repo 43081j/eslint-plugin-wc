@@ -16,7 +16,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallows closed shadow roots',
       category: 'Best Practices',
       url:
-        'https://github.com/43081j/eslint-plugin-lit/blob/master/docs/rules/no-closed-shadow-root.md'
+        'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-closed-shadow-root.md'
     },
     messages: {
       closedRoot:
