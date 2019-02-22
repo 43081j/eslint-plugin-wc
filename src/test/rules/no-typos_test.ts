@@ -1,5 +1,5 @@
 /**
- * @fileoverview Detects misspellings of lifecycle methods
+ * @fileoverview Detects misspellings of common features
  * @author James Garbutt <https://github.com/43081j>
  */
 
@@ -7,7 +7,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/lifecycle-spelling';
+import rule from '../../rules/no-typos';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ const ruleTester = new RuleTester({
   }
 });
 
-ruleTester.run('lifecycle-spelling', rule, {
+ruleTester.run('no-typos', rule, {
   valid: [
     {
       code: `class Foo extends HTMLElement {
@@ -126,7 +126,7 @@ ruleTester.run('lifecycle-spelling', rule, {
       errors: [
         {
           message:
-            'Method name is likely a misspelling, did you mean "observedAttributes"?',
+            'Member name is likely a misspelling, did you mean "observedAttributes"?',
           line: 2,
           column: 20
         }
@@ -140,7 +140,7 @@ ruleTester.run('lifecycle-spelling', rule, {
       errors: [
         {
           message:
-            'Method name is likely a misspelling, did you mean "observedAttributes"?',
+            'Member name is likely a misspelling, did you mean "observedAttributes"?',
           line: 3,
           column: 22
         }

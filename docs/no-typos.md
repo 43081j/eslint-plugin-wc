@@ -1,10 +1,11 @@
-# Detects misspellings of lifecycle methods (lifecycle-spelling)
+# Detects misspellings of common features (no-typos)
 
-Lifecycle methods of custom elements can often be easily misspelled.
+Several known features such as methods and properties of web
+components can easily be misspelled.
 
 ## Rule Details
 
-This rule detects common misspellings of custom element lifecycle methods.
+This rule detects common misspellings.
 
 The following patterns are considered warnings:
 
@@ -28,5 +29,6 @@ class Foo extends HTMLElement {
 
 ## When Not To Use It
 
-If you wish to name your methods very similarly to the custom element
-lifecycle methods, you should not use this rule.
+If you wish to name your methods/properties very similarly to those
+with special meaning in the web component spec, you should not use
+this rule.

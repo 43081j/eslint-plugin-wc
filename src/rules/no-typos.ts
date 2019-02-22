@@ -1,11 +1,12 @@
 /**
- * @fileoverview Detects misspellings of lifecycle methods
+ * @fileoverview Detects misspellings of common features
  * @author James Garbutt <https://github.com/43081j>
  */
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement, levenshtein} from '../util';
+import {isCustomElement} from '../util';
+import levenshtein from 'js-levenshtein-esm/lib/index.js';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -14,14 +15,16 @@ import {isCustomElement, levenshtein} from '../util';
 const rule: Rule.RuleModule = {
   meta: {
     docs: {
-      description: 'Detects misspellings of lifecycle methods',
+      description: 'Detects misspellings of common features',
       category: 'Best Practices',
       url:
-        'https://github.com/43081j/eslint-plugin-lit/blob/master/docs/rules/lifecycle-spelling.md'
+        'https://github.com/43081j/eslint-plugin-lit/blob/master/docs/rules/no-typos.md'
     },
     messages: {
-      spelling:
-        'Method name is likely a misspelling, did you mean "{{replacement}}"?'
+      method:
+        'Method name is likely a misspelling, did you mean "{{replacement}}"?',
+      member:
+        'Member name is likely a misspelling, did you mean "{{replacement}}"?'
     }
   },
 
@@ -76,7 +79,7 @@ const rule: Rule.RuleModule = {
             if (match.length > 0) {
               context.report({
                 node: node.key,
-                messageId: 'spelling',
+                messageId: 'method',
                 data: {
                   replacement: match[0][0]
                 }
@@ -91,7 +94,7 @@ const rule: Rule.RuleModule = {
             if (result !== 0 && result < 3) {
               context.report({
                 node: node.key,
-                messageId: 'spelling',
+                messageId: 'member',
                 data: {
                   replacement: 'observedAttributes'
                 }
