@@ -1,5 +1,5 @@
 /**
- * @fileoverview Detects misspellings of common features
+ * @fileoverview Prevents common typos
  * @author James Garbutt <https://github.com/43081j>
  */
 

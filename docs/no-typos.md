@@ -1,11 +1,20 @@
-# Detects misspellings of common features (no-typos)
+# Prevents common typos (no-typos)
 
-Several known features such as methods and properties of web
-components can easily be misspelled.
+Ensure no lifecycle methods or known custom element properties are
+misspelt.
 
 ## Rule Details
 
-This rule detects common misspellings.
+This rule detects common misspellings, particularly of lifecycle methods:
+
+* connectedCallback
+* adoptedCallback
+* disconnectedCallback
+* attributeChangedCallback
+
+It also detects misspellings of the following known properties:
+
+* observedAttributes
 
 The following patterns are considered warnings:
 
