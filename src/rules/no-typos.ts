@@ -6,7 +6,7 @@
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
 import {isCustomElement} from '../util';
-import levenshtein from 'js-levenshtein-esm/lib/index.js';
+import levenshtein from 'js-levenshtein-esm';
 
 //------------------------------------------------------------------------------
 // Rule Definition
