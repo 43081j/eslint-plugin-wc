@@ -40,6 +40,15 @@ You may also extend the recommended configuration like so:
 }
 ```
 
+Or the best practice configuration which extends this to include all
+best practice rules:
+
+```json
+{
+  "extends": ["plugin:wc/best-practice"]
+}
+```
+
 # Supported Rules
 
 ## Possible Errors (recommended)

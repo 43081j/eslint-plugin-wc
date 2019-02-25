@@ -20,5 +20,5 @@ export const rules = {
 
 export const configs = {
   recommended,
-  bestPractice
+  'best-practice': bestPractice
 };
