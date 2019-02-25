@@ -16,7 +16,6 @@ const rule: Rule.RuleModule = {
   meta: {
     docs: {
       description: 'Detects misspellings of common features',
-      category: 'Best Practices',
       url:
         'https://github.com/43081j/eslint-plugin-lit/blob/master/docs/rules/no-typos.md'
     },

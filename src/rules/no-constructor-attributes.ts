@@ -15,7 +15,6 @@ const rule: Rule.RuleModule = {
   meta: {
     docs: {
       description: 'Disallows interaction with attributes in constructors',
-      category: 'Best Practices',
       url:
         'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-constructor-attributes.md'
     },
