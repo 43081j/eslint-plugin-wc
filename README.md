@@ -1,6 +1,7 @@
-# eslint-plugin-wc
-
 [![Build Status](https://travis-ci.com/43081j/eslint-plugin-wc.svg?branch=master)](https://travis-ci.com/43081j/eslint-plugin-wc)
+[![npm version](https://img.shields.io/npm/v/eslint-plugin-wc.svg?style=flat)](https://npmjs.org/package/eslint-plugin-wc "View this project on npm")
+
+# eslint-plugin-wc
 
 ESLint plugin for Web Components.
 
