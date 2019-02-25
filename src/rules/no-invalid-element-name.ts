@@ -15,7 +15,6 @@ const rule: Rule.RuleModule = {
   meta: {
     docs: {
       description: 'Disallows invalid custom element names',
-      category: 'Recommended',
       url:
         'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-invalid-element-name.md'
     },

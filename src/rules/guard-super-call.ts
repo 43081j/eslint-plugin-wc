@@ -16,7 +16,6 @@ const rule: Rule.RuleModule = {
   meta: {
     docs: {
       description: 'Disallows attaching shadow root outside of the constructor',
-      category: 'Best Practices',
       url:
         'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/guard-super-call.md'
     },
