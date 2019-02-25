@@ -5,6 +5,7 @@ import noClosedShadowRoot from './rules/no-closed-shadow-root';
 import noConstructorAttrs from './rules/no-constructor-attributes';
 import noInvalidElementName from './rules/no-invalid-element-name';
 import noSelfClass from './rules/no-self-class';
+import noTypos from './rules/no-typos';
 
 export const rules = {
   'attach-shadow-constructor': attachShadowConstructor,
@@ -12,7 +13,8 @@ export const rules = {
   'no-closed-shadow-root': noClosedShadowRoot,
   'no-constructor-attributes': noConstructorAttrs,
   'no-invalid-element-name': noInvalidElementName,
-  'no-self-class': noSelfClass
+  'no-self-class': noSelfClass,
+  'no-typos': noTypos
 };
 
 export const configs = {

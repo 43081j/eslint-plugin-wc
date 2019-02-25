@@ -48,3 +48,4 @@ You may also extend the recommended configuration like so:
 - [wc/no-closed-shadow-root](docs/rules/no-closed-shadow-root.md)
 - [wc/no-invalid-element-name](docs/rules/no-invalid-element-name.md)
 - [wc/no-self-class](docs/rules/no-self-class.md)
+- [wc/no-typos](docs/rules/no-typos.md)
