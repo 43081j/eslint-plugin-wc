@@ -1,4 +1,5 @@
 import recommended from './configs/recommended';
+import bestPractice from './configs/best-practice';
 import attachShadowConstructor from './rules/attach-shadow-constructor';
 import guardSuperCall from './rules/guard-super-call';
 import noClosedShadowRoot from './rules/no-closed-shadow-root';
@@ -18,5 +19,6 @@ export const rules = {
 };
 
 export const configs = {
-  recommended
+  recommended,
+  bestPractice
 };
