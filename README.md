@@ -1,17 +1,20 @@
-[![Build Status](https://travis-ci.com/43081j/eslint-plugin-wc.svg?branch=master)](https://travis-ci.com/43081j/eslint-plugin-wc)
-[![npm version](https://img.shields.io/npm/v/eslint-plugin-wc.svg?style=flat)](https://npmjs.org/package/eslint-plugin-wc "View this project on npm")
+<div style="text-align: center"><img src="media/eslint-webcomponents.png" width="200" alt="Eslint + WebComponents" /></div>
 
 # eslint-plugin-wc
 
 ESLint plugin for Web Components.
 
-# Install
+[![npm version](https://img.shields.io/npm/v/eslint-plugin-wc.svg?style=flat)](https://npmjs.org/package/eslint-plugin-wc 'View this project on npm')
+[![Build Status](https://travis-ci.com/43081j/eslint-plugin-wc.svg?branch=master)](https://travis-ci.com/43081j/eslint-plugin-wc)
+[![Coverage Status](https://coveralls.io/repos/github/43081j/eslint-plugin-wc/badge.svg?branch=master)](https://coveralls.io/github/43081j/eslint-plugin-wc?branch=master)
+
+## Install
 
 ```
 $ npm i -D eslint eslint-plugin-wc
 ```
 
-# Usage
+## Usage
 
 Add `wc` to the plugins section of your `.eslintrc` file:
 
@@ -31,7 +34,7 @@ Configure your rules like so:
 }
 ```
 
-# Configuration
+## Configuration
 
 You may also extend the recommended configuration like so:
 
@@ -50,9 +53,9 @@ best practice rules:
 }
 ```
 
-# Supported Rules
+## Supported Rules
 
-## Possible Errors (recommended)
+### Possible Errors (recommended)
 
 | Rule                                                                    |                                                       |
 | ----------------------------------------------------------------------- | ----------------------------------------------------- |
@@ -60,7 +63,7 @@ best practice rules:
 | [wc/no-invalid-element-name](docs/rules/no-invalid-element-name.md)     | Disallows invalid custom element names                |
 | [wc/no-self-class](docs/rules/no-self-class.md)                         | Disallows class mutations on self                     |
 
-## Best Practice
+### Best Practice
 
 | Rule                                                                    |                                                                                       |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
