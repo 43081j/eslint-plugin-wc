@@ -9,6 +9,7 @@ ESLint plugin for Web Components.
 [![npm version](https://img.shields.io/npm/v/eslint-plugin-wc.svg?style=flat)](https://npmjs.org/package/eslint-plugin-wc 'View this project on npm')
 [![Build Status](https://travis-ci.com/43081j/eslint-plugin-wc.svg?branch=master)](https://travis-ci.com/43081j/eslint-plugin-wc)
 [![Coverage Status](https://coveralls.io/repos/github/43081j/eslint-plugin-wc/badge.svg?branch=master)](https://coveralls.io/github/43081j/eslint-plugin-wc?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Install
 
