@@ -10,17 +10,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
    Unreleased section, uncommenting the header as necessary.
 -->
 
-<!-- ## Unreleased -->
+## Unreleased
 
 <!-- ### Changed -->
-<!-- ### Added -->
-<!-- ### Removed -->
-<!-- ### Fixed -->
+
+### Added
+
+- Added `parserOptions.sourceType` of `'module'` to recommended config.
+  <!-- ### Removed -->
+
+### Fixed
+
+- Validate element name even when specifying `window.customElements`
 
 ## [0.1.1] - 2019-02-26
+
 ### Fixed
-* Added namespace to rules in configurations (`wc/`)
+
+- Added namespace to rules in configurations (`wc/`)
 
 ## [0.1.0] - 2019-02-26
+
 ### Added
-* Initial release
+
+- Initial release

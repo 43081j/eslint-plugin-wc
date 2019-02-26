@@ -45,10 +45,15 @@ const rule: Rule.RuleModule = {
         if (
           node.type === 'CallExpression' &&
           node.callee.type === 'MemberExpression' &&
-          (node.callee.object.type === 'Identifier' &&
-            node.callee.object.name === 'customElements') &&
-          (node.callee.property.type === 'Identifier' &&
-            node.callee.property.name === 'define')
+          ((node.callee.object.type === 'MemberExpression' &&
+            node.callee.object.object.type === 'Identifier' &&
+            node.callee.object.object.name === 'window' &&
+            node.callee.object.property.type === 'Identifier' &&
+            node.callee.object.property.name === 'customElements') ||
+            (node.callee.object.type === 'Identifier' &&
+              node.callee.object.name === 'customElements')) &&
+          node.callee.property.type === 'Identifier' &&
+          node.callee.property.name === 'define'
         ) {
           const firstArg = node.arguments[0];
           if (
