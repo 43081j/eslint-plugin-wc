@@ -20,10 +20,6 @@ const ruleTester = new RuleTester({
   }
 });
 
-const errorMessage =
-  'Attributes must not be interacted with in the ' +
-  'constructor as the element may not be ready yet.';
-
 ruleTester.run('no-constructor-attributes', rule, {
   valid: [
     {code: `this.hasAttribute('foo')`},
@@ -74,37 +70,37 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 7,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 8,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 9,
           column: 23
         }
@@ -124,37 +120,37 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 7,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 8,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 9,
           column: 23
         }
@@ -169,12 +165,12 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         }
@@ -189,12 +185,12 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         }
@@ -209,12 +205,12 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         }
@@ -232,27 +228,27 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 7,
           column: 11
         }
@@ -270,27 +266,27 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 7,
           column: 11
         }
@@ -307,22 +303,22 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 21
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 25
         }
@@ -339,22 +335,22 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 21
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 25
         }
@@ -371,22 +367,22 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 11
         }
@@ -403,22 +399,22 @@ ruleTester.run('no-constructor-attributes', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'constructorAttrs',
           line: 6,
           column: 11
         }

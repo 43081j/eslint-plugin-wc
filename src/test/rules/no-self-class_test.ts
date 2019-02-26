@@ -20,10 +20,6 @@ const ruleTester = new RuleTester({
   }
 });
 
-const errorMessage =
-  'Classes should be considered owned by the consumer of the element, ' +
-  'meaning they should never be mutated on `this`.';
-
 ruleTester.run('no-self-class', rule, {
   valid: [
     {
@@ -92,32 +88,32 @@ ruleTester.run('no-self-class', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 6,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 7,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 8,
           column: 11
         }
@@ -136,32 +132,32 @@ ruleTester.run('no-self-class', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 3,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 4,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 5,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 6,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 7,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 8,
           column: 11
         }
@@ -179,7 +175,7 @@ ruleTester.run('no-self-class', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 5,
           column: 15
         }
@@ -193,7 +189,7 @@ ruleTester.run('no-self-class', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 3,
           column: 11
         }
@@ -208,7 +204,7 @@ ruleTester.run('no-self-class', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'selfClass',
           line: 4,
           column: 11
         }

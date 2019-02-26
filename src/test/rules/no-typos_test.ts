@@ -40,6 +40,16 @@ ruleTester.run('no-typos', rule, {
       code: `class Foo extends HTMLElement {
       observedAttributes() {}
     }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        static get obsereveddAttribute() {}
+      }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        get observedAttributes() {}
+      }`
     }
   ],
 
@@ -53,26 +63,34 @@ ruleTester.run('no-typos', rule, {
       }`,
       errors: [
         {
-          message:
-            'Method name is likely a misspelling, did you mean "connectedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'connectedCallback'
+          },
           line: 2,
           column: 9
         },
         {
-          message:
-            'Method name is likely a misspelling, did you mean "disconnectedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'disconnectedCallback'
+          },
           line: 3,
           column: 9
         },
         {
-          message:
-            'Method name is likely a misspelling, did you mean "adoptedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'adoptedCallback'
+          },
           line: 4,
           column: 9
         },
         {
-          message:
-            'Method name is likely a misspelling, did you mean "attributeChangedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'attributeChangedCallback'
+          },
           line: 5,
           column: 9
         }
@@ -85,8 +103,10 @@ ruleTester.run('no-typos', rule, {
         }`,
       errors: [
         {
-          message:
-            'Method name is likely a misspelling, did you mean "connectedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'connectedCallback'
+          },
           line: 3,
           column: 11
         }
@@ -100,20 +120,26 @@ ruleTester.run('no-typos', rule, {
       }`,
       errors: [
         {
-          message:
-            'Method name is likely a misspelling, did you mean "connectedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'connectedCallback'
+          },
           line: 2,
           column: 9
         },
         {
-          message:
-            'Method name is likely a misspelling, did you mean "connectedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'connectedCallback'
+          },
           line: 3,
           column: 9
         },
         {
-          message:
-            'Method name is likely a misspelling, did you mean "connectedCallback"?',
+          messageId: 'method',
+          data: {
+            replacement: 'connectedCallback'
+          },
           line: 4,
           column: 9
         }
@@ -125,8 +151,10 @@ ruleTester.run('no-typos', rule, {
       }`,
       errors: [
         {
-          message:
-            'Member name is likely a misspelling, did you mean "observedAttributes"?',
+          messageId: 'member',
+          data: {
+            replacement: 'observedAttributes'
+          },
           line: 2,
           column: 20
         }
@@ -139,8 +167,10 @@ ruleTester.run('no-typos', rule, {
         }`,
       errors: [
         {
-          message:
-            'Member name is likely a misspelling, did you mean "observedAttributes"?',
+          messageId: 'member',
+          data: {
+            replacement: 'observedAttributes'
+          },
           line: 3,
           column: 22
         }

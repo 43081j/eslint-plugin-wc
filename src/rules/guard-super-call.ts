@@ -120,12 +120,12 @@ const rule: Rule.RuleModule = {
     return {
       'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
         if (
-          node.type === 'ClassExpression' ||
-          node.type === 'ClassDeclaration'
+          (node.type === 'ClassExpression' ||
+            node.type === 'ClassDeclaration') &&
+          isCustomElement(node, source.getJSDocComment(node)) &&
+          !isNativeCustomElement(node)
         ) {
-          insideNonNativeElement =
-            isCustomElement(node, source.getJSDocComment(node)) &&
-            !isNativeCustomElement(node);
+          insideNonNativeElement = true;
         }
       },
       'ClassDeclaration,ClassExpression:exit': (): void => {
