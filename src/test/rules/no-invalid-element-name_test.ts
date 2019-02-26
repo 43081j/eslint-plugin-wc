@@ -55,16 +55,17 @@ ruleTester.run('no-invalid-element-name', rule, {
     {
       code: `customElements.define('my--app', class extends HTMLElement {})`,
       options: [{loose: true}]
-    }
+    },
     // FUTURE: If Scoping is easier, attempt to implement a few other use-cases
-    // {
-    //   code: `
-    //     class MyApp extends HTMLElement {
-    //       static get is() { return 'my-app' }
-    //     }
-    //     customElements.define(MyApp.is, MyApp)
-    //   `
-    // },
+    // NOTE: This case is currently ignored
+    {
+      code: `
+        class MyApp extends HTMLElement {
+          static get is() { return 'my-app' }
+        }
+        customElements.define(MyApp.is, MyApp)
+      `
+    }
   ],
 
   invalid: [
