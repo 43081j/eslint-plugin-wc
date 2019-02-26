@@ -1,4 +1,6 @@
-<div style="text-align: center"><img src="media/eslint-webcomponents.png" width="200" alt="Eslint + WebComponents" /></div>
+<div align="center">
+  <img src="media/eslint-webcomponents.png" alt="Eslint + WebComponents" />
+</div>
 
 # eslint-plugin-wc
 
