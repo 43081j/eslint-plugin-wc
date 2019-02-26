@@ -1,5 +1,8 @@
 const config = {
   plugins: ['wc'],
+  parserOptions: {
+    sourceType: 'module'
+  },
 
   rules: {
     'wc/no-constructor-attributes': 'error',

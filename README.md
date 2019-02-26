@@ -43,7 +43,8 @@ You may also extend the recommended configuration like so:
 
 ```json
 {
-  "extends": ["plugin:wc/recommended"]
+  "extends": ["plugin:wc/recommended"],
+  "env": {"browser": true}
 }
 ```
 
@@ -52,22 +53,8 @@ best practice rules:
 
 ```json
 {
-  "extends": ["plugin:wc/best-practice"]
-}
-```
-
-### Base configuration
-
-This is the base configuration to get started with linting webcomponents:
-
-```json
-{
-  "parserOptions": {
-    "sourceType": "module"
-  },
-  "env": {
-    "browser": true
-  }
+  "extends": ["plugin:wc/best-practice"],
+  "env": {"browser": true}
 }
 ```
 
