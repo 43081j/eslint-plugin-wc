@@ -67,6 +67,13 @@ ruleTester.run('attach-shadow-constructor', rule, {
         this.attachShadow();
       }
     }`
+    },
+    {
+      code: `class A extends Element {
+        connectedCallback() {
+          this.attachShadow();
+        }
+      }`
     }
   ],
 
