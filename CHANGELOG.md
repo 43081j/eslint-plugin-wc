@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
    Unreleased section, uncommenting the header as necessary.
 -->
 
-## Unreleased
+<!-- ## Unreleased -->
 
 <!-- ### Changed -->
 <!-- ### Added -->
