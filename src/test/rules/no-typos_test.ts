@@ -40,6 +40,16 @@ ruleTester.run('no-typos', rule, {
       code: `class Foo extends HTMLElement {
       observedAttributes() {}
     }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        static get obsereveddAttribute() {}
+      }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        get observedAttributes() {}
+      }`
     }
   ],
 
