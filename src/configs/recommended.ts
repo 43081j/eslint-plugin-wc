@@ -2,9 +2,9 @@ const config = {
   plugins: ['wc'],
 
   rules: {
-    'no-constructor-attributes': 'error',
-    'no-invalid-element-name': 'error',
-    'no-self-class': 'error'
+    'wc/no-constructor-attributes': 'error',
+    'wc/no-invalid-element-name': 'error',
+    'wc/no-self-class': 'error'
   }
 };
 

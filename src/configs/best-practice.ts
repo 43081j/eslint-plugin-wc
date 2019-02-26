@@ -3,10 +3,10 @@ const config = {
   plugins: ['wc'],
 
   rules: {
-    'attach-shadow-constructor': 'error',
-    'guard-super-call': 'error',
-    'no-closed-shadow-root': 'error',
-    'no-typos': 'error'
+    'wc/attach-shadow-constructor': 'error',
+    'wc/guard-super-call': 'error',
+    'wc/no-closed-shadow-root': 'error',
+    'wc/no-typos': 'error'
   }
 };
 
