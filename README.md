@@ -89,7 +89,3 @@ This is the base configuration to get started with linting webcomponents:
 | [wc/guard-super-call](docs/rules/guard-super-call.md)                   | Requires a guard before calling a super method inside a Custom Element Lifecycle hook |
 | [wc/no-closed-shadow-root](docs/rules/no-closed-shadow-root.md)         | Disallows closed shadow roots                                                         |
 | [wc/no-typos](docs/rules/no-typos.md)                                   | Prevents common typos                                                                 |
-
-```
-
-```
