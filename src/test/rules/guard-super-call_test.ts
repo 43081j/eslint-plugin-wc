@@ -21,9 +21,6 @@ const ruleTester = new RuleTester({
   }
 });
 
-const errorMessage =
-  'Super calls to lifecycle callbacks should be guarded in case the base class does not implement them';
-
 ruleTester.run('guard-super-call', rule, {
   valid: [
     {
@@ -120,22 +117,22 @@ ruleTester.run('guard-super-call', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'guardSuperCall',
           line: 6,
           column: 11
         },
         {
-          message: errorMessage,
+          messageId: 'guardSuperCall',
           line: 10,
           column: 13
         },
         {
-          message: errorMessage,
+          messageId: 'guardSuperCall',
           line: 14,
           column: 13
         },
         {
-          message: errorMessage,
+          messageId: 'guardSuperCall',
           line: 18,
           column: 11
         }

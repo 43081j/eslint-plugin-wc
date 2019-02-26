@@ -20,9 +20,6 @@ const ruleTester = new RuleTester({
   }
 });
 
-const errorMessage =
-  'Attaching a Shadow Root should only occur in the constructor of an element.';
-
 ruleTester.run('attach-shadow-constructor', rule, {
   valid: [
     {
@@ -86,7 +83,7 @@ ruleTester.run('attach-shadow-constructor', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'attachShadowConstructor',
           line: 3,
           column: 11
         }
@@ -100,7 +97,7 @@ ruleTester.run('attach-shadow-constructor', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'attachShadowConstructor',
           line: 3,
           column: 11
         }
@@ -114,7 +111,7 @@ ruleTester.run('attach-shadow-constructor', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'attachShadowConstructor',
           line: 3,
           column: 11
         }
@@ -131,7 +128,7 @@ ruleTester.run('attach-shadow-constructor', rule, {
       }`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'attachShadowConstructor',
           line: 6,
           column: 11
         }
