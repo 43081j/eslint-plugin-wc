@@ -26,6 +26,9 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('my-app', class extends HTMLElement {})`
     },
     {
+      code: `window.customElements.define('my-app', class extends HTMLElement {})`
+    },
+    {
       code: `class MyApp extends HTMLElement {}
       customElements.define('my-app', MyApp)`
     },
@@ -77,6 +80,18 @@ ruleTester.run('no-invalid-element-name', rule, {
             'Custom element names must not contain uppercase ASCII characters.',
           line: 2,
           column: 29
+        }
+      ]
+    },
+    {
+      code: `class MyApp extends HTMLElement {}
+      window.customElements.define('my-App', MyApp)`,
+      errors: [
+        {
+          message:
+            'Custom element names must not contain uppercase ASCII characters.',
+          line: 2,
+          column: 36
         }
       ]
     },
