@@ -59,6 +59,74 @@ ruleTester.run('no-constructor-attributes', rule, {
     {
       code: `class Foo extends HTMLElement {
         constructor() {
+          this.accessKey = 'z';
+          this.autocapitalize = 'on';
+          this.className = 'foo';
+          this.contentEditable = 'true';
+          this.dir = 'rtl';
+          this.draggable = 'true';
+          this.hidden = 'true';
+          this.id = 'foo';
+          this.lang = 'foo';
+          this.slot = 'foo';
+          this.spellcheck = 'true';
+          this.style = 'color: blue';
+          this.tabIndex = 42;
+          this.title = 'foo';
+          this.translate = 'true';
+        }
+      }`,
+      errors: [
+        {messageId: 'constructorAttrs', line: 3, column: 11},
+        {messageId: 'constructorAttrs', line: 4, column: 11},
+        {messageId: 'constructorAttrs', line: 5, column: 11},
+        {messageId: 'constructorAttrs', line: 6, column: 11},
+        {messageId: 'constructorAttrs', line: 7, column: 11},
+        {messageId: 'constructorAttrs', line: 8, column: 11},
+        {messageId: 'constructorAttrs', line: 9, column: 11},
+        {messageId: 'constructorAttrs', line: 10, column: 11},
+        {messageId: 'constructorAttrs', line: 11, column: 11},
+        {messageId: 'constructorAttrs', line: 12, column: 11},
+        {messageId: 'constructorAttrs', line: 13, column: 11},
+        {messageId: 'constructorAttrs', line: 14, column: 11},
+        {messageId: 'constructorAttrs', line: 15, column: 11},
+        {messageId: 'constructorAttrs', line: 16, column: 11},
+        {messageId: 'constructorAttrs', line: 17, column: 11}
+      ]
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
+          this.classList.toggle('foo');
+          this.classList.add('foo');
+          this.classList.remove('foo');
+          const foo = this.classList;
+        }
+      }`,
+      errors: [
+        {messageId: 'constructorAttrs', line: 3, column: 11},
+        {messageId: 'constructorAttrs', line: 4, column: 11},
+        {messageId: 'constructorAttrs', line: 5, column: 11},
+        {messageId: 'constructorAttrs', line: 6, column: 23}
+      ]
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
+          this.dataset['foo'] = 'bar';
+          const foo = this.dataset['foo'];
+          const bar = this.dataset;
+        }
+      }`,
+      errors: [
+        {messageId: 'constructorAttrs', line: 3, column: 11},
+        {messageId: 'constructorAttrs', line: 4, column: 23},
+        {messageId: 'constructorAttrs', line: 5, column: 23}
+      ]
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
           this.hasAttribute('foo');
           this.getAttribute('foo');
           this.hasAttributes();

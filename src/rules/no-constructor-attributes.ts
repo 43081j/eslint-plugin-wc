@@ -47,12 +47,31 @@ const rule: Rule.RuleModule = {
       'toggleAttribute'
     ];
     const bannedMembers = [
+      // Child node inspection
       'innerHTML',
       'children',
       'childNodes',
       'firstChild',
       'lastChild',
-      'attributes'
+      'attributes',
+      // Global reflected attributes
+      'accessKey',
+      'autocapitalize',
+      'className',
+      'classList',
+      'contentEditable',
+      'dataset',
+      'dir',
+      'draggable',
+      'hidden',
+      'id',
+      'lang',
+      'slot',
+      'spellcheck',
+      'style',
+      'tabIndex',
+      'title',
+      'translate'
     ];
     const source = context.getSourceCode();
 
