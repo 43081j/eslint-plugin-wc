@@ -133,6 +133,22 @@ ruleTester.run('attach-shadow-constructor', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `@customElement('x-foo')
+      class A extends Element {
+        connectedCallback() {
+          this.attachShadow();
+        }
+      }`,
+      parser: '@typescript-eslint/parser',
+      errors: [
+        {
+          messageId: 'attachShadowConstructor',
+          line: 4,
+          column: 11
+        }
+      ]
     }
   ]
 });
