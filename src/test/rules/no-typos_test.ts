@@ -162,9 +162,26 @@ ruleTester.run('no-typos', rule, {
     },
     {
       code: `/** @customElement **/
-        class Foo extends HTMLElement {
+        class Foo extends Bar {
           static get observedAtributes() {}
         }`,
+      errors: [
+        {
+          messageId: 'member',
+          data: {
+            replacement: 'observedAttributes'
+          },
+          line: 3,
+          column: 22
+        }
+      ]
+    },
+    {
+      code: `@customElement('x-foo')
+        class Foo extends Bar {
+          static get observedAtributes() {}
+        }`,
+      parser: '@typescript-eslint/parser',
       errors: [
         {
           messageId: 'member',

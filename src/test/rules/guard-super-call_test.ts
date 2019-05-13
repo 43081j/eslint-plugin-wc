@@ -137,6 +137,22 @@ ruleTester.run('guard-super-call', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `@customElement('x-foo')
+      class A extends Element {
+        connectedCallback() {
+          super.connectedCallback();
+        }
+      }`,
+      parser: '@typescript-eslint/parser',
+      errors: [
+        {
+          messageId: 'guardSuperCall',
+          line: 4,
+          column: 11
+        }
+      ]
     }
   ]
 });

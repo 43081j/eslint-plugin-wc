@@ -209,6 +209,22 @@ ruleTester.run('no-self-class', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `@customElement('x-foo')
+      class Foo extends Bar {
+        method() {
+          this.className += 'test';
+        }
+      }`,
+      parser: '@typescript-eslint/parser',
+      errors: [
+        {
+          messageId: 'selfClass',
+          line: 4,
+          column: 11
+        }
+      ]
     }
   ]
 });
