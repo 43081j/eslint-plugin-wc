@@ -6,7 +6,12 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement, isNativeCustomElement} from '../util';
+import {
+  isCustomElement,
+  isNativeCustomElement,
+  getParentNode,
+  getDefineCallName
+} from '../util';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -27,8 +32,8 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     // variables should be defined here
-    let insideNonNativeElement = false;
-    let errNode = null;
+    const scannedMembers = new Set<ESTree.Node>();
+    const scannedDefinitions = new Set<string>();
     const source = context.getSourceCode();
 
     const nativeHooks = [
@@ -98,19 +103,28 @@ const rule: Rule.RuleModule = {
      * @param {string} hook hook to test
      * @return {boolean}
      */
-    function isUnguardedSuperHook(node: ESTree.Node, hook: string): boolean {
+    function findUnguardedSuperHook(
+      node: ESTree.Node,
+      hook: string
+    ): ESTree.Node | undefined {
       if (isSuperHookExpression(node, hook)) {
-        errNode = node;
-        return true;
-      } else if (node.type === 'IfStatement' && !isSuperHook(node.test, hook)) {
-        return isUnguardedSuperHook(node.consequent, hook);
-      } else if (
-        node.type === 'BlockStatement' &&
-        node.body.some((n) => isUnguardedSuperHook(n, hook))
-      ) {
-        return true;
+        return node;
       }
-      return false;
+
+      if (node.type === 'IfStatement' && !isSuperHook(node.test, hook)) {
+        return findUnguardedSuperHook(node.consequent, hook);
+      }
+
+      if (node.type === 'BlockStatement') {
+        for (const child of node.body) {
+          const found = findUnguardedSuperHook(child, hook);
+          if (found) {
+            return found;
+          }
+        }
+      }
+
+      return undefined;
     }
 
     //----------------------------------------------------------------------
@@ -118,35 +132,54 @@ const rule: Rule.RuleModule = {
     //----------------------------------------------------------------------
 
     return {
-      'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
-        if (
-          (node.type === 'ClassExpression' ||
-            node.type === 'ClassDeclaration') &&
-          isCustomElement(node, source.getJSDocComment(node)) &&
-          !isNativeCustomElement(node)
-        ) {
-          insideNonNativeElement = true;
-        }
-      },
-      'ClassDeclaration,ClassExpression:exit': (): void => {
-        insideNonNativeElement = false;
-      },
       MethodDefinition: (node: ESTree.Node): void => {
-        if (!insideNonNativeElement || !isLifecycleHook(node)) {
-          return;
-        }
-
-        errNode = node;
+        const parent = getParentNode<ESTree.Class>(node, [
+          'ClassDeclaration',
+          'ClassExpression'
+        ]);
 
         if (
+          parent &&
+          !isNativeCustomElement(parent) &&
+          isLifecycleHook(node) &&
           node.key.type === 'Identifier' &&
-          node.value.type === 'FunctionExpression' &&
-          isUnguardedSuperHook(node.value.body, node.key.name)
+          node.value.type === 'FunctionExpression'
         ) {
-          context.report({
-            node: errNode,
-            messageId: 'guardSuperCall'
-          });
+          const hook = findUnguardedSuperHook(node.value.body, node.key.name);
+          if (hook !== undefined) {
+            scannedMembers.add(hook);
+          }
+        }
+      },
+      CallExpression: (node: ESTree.Node): void => {
+        if (node.type === 'CallExpression') {
+          const definedName = getDefineCallName(node);
+
+          if (definedName !== undefined) {
+            scannedDefinitions.add(definedName);
+          }
+        }
+      },
+      'Program:exit': (): void => {
+        for (const member of scannedMembers) {
+          const parent = getParentNode<ESTree.Class>(member, [
+            'ClassDeclaration',
+            'ClassExpression'
+          ]);
+
+          if (
+            parent !== undefined &&
+            (isCustomElement(parent, source.getJSDocComment(parent)) ||
+              (parent.id !== undefined &&
+                parent.id !== null &&
+                parent.id.type === 'Identifier' &&
+                scannedDefinitions.has(parent.id.name)))
+          ) {
+            context.report({
+              node: member,
+              messageId: 'guardSuperCall'
+            });
+          }
         }
       }
     };

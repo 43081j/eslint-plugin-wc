@@ -507,6 +507,42 @@ ruleTester.run('no-constructor-attributes', rule, {
       ]
     },
     {
+      code: `class Foo extends Bar {
+        constructor() {
+          super();
+          this.setAttribute('x', 'y');
+        }
+      }
+      customElements.define('x', Foo);`,
+      errors: [
+        {
+          message:
+            'Attributes must not be interacted with in the ' +
+            'constructor as the element may not be ready yet.',
+          line: 4,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `customElements.define('x', Foo);
+      class Foo extends Bar {
+        constructor() {
+          super();
+          this.setAttribute('x', 'y');
+        }
+      }`,
+      errors: [
+        {
+          message:
+            'Attributes must not be interacted with in the ' +
+            'constructor as the element may not be ready yet.',
+          line: 5,
+          column: 11
+        }
+      ]
+    },
+    {
       code: `@customElement('x-foo')
       class Foo extends Bar {
         constructor() {

@@ -149,6 +149,21 @@ ruleTester.run('attach-shadow-constructor', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `class A extends Element {
+        connectedCallback() {
+          this.attachShadow();
+        }
+      }
+      customElements.define('foo-bar', A);`,
+      errors: [
+        {
+          messageId: 'attachShadowConstructor',
+          line: 3,
+          column: 11
+        }
+      ]
     }
   ]
 });

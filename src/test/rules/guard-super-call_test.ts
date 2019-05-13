@@ -153,6 +153,21 @@ ruleTester.run('guard-super-call', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `class A extends B {
+        connectedCallback() {
+          super.connectedCallback();
+        }
+      }
+      customElements.define('foo-bar', A);`,
+      errors: [
+        {
+          messageId: 'guardSuperCall',
+          line: 3,
+          column: 11
+        }
+      ]
     }
   ]
 });

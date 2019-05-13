@@ -5,7 +5,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement} from '../util';
+import {isCustomElement, getDefineCallName, getParentNode} from '../util';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -27,7 +27,8 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     // variables should be defined here
-    let insideElement = false;
+    const scannedMembers = new Set<ESTree.Node>();
+    const scannedDefinitions = new Set<string>();
     const bannedClassListMethods = ['add', 'remove', 'toggle', 'replace'];
     const source = context.getSourceCode();
 
@@ -83,34 +84,44 @@ const rule: Rule.RuleModule = {
     //----------------------------------------------------------------------
 
     return {
-      'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
-        if (
-          (node.type === 'ClassExpression' ||
-            node.type === 'ClassDeclaration') &&
-          isCustomElement(node, source.getJSDocComment(node))
-        ) {
-          insideElement = true;
+      CallExpression: (node: ESTree.Node): void => {
+        if (node.type === 'CallExpression') {
+          if (isBannedCallExpr(node)) {
+            scannedMembers.add(node);
+          }
+
+          const definedName = getDefineCallName(node);
+
+          if (definedName !== undefined) {
+            scannedDefinitions.add(definedName);
+          }
         }
-      },
-      'ClassDeclaration,ClassExpression:exit': (): void => {
-        insideElement = false;
       },
       AssignmentExpression: (node: ESTree.Node): void => {
         if (
-          insideElement &&
           node.type === 'AssignmentExpression' &&
           isBannedAssignmentExpr(node)
         ) {
-          context.report({node: node, messageId: 'selfClass'});
+          scannedMembers.add(node);
         }
       },
-      CallExpression: (node: ESTree.Node): void => {
-        if (
-          insideElement &&
-          node.type === 'CallExpression' &&
-          isBannedCallExpr(node)
-        ) {
-          context.report({node: node, messageId: 'selfClass'});
+      'Program:exit': (): void => {
+        for (const member of scannedMembers) {
+          const parent = getParentNode<ESTree.Class>(member, [
+            'ClassDeclaration',
+            'ClassExpression'
+          ]);
+
+          if (
+            parent !== undefined &&
+            (isCustomElement(parent, source.getJSDocComment(parent)) ||
+              (parent.id !== undefined &&
+                parent.id !== null &&
+                parent.id.type === 'Identifier' &&
+                scannedDefinitions.has(parent.id.name)))
+          ) {
+            context.report({node: member, messageId: 'selfClass'});
+          }
         }
       }
     };

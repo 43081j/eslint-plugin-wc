@@ -225,6 +225,21 @@ ruleTester.run('no-self-class', rule, {
           column: 11
         }
       ]
+    },
+    {
+      code: `class Foo extends Bar {
+        method() {
+          this.className += 'test';
+        }
+      }
+      customElements.define('foo-bar', Foo);`,
+      errors: [
+        {
+          messageId: 'selfClass',
+          line: 3,
+          column: 11
+        }
+      ]
     }
   ]
 });

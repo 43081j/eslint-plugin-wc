@@ -5,7 +5,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement} from '../util';
+import {getDefineCallName, getParentNode, isCustomElement} from '../util';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -26,9 +26,9 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     // variables should be defined here
-    let insideNonConstructor = false;
-    let insideElement = false;
     const source = context.getSourceCode();
+    const scannedMembers = new Set<ESTree.Node>();
+    const scannedDefinitions = new Set<string>();
 
     //----------------------------------------------------------------------
     // Helpers
@@ -39,42 +39,56 @@ const rule: Rule.RuleModule = {
     //----------------------------------------------------------------------
 
     return {
-      'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
-        if (
-          (node.type === 'ClassExpression' ||
-            node.type === 'ClassDeclaration') &&
-          isCustomElement(node, source.getJSDocComment(node))
-        ) {
-          insideElement = true;
-        }
-      },
-      'ClassDeclaration,ClassExpression:exit': (): void => {
-        insideElement = false;
-      },
-      MethodDefinition: (node: ESTree.Node): void => {
-        if (
-          insideElement &&
-          node.type === 'MethodDefinition' &&
-          node.kind !== 'constructor' &&
-          node.key.type === 'Identifier' &&
-          node.key.name !== 'constructor'
-        ) {
-          insideNonConstructor = true;
-        }
-      },
-      'MethodDefinition:exit': (): void => {
-        insideNonConstructor = false;
-      },
       CallExpression: (node: ESTree.Node): void => {
-        if (
-          insideNonConstructor &&
-          node.type === 'CallExpression' &&
-          node.callee.type === 'MemberExpression' &&
-          node.callee.object.type === 'ThisExpression' &&
-          node.callee.property.type === 'Identifier' &&
-          node.callee.property.name === 'attachShadow'
-        ) {
-          context.report({node, messageId: 'attachShadowConstructor'});
+        if (node.type === 'CallExpression') {
+          const parent = getParentNode<ESTree.MethodDefinition>(node, [
+            'MethodDefinition'
+          ]);
+
+          const isConstructor =
+            parent !== undefined &&
+            parent.kind === 'constructor' &&
+            parent.static === false &&
+            parent.key.type === 'Identifier' &&
+            parent.key.name === 'constructor';
+
+          if (
+            !isConstructor &&
+            node.callee.type === 'MemberExpression' &&
+            node.callee.object.type === 'ThisExpression' &&
+            node.callee.property.type === 'Identifier' &&
+            node.callee.property.name === 'attachShadow'
+          ) {
+            scannedMembers.add(node);
+          }
+
+          const definedName = getDefineCallName(node);
+
+          if (definedName !== undefined) {
+            scannedDefinitions.add(definedName);
+          }
+        }
+      },
+      'Program:exit': (): void => {
+        for (const member of scannedMembers) {
+          const parent = getParentNode<ESTree.Class>(member, [
+            'ClassDeclaration',
+            'ClassExpression'
+          ]);
+
+          if (
+            parent !== undefined &&
+            (isCustomElement(parent, source.getJSDocComment(parent)) ||
+              (parent.id !== undefined &&
+                parent.id !== null &&
+                parent.id.type === 'Identifier' &&
+                scannedDefinitions.has(parent.id.name)))
+          ) {
+            context.report({
+              node: member,
+              messageId: 'attachShadowConstructor'
+            });
+          }
         }
       }
     };

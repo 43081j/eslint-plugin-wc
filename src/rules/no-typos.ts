@@ -5,7 +5,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement} from '../util';
+import {isCustomElement, getDefineCallName, getParentNode} from '../util';
 import levenshtein from 'js-levenshtein-esm';
 
 //------------------------------------------------------------------------------
@@ -29,7 +29,8 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     // variables should be defined here
-    let insideElement = false;
+    const scannedMembers = new Set<ESTree.MethodDefinition>();
+    const scannedDefinitions = new Set<string>();
     const source = context.getSourceCode();
     const lifecycleMethods = [
       'connectedCallback',
@@ -47,57 +48,73 @@ const rule: Rule.RuleModule = {
     //----------------------------------------------------------------------
 
     return {
-      'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
-        if (
-          (node.type === 'ClassExpression' ||
-            node.type === 'ClassDeclaration') &&
-          isCustomElement(node, source.getJSDocComment(node))
-        ) {
-          insideElement = true;
+      CallExpression: (node: ESTree.Node): void => {
+        if (node.type === 'CallExpression') {
+          const definedName = getDefineCallName(node);
+
+          if (definedName !== undefined) {
+            scannedDefinitions.add(definedName);
+          }
         }
       },
-      'ClassDeclaration,ClassExpression:exit': (): void => {
-        insideElement = false;
-      },
       MethodDefinition: (node: ESTree.Node): void => {
-        if (insideElement && node.type === 'MethodDefinition') {
-          if (
-            node.kind === 'method' &&
-            !node.static &&
-            node.key.type === 'Identifier'
-          ) {
-            const name = node.key.name;
-            const match = lifecycleMethods
-              .map<[string, number]>((m) => {
-                const result = levenshtein(m, name);
-                return [m, result];
-              })
-              .filter((pair) => pair[1] !== 0 && pair[1] < 3)
-              .sort((a, b) => a[1] - b[1]);
+        if (node.type === 'MethodDefinition') {
+          scannedMembers.add(node);
+        }
+      },
+      'Program:exit': (): void => {
+        for (const member of scannedMembers) {
+          const parent = getParentNode<ESTree.Class>(member, [
+            'ClassDeclaration',
+            'ClassExpression'
+          ]);
 
-            if (match.length > 0) {
-              context.report({
-                node: node.key,
-                messageId: 'method',
-                data: {
-                  replacement: match[0][0]
-                }
-              });
-            }
-          } else if (
-            node.kind === 'get' &&
-            node.static &&
-            node.key.type === 'Identifier'
+          if (
+            parent !== undefined &&
+            (isCustomElement(parent, source.getJSDocComment(parent)) ||
+              (parent.id !== undefined &&
+                parent.id !== null &&
+                parent.id.type === 'Identifier' &&
+                scannedDefinitions.has(parent.id.name)))
           ) {
-            const result = levenshtein(node.key.name, 'observedAttributes');
-            if (result !== 0 && result < 3) {
-              context.report({
-                node: node.key,
-                messageId: 'member',
-                data: {
-                  replacement: 'observedAttributes'
-                }
-              });
+            if (
+              member.kind === 'method' &&
+              !member.static &&
+              member.key.type === 'Identifier'
+            ) {
+              const name = member.key.name;
+              const match = lifecycleMethods
+                .map<[string, number]>((m) => {
+                  const result = levenshtein(m, name);
+                  return [m, result];
+                })
+                .filter((pair) => pair[1] !== 0 && pair[1] < 3)
+                .sort((a, b) => a[1] - b[1]);
+
+              if (match.length > 0) {
+                context.report({
+                  node: member.key,
+                  messageId: 'method',
+                  data: {
+                    replacement: match[0][0]
+                  }
+                });
+              }
+            } else if (
+              member.kind === 'get' &&
+              member.static &&
+              member.key.type === 'Identifier'
+            ) {
+              const result = levenshtein(member.key.name, 'observedAttributes');
+              if (result !== 0 && result < 3) {
+                context.report({
+                  node: member.key,
+                  messageId: 'member',
+                  data: {
+                    replacement: 'observedAttributes'
+                  }
+                });
+              }
             }
           }
         }
