@@ -16,9 +16,12 @@ import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaVersion: 2015
   }
 });
+
+const parser = require.resolve('@typescript-eslint/parser');
 
 ruleTester.run('no-typos', rule, {
   valid: [
@@ -181,7 +184,7 @@ ruleTester.run('no-typos', rule, {
         class Foo extends Bar {
           static get observedAtributes() {}
         }`,
-      parser: '@typescript-eslint/parser',
+      parser,
       errors: [
         {
           messageId: 'member',

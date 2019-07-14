@@ -16,9 +16,12 @@ import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaVersion: 2015
   }
 });
+
+const parser = require.resolve('@typescript-eslint/parser');
 
 ruleTester.run('attach-shadow-constructor', rule, {
   valid: [
@@ -141,7 +144,7 @@ ruleTester.run('attach-shadow-constructor', rule, {
           this.attachShadow();
         }
       }`,
-      parser: '@typescript-eslint/parser',
+      parser,
       errors: [
         {
           messageId: 'attachShadowConstructor',

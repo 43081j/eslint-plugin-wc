@@ -17,9 +17,12 @@ import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaVersion: 2015
   }
 });
+
+const parser = require.resolve('@typescript-eslint/parser');
 
 ruleTester.run('guard-super-call', rule, {
   valid: [
@@ -145,7 +148,7 @@ ruleTester.run('guard-super-call', rule, {
           super.connectedCallback();
         }
       }`,
-      parser: '@typescript-eslint/parser',
+      parser,
       errors: [
         {
           messageId: 'guardSuperCall',
