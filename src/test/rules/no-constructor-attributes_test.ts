@@ -16,9 +16,12 @@ import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaVersion: 2015
   }
 });
+
+const parser = require.resolve('@typescript-eslint/parser');
 
 ruleTester.run('no-constructor-attributes', rule, {
   valid: [
@@ -514,7 +517,7 @@ ruleTester.run('no-constructor-attributes', rule, {
           this.setAttribute('x', 'y');
         }
       }`,
-      parser: '@typescript-eslint/parser',
+      parser,
       errors: [
         {
           message:

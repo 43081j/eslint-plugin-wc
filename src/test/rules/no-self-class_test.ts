@@ -16,9 +16,12 @@ import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaVersion: 2015
   }
 });
+
+const parser = require.resolve('@typescript-eslint/parser');
 
 ruleTester.run('no-self-class', rule, {
   valid: [
@@ -217,7 +220,7 @@ ruleTester.run('no-self-class', rule, {
           this.className += 'test';
         }
       }`,
-      parser: '@typescript-eslint/parser',
+      parser,
       errors: [
         {
           messageId: 'selfClass',
