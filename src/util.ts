@@ -1,5 +1,5 @@
 import * as ESTree from 'estree';
-import {AST} from 'eslint';
+import {AST, Rule} from 'eslint';
 
 export interface DecoratorNode extends ESTree.BaseNode {
   type: 'Decorator';
@@ -29,21 +29,32 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
 /**
  * Determines if a node is an element class or not.
  *
+ * @param {Rule.RuleContext} context ESLint rule context
  * @param {ESTree.Node} node Node to test
  * @param {AST.Token=} jsdoc JSDoc to parse
  * @return {boolean}
  */
 export function isCustomElement(
+  context: Rule.RuleContext,
   node: ESTree.Node,
   jsdoc?: AST.Token | null
 ): node is ESTree.Class {
   const asDecorated = node as WithDecorators<ESTree.Node>;
+  const customElementBases: string[] = ['HTMLElement'];
+  if (
+    context.settings.wc &&
+    Array.isArray(context.settings.wc.elementBaseClasses)
+  ) {
+    customElementBases.push(
+      ...(context.settings.wc.elementBaseClasses as string[])
+    );
+  }
 
   if (node.type === 'ClassExpression' || node.type === 'ClassDeclaration') {
     if (
       node.superClass &&
       node.superClass.type === 'Identifier' &&
-      node.superClass.name === 'HTMLElement'
+      customElementBases.includes(node.superClass.name)
     ) {
       return true;
     }

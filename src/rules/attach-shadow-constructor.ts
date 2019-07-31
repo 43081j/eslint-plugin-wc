@@ -43,7 +43,7 @@ const rule: Rule.RuleModule = {
         if (
           (node.type === 'ClassExpression' ||
             node.type === 'ClassDeclaration') &&
-          isCustomElement(node, source.getJSDocComment(node))
+          isCustomElement(context, node, source.getJSDocComment(node))
         ) {
           insideElement = true;
         }
