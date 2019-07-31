@@ -73,26 +73,51 @@ ruleTester.run('guard-super-call', rule, {
     },
     {
       code: `/**
-     * @customElement
-     */
-    class A extends Element {
-      connectedCallback() {
-        if (super.connectedCallback) {
-          super.connectedCallback();
+       * @customElement
+       */
+      class A extends Element {
+        connectedCallback() {
+          if (super.connectedCallback) {
+            super.connectedCallback();
+          }
+        }
+        disconnectedCallback() {
+          if (super.disconnectedCallback)
+            super.disconnectedCallback();
+        }
+        adoptedCallback() {
+          if (super.adoptedCallback) super.adoptedCallback();
+        }
+        attributeChangedCallback() {
+          super.attributeChangedCallback &&
+            super.attributeChangedCallback();
+        }
+      }`
+    },
+    {
+      code: `class A extends Element {
+        connectedCallback() {
+          if (super.connectedCallback) {
+            super.connectedCallback();
+          }
+        }
+        disconnectedCallback() {
+          if (super.disconnectedCallback)
+            super.disconnectedCallback();
+        }
+        adoptedCallback() {
+          if (super.adoptedCallback) super.adoptedCallback();
+        }
+        attributeChangedCallback() {
+          super.attributeChangedCallback &&
+            super.attributeChangedCallback();
+        }
+      }`,
+      settings: {
+        wc: {
+          elementBaseClasses: ['Element']
         }
       }
-      disconnectedCallback() {
-        if (super.disconnectedCallback)
-          super.disconnectedCallback();
-      }
-      adoptedCallback() {
-        if (super.adoptedCallback) super.adoptedCallback();
-      }
-      attributeChangedCallback() {
-        super.attributeChangedCallback &&
-          super.attributeChangedCallback();
-      }
-    }`
     }
   ],
 
@@ -153,6 +178,25 @@ ruleTester.run('guard-super-call', rule, {
         {
           messageId: 'guardSuperCall',
           line: 4,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `class A extends Element {
+        connectedCallback() {
+          super.connectedCallback();
+        }
+      }`,
+      settings: {
+        wc: {
+          elementBaseClasses: ['Element']
+        }
+      },
+      errors: [
+        {
+          messageId: 'guardSuperCall',
+          line: 3,
           column: 11
         }
       ]

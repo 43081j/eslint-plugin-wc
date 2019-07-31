@@ -1,5 +1,5 @@
 import * as ESTree from 'estree';
-import {AST} from 'eslint';
+import {AST, Rule} from 'eslint';
 
 export interface DecoratorNode extends ESTree.BaseNode {
   type: 'Decorator';
@@ -34,16 +34,21 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
  * @return {boolean}
  */
 export function isCustomElement(
+  context: Rule.RuleContext,
   node: ESTree.Node,
   jsdoc?: AST.Token | null
 ): node is ESTree.Class {
   const asDecorated = node as WithDecorators<ESTree.Node>;
+  let customElementBases: string[] = ['HTMLElement'];
+  if (context.settings.wc && context.settings.wc.elementBaseClasses) {
+    customElementBases.push(...context.settings.wc.elementBaseClasses as string[]);
+  }
 
   if (node.type === 'ClassExpression' || node.type === 'ClassDeclaration') {
     if (
       node.superClass &&
       node.superClass.type === 'Identifier' &&
-      node.superClass.name === 'HTMLElement'
+      customElementBases.includes(node.superClass.name)
     ) {
       return true;
     }

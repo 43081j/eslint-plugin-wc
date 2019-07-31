@@ -195,6 +195,26 @@ ruleTester.run('no-typos', rule, {
           column: 22
         }
       ]
+    },
+    {
+      code: `class Foo extends Bar {
+        static get observedAtributes() {}
+      }`,
+      settings: {
+        wc: {
+          elementBaseClasses: ['Bar']
+        }
+      },
+      errors: [
+        {
+          messageId: 'member',
+          data: {
+            replacement: 'observedAttributes'
+          },
+          line: 2,
+          column: 20
+        }
+      ]
     }
   ]
 });

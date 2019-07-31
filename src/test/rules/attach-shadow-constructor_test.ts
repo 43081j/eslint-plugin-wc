@@ -70,6 +70,18 @@ ruleTester.run('attach-shadow-constructor', rule, {
     },
     {
       code: `class A extends Element {
+        constructor() {
+          this.attachShadow();
+        }
+      }`,
+      settings: {
+        wc: {
+          elementBaseClasses: ['Element']
+        }
+      }
+    },
+    {
+      code: `class A extends Element {
         connectedCallback() {
           this.attachShadow();
         }
@@ -152,6 +164,25 @@ ruleTester.run('attach-shadow-constructor', rule, {
           column: 11
         }
       ]
-    }
+    },
+    {
+      code: `class A extends Element {
+        connectedCallback() {
+          this.attachShadow();
+        }
+      }`,
+      settings: {
+        wc: {
+          elementBaseClasses: ['Element']
+        }
+      },
+      errors: [
+        {
+          messageId: 'attachShadowConstructor',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
   ]
 });
