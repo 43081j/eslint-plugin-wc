@@ -29,6 +29,7 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
 /**
  * Determines if a node is an element class or not.
  *
+ * @param {Rule.RuleContext} context ESLint rule context
  * @param {ESTree.Node} node Node to test
  * @param {AST.Token=} jsdoc JSDoc to parse
  * @return {boolean}
@@ -39,9 +40,11 @@ export function isCustomElement(
   jsdoc?: AST.Token | null
 ): node is ESTree.Class {
   const asDecorated = node as WithDecorators<ESTree.Node>;
-  let customElementBases: string[] = ['HTMLElement'];
+  const customElementBases: string[] = ['HTMLElement'];
   if (context.settings.wc && context.settings.wc.elementBaseClasses) {
-    customElementBases.push(...context.settings.wc.elementBaseClasses as string[]);
+    customElementBases.push(
+      ...(context.settings.wc.elementBaseClasses as string[])
+    );
   }
 
   if (node.type === 'ClassExpression' || node.type === 'ClassDeclaration') {

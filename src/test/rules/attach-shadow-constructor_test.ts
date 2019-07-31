@@ -183,6 +183,6 @@ ruleTester.run('attach-shadow-constructor', rule, {
           column: 11
         }
       ]
-    },
+    }
   ]
 });
