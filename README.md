@@ -58,6 +58,25 @@ best practice rules:
 }
 ```
 
+### Custom settings
+
+Settings are configured through a `settings` option in your eslintrc file.
+
+#### `wc.elementBaseClasses`
+
+```json
+{
+  "settings": {
+    "wc": {
+      "elementBaseClasses": ["MyBaseElement"]
+    }
+  }
+}
+```
+
+Using this setting, you can control which base classes are considered
+to be custom elements.
+
 ## Supported Rules
 
 ### Possible Errors (recommended)

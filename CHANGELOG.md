@@ -20,6 +20,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 <!-- ### Fixed -->
 
+## [1.2.0] - 2019-07-31
+
+### Added
+
+- Custom elements can now be detected via a new setting
+(`settings.wc.elementBaseClasses`)
+
 ## [1.1.1] - 2019-06-10
 
 ### Fixed
