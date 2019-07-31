@@ -41,7 +41,10 @@ export function isCustomElement(
 ): node is ESTree.Class {
   const asDecorated = node as WithDecorators<ESTree.Node>;
   const customElementBases: string[] = ['HTMLElement'];
-  if (context.settings.wc && context.settings.wc.elementBaseClasses) {
+  if (
+    context.settings.wc &&
+    Array.isArray(context.settings.wc.elementBaseClasses)
+  ) {
     customElementBases.push(
       ...(context.settings.wc.elementBaseClasses as string[])
     );
