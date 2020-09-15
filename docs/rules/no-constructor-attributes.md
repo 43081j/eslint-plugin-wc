@@ -31,7 +31,7 @@ class MyClass {
 
 class OtherClass {
   constructor() {
-    this.setAtrribute('foo', 'bar');
+    this.setAttribute('foo', 'bar');
   }
 }
 ```
