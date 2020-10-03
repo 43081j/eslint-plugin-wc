@@ -47,6 +47,7 @@ const rule: Rule.RuleModule = {
       }
       return firstArg.properties.find<ESTree.Property>(
         (n): n is ESTree.Property =>
+          n.type === 'Property' &&
           ((n.key.type === 'Identifier' && n.key.name === 'mode') ||
             (n.key.type === 'Literal' && n.key.value === 'mode')) &&
           n.value.type === 'Literal' &&
