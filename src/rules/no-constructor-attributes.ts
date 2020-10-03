@@ -93,17 +93,17 @@ const rule: Rule.RuleModule = {
         ((node.callee.object.type === 'ThisExpression' &&
           node.callee.property.type === 'Identifier' &&
           bannedCallExpressions.includes(node.callee.property.name)) ||
-          ((node.callee.object.type === 'MemberExpression' &&
+          (node.callee.object.type === 'MemberExpression' &&
             node.callee.object.object.type === 'ThisExpression' &&
             node.callee.object.property.type === 'Identifier' &&
             node.callee.object.property.name === 'shadowRoot' &&
             node.callee.property.type === 'Identifier' &&
             bannedCallExpressions.includes(node.callee.property.name)) ||
-            (node.callee.object.type === 'Identifier' &&
-              node.callee.object.name === 'document' &&
-              node.callee.property.type === 'Identifier' &&
-              (node.callee.property.name === 'write' ||
-                node.callee.property.name === 'open'))))
+          (node.callee.object.type === 'Identifier' &&
+            node.callee.object.name === 'document' &&
+            node.callee.property.type === 'Identifier' &&
+            (node.callee.property.name === 'write' ||
+              node.callee.property.name === 'open')))
       );
     }
 
