@@ -59,13 +59,13 @@ ruleTester.run('no-constructor-attributes', rule, {
     {
       code: `class Foo extends HTMLElement {
         constructor() {
-          this.shadowRoot.hasAttribute('foo');
-          this.shadowRoot.getAttribute('foo');
-          this.shadowRoot.hasAttributes();
-          this.shadowRoot.removeAttribute('foo');
-          this.shadowRoot.setAttribute('foo', 'bar');
-          this.shadowRoot.toggleAttribute('foo');
-          console.log(this.shadowRoot.attributes[0]);
+          this.shadowRoot.firstElementChild.hasAttribute('foo');
+          this.shadowRoot.firstElementChild.getAttribute('foo');
+          this.shadowRoot.firstElementChild.hasAttributes();
+          this.shadowRoot.firstElementChild.removeAttribute('foo');
+          this.shadowRoot.firstElementChild.setAttribute('foo', 'bar');
+          this.shadowRoot.firstElementChild.toggleAttribute('foo');
+          console.log(this.shadowRoot.firstElementChild.attributes[0]);
         }
       }`
     },
