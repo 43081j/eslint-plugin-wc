@@ -1,9 +1,10 @@
 # Disallows interaction with attributes in constructors (no-constructor-attributes)
 
-Constructors of custom elements should never interact with their own light DOM and attributes as the element will not be connected to the DOM when created programmatically (i.e. using `document.createElement()`).
+Constructors of custom elements should never interact with the DOM or
+attributes as the element may not yet be upgraded.
 
-> Do note that interaction with the element's shadow DOM is perfectly valid at this point as it does not interfere with
-> the DOM tree of the consumer.
+> Do note that interaction with the element's shadow DOM is perfectly valid at
+> this point as it does not interfere with the DOM tree of the consumer.
 
 More information on why this is a bad thing can be found in the HTML
 standard [here](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance).
