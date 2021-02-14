@@ -55,6 +55,58 @@ ruleTester.run('no-constructor-attributes', rule, {
       code: `class NonElement {
       constructor() { this.getAttribute('x'); this.appendChild(c); }
     }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
+          this.shadowRoot.firstElementChild.hasAttribute('foo');
+          this.shadowRoot.firstElementChild.getAttribute('foo');
+          this.shadowRoot.firstElementChild.hasAttributes();
+          this.shadowRoot.firstElementChild.removeAttribute('foo');
+          this.shadowRoot.firstElementChild.setAttribute('foo', 'bar');
+          this.shadowRoot.firstElementChild.toggleAttribute('foo');
+          console.log(this.shadowRoot.firstElementChild.attributes[0]);
+        }
+      }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
+          this.shadowRoot.innerHTML += 'test';
+          this.shadowRoot.innerHTML = 'test';
+        }
+      }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
+          this.shadowRoot.childNodes[0];
+          const x = this.shadowRoot.firstChild;
+          this.shadowRoot.lastChild.innerHTML = 'foo';
+          const y = [...this.shadowRoot.children];
+        }
+      }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
+          this.shadowRoot.getElementsByClassName(foo)
+          this.shadowRoot.getElementsByTagName(foo)
+          this.shadowRoot.querySelector(foo)
+          this.shadowRoot.querySelectorAll(foo)
+        }
+      }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        constructor() {
+          this.shadowRoot.append(node);
+          this.shadowRoot.appendChild(node);
+          this.shadowRoot.removeChild(node);
+          this.shadowRoot.replaceChild(a, b);
+          this.shadowRoot.insertBefore(a, b)
+        }
+      }`
     }
   ],
 
@@ -180,56 +232,6 @@ ruleTester.run('no-constructor-attributes', rule, {
     {
       code: `class Foo extends HTMLElement {
         constructor() {
-          this.shadowRoot.hasAttribute('foo');
-          this.shadowRoot.getAttribute('foo');
-          this.shadowRoot.hasAttributes();
-          this.shadowRoot.removeAttribute('foo');
-          this.shadowRoot.setAttribute('foo', 'bar');
-          this.shadowRoot.toggleAttribute('foo');
-          console.log(this.shadowRoot.attributes[0]);
-        }
-      }`,
-      errors: [
-        {
-          messageId: 'constructorAttrs',
-          line: 3,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 4,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 5,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 6,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 7,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 8,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 9,
-          column: 23
-        }
-      ]
-    },
-    {
-      code: `class Foo extends HTMLElement {
-        constructor() {
           document.write('test');
           document.open(url);
         }
@@ -270,69 +272,11 @@ ruleTester.run('no-constructor-attributes', rule, {
     {
       code: `class Foo extends HTMLElement {
         constructor() {
-          this.shadowRoot.innerHTML += 'test';
-          this.shadowRoot.innerHTML = 'test';
-        }
-      }`,
-      errors: [
-        {
-          messageId: 'constructorAttrs',
-          line: 3,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 4,
-          column: 11
-        }
-      ]
-    },
-    {
-      code: `class Foo extends HTMLElement {
-        constructor() {
           this.append(node);
           this.appendChild(node);
           this.removeChild(node);
           this.replaceChild(a, b);
           this.insertBefore(a, b)
-        }
-      }`,
-      errors: [
-        {
-          messageId: 'constructorAttrs',
-          line: 3,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 4,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 5,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 6,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 7,
-          column: 11
-        }
-      ]
-    },
-    {
-      code: `class Foo extends HTMLElement {
-        constructor() {
-          this.shadowRoot.append(node);
-          this.shadowRoot.appendChild(node);
-          this.shadowRoot.removeChild(node);
-          this.shadowRoot.replaceChild(a, b);
-          this.shadowRoot.insertBefore(a, b)
         }
       }`,
       errors: [
@@ -395,38 +339,7 @@ ruleTester.run('no-constructor-attributes', rule, {
         }
       ]
     },
-    {
-      code: `class Foo extends HTMLElement {
-        constructor() {
-          this.shadowRoot.childNodes[0];
-          const x = this.shadowRoot.firstChild;
-          this.shadowRoot.lastChild.innerHTML = 'foo';
-          const y = [...this.shadowRoot.children];
-        }
-      }`,
-      errors: [
-        {
-          messageId: 'constructorAttrs',
-          line: 3,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 4,
-          column: 21
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 5,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 6,
-          column: 25
-        }
-      ]
-    },
+
     {
       code: `class Foo extends HTMLElement {
         constructor() {
@@ -434,38 +347,6 @@ ruleTester.run('no-constructor-attributes', rule, {
           this.getElementsByTagName(foo)
           this.querySelector(foo)
           this.querySelectorAll(foo)
-        }
-      }`,
-      errors: [
-        {
-          messageId: 'constructorAttrs',
-          line: 3,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 4,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 5,
-          column: 11
-        },
-        {
-          messageId: 'constructorAttrs',
-          line: 6,
-          column: 11
-        }
-      ]
-    },
-    {
-      code: `class Foo extends HTMLElement {
-        constructor() {
-          this.shadowRoot.getElementsByClassName(foo)
-          this.shadowRoot.getElementsByTagName(foo)
-          this.shadowRoot.querySelector(foo)
-          this.shadowRoot.querySelectorAll(foo)
         }
       }`,
       errors: [

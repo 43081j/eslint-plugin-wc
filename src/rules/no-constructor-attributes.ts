@@ -81,7 +81,7 @@ const rule: Rule.RuleModule = {
     /**
      * Determines if a call expression is banned or not.
      * This is true if it is in the banned list and has been called
-     * on `this` or `this.shadowRoot`, or if it is a `document.write`
+     * on `this`, or if it is a `document.write`
      * or `document.open`.
      *
      * @param {ESTree.CallExpression} node Node to test
@@ -93,12 +93,6 @@ const rule: Rule.RuleModule = {
         ((node.callee.object.type === 'ThisExpression' &&
           node.callee.property.type === 'Identifier' &&
           bannedCallExpressions.includes(node.callee.property.name)) ||
-          (node.callee.object.type === 'MemberExpression' &&
-            node.callee.object.object.type === 'ThisExpression' &&
-            node.callee.object.property.type === 'Identifier' &&
-            node.callee.object.property.name === 'shadowRoot' &&
-            node.callee.property.type === 'Identifier' &&
-            bannedCallExpressions.includes(node.callee.property.name)) ||
           (node.callee.object.type === 'Identifier' &&
             node.callee.object.name === 'document' &&
             node.callee.property.type === 'Identifier' &&
@@ -118,15 +112,9 @@ const rule: Rule.RuleModule = {
      */
     function isBannedMember(node: ESTree.MemberExpression): boolean {
       return (
-        (node.object.type === 'ThisExpression' &&
-          node.property.type === 'Identifier' &&
-          bannedMembers.includes(node.property.name)) ||
-        (node.object.type === 'MemberExpression' &&
-          node.object.object.type === 'ThisExpression' &&
-          node.object.property.type === 'Identifier' &&
-          node.object.property.name === 'shadowRoot' &&
-          node.property.type === 'Identifier' &&
-          bannedMembers.includes(node.property.name))
+        node.object.type === 'ThisExpression' &&
+        node.property.type === 'Identifier' &&
+        bannedMembers.includes(node.property.name)
       );
     }
 
