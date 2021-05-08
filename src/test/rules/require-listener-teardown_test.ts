@@ -40,6 +40,13 @@ ruleTester.run('require-listener-teardown', rule, {
       }
     }`
     },
+    {
+      code: `class Foo extends HTMLElement {
+      connectedCallback() {
+        this.addEventListener(notAString, console.log);
+      }
+    }`
+    },
     {code: `class Foo extends HTMLElement {}`},
     {
       code: `class Foo extends Unknown {
