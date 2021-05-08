@@ -85,6 +85,40 @@ ruleTester.run('require-listener-teardown', rule, {
       ]
     },
     {
+      code: `class Foo extends HTMLElement {
+        connectedCallback() {
+          this.addEventListener('x', console.log);
+        }
+        disconnectedCallback() {
+          this.removeEventListener(notAString, console.log);
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'noTeardown',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `class Foo extends HTMLElement {
+        connectedCallback() {
+          this.addEventListener('x', console.log);
+        }
+        disconnectedCallback() {
+          foo.removeEventListener('x', console.log);
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'noTeardown',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    {
       code: `class Foo extends Unknown {
         connectedCallback() {
           this.addEventListener('x', console.log);
