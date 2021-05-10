@@ -26,5 +26,6 @@ class Foo extends HTMLElement {
 
 ## When Not To Use It
 
-If you wish to allow parameters to custom element constructors, you should not
-use this rule.
+You should usually keep this rule enabled as browsers will never pass parameters
+to the constructor. You should only disable it if you intend to instantiate
+your class directly, and should then make all parameters optional.
