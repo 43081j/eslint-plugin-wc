@@ -20,13 +20,12 @@ const rule: Rule.RuleModule = {
     },
     messages: {
       noParams:
-        'Constructors must be parameterless as they are created indirectly ' +
-        'when appended to DOM.'
+        'Constructors must not have parameters as they are called with ' +
+        'no parameters when custom elements are created by the browser.'
     }
   },
 
   create(context): Rule.RuleListener {
-    // variables should be defined here
     const constructorQuery =
       'ClassBody > MethodDefinition[kind="constructor"]' +
       '[value.params.length > 0]';

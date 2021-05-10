@@ -10,6 +10,8 @@ export type WithDecorators<T extends ESTree.Node> = T & {
   decorators?: DecoratorNode[];
 };
 
+const customElementsCache = new WeakMap<ESTree.Node, boolean>();
+
 /**
  * Determines if a given decorator is the `@customElement` decorator
  *
@@ -41,6 +43,12 @@ export function isCustomElement(
 ): node is ESTree.Class {
   const asDecorated = node as WithDecorators<ESTree.Node>;
   const customElementBases: string[] = ['HTMLElement'];
+  const cached = customElementsCache.get(node);
+
+  if (cached !== undefined) {
+    return cached;
+  }
+
   if (
     context.settings.wc &&
     Array.isArray(context.settings.wc.elementBaseClasses)
@@ -56,6 +64,7 @@ export function isCustomElement(
       node.superClass.type === 'Identifier' &&
       customElementBases.includes(node.superClass.name)
     ) {
+      customElementsCache.set(node, true);
       return true;
     }
 
@@ -64,6 +73,7 @@ export function isCustomElement(
       jsdoc !== null &&
       jsdoc.value.includes('@customElement')
     ) {
+      customElementsCache.set(node, true);
       return true;
     }
 
@@ -71,10 +81,12 @@ export function isCustomElement(
       asDecorated.decorators !== undefined &&
       asDecorated.decorators.some(isCustomElementDecorator)
     ) {
+      customElementsCache.set(node, true);
       return true;
     }
   }
 
+  customElementsCache.set(node, false);
   return false;
 }
 
