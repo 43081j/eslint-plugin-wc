@@ -114,6 +114,8 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 }
 ```
 
+**Note**: These configurations will enable `sourceType: 'module'` in [parser options](http://eslint.org/docs/user-guide/configuring#specifying-parser-options).
+
 ## License
 
 `eslint-plugin-wc` is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
