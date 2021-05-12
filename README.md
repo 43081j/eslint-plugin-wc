@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="media/eslint-webcomponents.png" alt="Eslint + WebComponents" />
+  <img src="media/eslint-webcomponents.svg" alt="Eslint + WebComponents" />
 </div>
 
 # eslint-plugin-wc
