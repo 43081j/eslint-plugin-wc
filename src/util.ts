@@ -40,7 +40,7 @@ export function isCustomElement(
   context: Rule.RuleContext,
   node: ESTree.Class,
   jsdoc?: AST.Token | null
-): node is ESTree.Class {
+): boolean {
   const asDecorated = node as WithDecorators<ESTree.Node>;
   const customElementBases: string[] = ['HTMLElement'];
   const cached = customElementsCache.get(node);
@@ -83,9 +83,7 @@ export function isCustomElement(
  * @param {ESTree.Class} node Node to test
  * @return {boolean}
  */
-export function isNativeCustomElement(
-  node: ESTree.Class
-): node is ESTree.Class {
+export function isNativeCustomElement(node: ESTree.Class): boolean {
   return (
     node.superClass?.type === 'Identifier' &&
     node.superClass.name === 'HTMLElement'
