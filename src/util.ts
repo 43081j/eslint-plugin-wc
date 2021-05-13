@@ -33,7 +33,7 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
  *
  * @param {Rule.RuleContext} context ESLint rule context
  * @param {ESTree.Class} node Node to test
- * @param {AST.Token} jsdoc JSDoc to parse
+ * @param {AST.Token=} jsdoc JSDoc to parse
  * @return {boolean}
  */
 export function isCustomElement(
