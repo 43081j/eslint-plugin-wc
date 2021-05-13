@@ -23,6 +23,7 @@ describe('util', () => {
   describe('isCustomElement', () => {
     it('should parse direct sub classes of HTMLElement', () => {
       const doc = parseExpr(`class Foo extends HTMLElement {}`);
+      util.isCustomElement(mockContext, doc); // Primes the cache
       expect(util.isCustomElement(mockContext, doc)).to.equal(true);
     });
 
