@@ -47,20 +47,16 @@ const rule: Rule.RuleModule = {
     //----------------------------------------------------------------------
 
     return {
-      'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
-        if (
-          (node.type === 'ClassExpression' ||
-            node.type === 'ClassDeclaration') &&
-          isCustomElement(context, node, source.getJSDocComment(node))
-        ) {
+      'ClassDeclaration,ClassExpression': (node: ESTree.Class): void => {
+        if (isCustomElement(context, node, source.getJSDocComment(node))) {
           insideElement = true;
         }
       },
       'ClassDeclaration,ClassExpression:exit': (): void => {
         insideElement = false;
       },
-      MethodDefinition: (node: ESTree.Node): void => {
-        if (insideElement && node.type === 'MethodDefinition') {
+      MethodDefinition: (node: ESTree.MethodDefinition): void => {
+        if (insideElement) {
           if (
             node.kind === 'method' &&
             !node.static &&

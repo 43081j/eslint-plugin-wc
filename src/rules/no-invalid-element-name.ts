@@ -41,9 +41,8 @@ const rule: Rule.RuleModule = {
     //----------------------------------------------------------------------
 
     return {
-      CallExpression: (node: ESTree.Node): void => {
+      CallExpression: (node: ESTree.CallExpression): void => {
         if (
-          node.type === 'CallExpression' &&
           node.callee.type === 'MemberExpression' &&
           ((node.callee.object.type === 'MemberExpression' &&
             node.callee.object.object.type === 'Identifier' &&

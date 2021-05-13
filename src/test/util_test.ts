@@ -4,13 +4,15 @@ import {expect} from 'chai';
 import * as ESTree from 'estree';
 import {AST, Rule} from 'eslint';
 
-const parseExpr = (expr: string): ESTree.Node => {
+const parseExpr = (expr: string): ESTree.Class => {
   const parsed = parse(expr, {
     loc: true,
     ecmaVersion: 6,
     sourceType: 'module'
   });
-  return (parsed as ESTree.Program).body[0];
+  return (parsed as ESTree.Program).body[0] as
+    | ESTree.ClassDeclaration
+    | ESTree.ClassExpression;
 };
 
 const mockContext = ({

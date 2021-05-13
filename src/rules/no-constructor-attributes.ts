@@ -123,22 +123,17 @@ const rule: Rule.RuleModule = {
     //----------------------------------------------------------------------
 
     return {
-      'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
-        if (
-          (node.type === 'ClassExpression' ||
-            node.type === 'ClassDeclaration') &&
-          isCustomElement(context, node, source.getJSDocComment(node))
-        ) {
+      'ClassDeclaration,ClassExpression': (node: ESTree.Class): void => {
+        if (isCustomElement(context, node, source.getJSDocComment(node))) {
           insideElement = true;
         }
       },
       'ClassDeclaration,ClassExpression:exit': (): void => {
         insideElement = false;
       },
-      MethodDefinition: (node: ESTree.Node): void => {
+      MethodDefinition: (node: ESTree.MethodDefinition): void => {
         if (
           insideElement &&
-          node.type === 'MethodDefinition' &&
           node.kind === 'constructor' &&
           node.static === false &&
           node.key.type === 'Identifier' &&
@@ -150,21 +145,13 @@ const rule: Rule.RuleModule = {
       'MethodDefinition:exit': (): void => {
         insideConstructor = false;
       },
-      CallExpression: (node: ESTree.Node): void => {
-        if (
-          insideConstructor &&
-          node.type === 'CallExpression' &&
-          isBannedCallExpr(node)
-        ) {
+      CallExpression: (node: ESTree.CallExpression): void => {
+        if (insideConstructor && isBannedCallExpr(node)) {
           context.report({node: node, messageId: 'constructorAttrs'});
         }
       },
-      MemberExpression: (node: ESTree.Node): void => {
-        if (
-          insideConstructor &&
-          node.type === 'MemberExpression' &&
-          isBannedMember(node)
-        ) {
+      MemberExpression: (node: ESTree.MemberExpression): void => {
+        if (insideConstructor && isBannedMember(node)) {
           context.report({node: node, messageId: 'constructorAttrs'});
         }
       }
