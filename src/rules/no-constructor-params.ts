@@ -51,12 +51,8 @@ const rule: Rule.RuleModule = {
     return {
       [`ClassExpression > ${constructorQuery}`]: visitConstructor,
       [`ClassDeclaration > ${constructorQuery}`]: visitConstructor,
-      'ClassDeclaration,ClassExpression': (node: ESTree.Node): void => {
-        if (
-          (node.type === 'ClassExpression' ||
-            node.type === 'ClassDeclaration') &&
-          isCustomElement(context, node, source.getJSDocComment(node))
-        ) {
+      'ClassDeclaration,ClassExpression': (node: ESTree.Class): void => {
+        if (isCustomElement(context, node, source.getJSDocComment(node))) {
           insideElement = true;
         }
       },

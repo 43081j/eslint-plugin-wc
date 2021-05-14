@@ -32,15 +32,15 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
  * Determines if a node is an element class or not.
  *
  * @param {Rule.RuleContext} context ESLint rule context
- * @param {ESTree.Node} node Node to test
+ * @param {ESTree.Class} node Node to test
  * @param {AST.Token=} jsdoc JSDoc to parse
  * @return {boolean}
  */
 export function isCustomElement(
   context: Rule.RuleContext,
-  node: ESTree.Node,
+  node: ESTree.Class,
   jsdoc?: AST.Token | null
-): node is ESTree.Class {
+): boolean {
   const asDecorated = node as WithDecorators<ESTree.Node>;
   const customElementBases: string[] = ['HTMLElement'];
   const cached = customElementsCache.get(node);
@@ -49,41 +49,28 @@ export function isCustomElement(
     return cached;
   }
 
-  if (
-    context.settings.wc &&
-    Array.isArray(context.settings.wc.elementBaseClasses)
-  ) {
+  if (Array.isArray(context.settings.wc?.elementBaseClasses)) {
     customElementBases.push(
       ...(context.settings.wc.elementBaseClasses as string[])
     );
   }
 
-  if (node.type === 'ClassExpression' || node.type === 'ClassDeclaration') {
-    if (
-      node.superClass &&
-      node.superClass.type === 'Identifier' &&
-      customElementBases.includes(node.superClass.name)
-    ) {
-      customElementsCache.set(node, true);
-      return true;
-    }
+  if (
+    node.superClass?.type === 'Identifier' &&
+    customElementBases.includes(node.superClass.name)
+  ) {
+    customElementsCache.set(node, true);
+    return true;
+  }
 
-    if (
-      jsdoc !== undefined &&
-      jsdoc !== null &&
-      jsdoc.value.includes('@customElement')
-    ) {
-      customElementsCache.set(node, true);
-      return true;
-    }
+  if (jsdoc?.value.includes('@customElement')) {
+    customElementsCache.set(node, true);
+    return true;
+  }
 
-    if (
-      asDecorated.decorators !== undefined &&
-      asDecorated.decorators.some(isCustomElementDecorator)
-    ) {
-      customElementsCache.set(node, true);
-      return true;
-    }
+  if (asDecorated.decorators?.some(isCustomElementDecorator)) {
+    customElementsCache.set(node, true);
+    return true;
   }
 
   customElementsCache.set(node, false);
@@ -93,15 +80,12 @@ export function isCustomElement(
 /**
  * Determines if a node is an extension of HTMLElement class or not.
  *
- * @param {ESTree.Node} node Node to test
+ * @param {ESTree.Class} node Node to test
  * @return {boolean}
  */
-export function isNativeCustomElement(node: ESTree.Node): node is ESTree.Class {
+export function isNativeCustomElement(node: ESTree.Class): boolean {
   return (
-    (node.type === 'ClassExpression' || node.type === 'ClassDeclaration') &&
-    node.superClass !== undefined &&
-    node.superClass !== null &&
-    node.superClass.type === 'Identifier' &&
+    node.superClass?.type === 'Identifier' &&
     node.superClass.name === 'HTMLElement'
   );
 }
