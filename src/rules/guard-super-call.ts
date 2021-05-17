@@ -15,7 +15,7 @@ import {isCustomElement, isNativeCustomElement} from '../util';
 const rule: Rule.RuleModule = {
   meta: {
     docs: {
-      description: 'Disallows attaching shadow root outside of the constructor',
+      description: 'Requires a guard before calling a super lifecycle hook',
       url:
         'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/guard-super-call.md'
     },
@@ -26,7 +26,6 @@ const rule: Rule.RuleModule = {
   },
 
   create(context): Rule.RuleListener {
-    // variables should be defined here
     let insideNonNativeElement = false;
     let errNode = null;
     const source = context.getSourceCode();
