@@ -81,6 +81,7 @@ If you want more fine-grained configuration, you can instead add a snippet like 
 - [wc/no-closed-shadow-root](docs/rules/no-closed-shadow-root.md)
 - [wc/no-constructor-params](docs/rules/no-constructor-params.md)
 - [wc/no-typos](docs/rules/no-typos.md)
+- [wc/require-listener-teardown](docs/rules/require-listener-teardown.md)
 
 ## Shareable configurations
 

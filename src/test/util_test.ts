@@ -2,7 +2,7 @@ import * as util from '../util';
 import {parse} from 'espree';
 import {expect} from 'chai';
 import * as ESTree from 'estree';
-import {AST, Rule} from 'eslint';
+import {Rule} from 'eslint';
 
 const parseExpr = <T extends ESTree.Node = ESTree.Node>(expr: string): T => {
   const parsed = parse(expr, {
@@ -36,8 +36,8 @@ describe('util', () => {
     });
 
     it('should parse annotated classes', () => {
-      const jsdoc: AST.Token = {
-        type: 'String',
+      const jsdoc: ESTree.Comment = {
+        type: 'Line',
         value: '* @customElement *',
         range: [0, 0],
         loc: {
