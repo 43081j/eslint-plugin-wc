@@ -5,5 +5,5 @@ declare module 'validate-element-name' {
     isValid: boolean;
     message: string;
   };
-  export = validate;
+  export default validate;
 }
