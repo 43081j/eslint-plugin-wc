@@ -75,7 +75,7 @@ const rule: Rule.RuleModule = {
             const options = context.options[0];
             const isWarning =
               !(options && options.loose) &&
-              validationResult.message !== undefined;
+              !isBestPracticeElementName(firstArg.value);
 
             if (!validationResult || isWarning) {
               context.report({
