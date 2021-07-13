@@ -5,7 +5,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import validate = require('validate-element-name');
+import isValidElementName = require('is-valid-element-name');
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -71,13 +71,13 @@ const rule: Rule.RuleModule = {
             firstArg.type === 'Literal' &&
             typeof firstArg.value === 'string'
           ) {
-            const validationResult = validate(firstArg.value);
+            const validationResult = isValidElementName(firstArg.value);
             const options = context.options[0];
             const isWarning =
               !(options && options.loose) &&
               validationResult.message !== undefined;
 
-            if (!validationResult.isValid || isWarning) {
+            if (!validationResult || isWarning) {
               context.report({
                 message: errorMessage,
                 node: firstArg
