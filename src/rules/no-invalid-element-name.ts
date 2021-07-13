@@ -11,6 +11,15 @@ import validate = require('validate-element-name');
 // Rule Definition
 //------------------------------------------------------------------------------
 
+const isBestPracticeElementName = (name: string): boolean =>
+  !name.startsWith('xml') &&
+  !name.startsWith('polymer-') &&
+  !name.startsWith('ng-') &&
+  !name.startsWith('x-') &&
+  !name.endsWith('-') &&
+  !name.includes('--') &&
+  !name.includes('.');
+
 const rule: Rule.RuleModule = {
   meta: {
     docs: {
