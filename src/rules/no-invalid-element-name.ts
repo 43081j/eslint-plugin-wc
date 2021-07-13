@@ -11,6 +11,9 @@ import validate = require('validate-element-name');
 // Rule Definition
 //------------------------------------------------------------------------------
 
+export const errorMessage =
+  "Element name is invalid and should follow the HTML standard's recommendations (https://html.spec.whatwg.org/multipage/custom-elements.html#prod-potentialcustomelementname).";
+
 const isBestPracticeElementName = (name: string): boolean =>
   !name.startsWith('xml') &&
   !name.startsWith('polymer-') &&
@@ -76,7 +79,7 @@ const rule: Rule.RuleModule = {
 
             if (!validationResult.isValid || isWarning) {
               context.report({
-                message: validationResult.message,
+                message: errorMessage,
                 node: firstArg
               });
             }
