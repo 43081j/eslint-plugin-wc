@@ -12,7 +12,8 @@ import isValidElementName = require('is-valid-element-name');
 //------------------------------------------------------------------------------
 
 export const errorMessage =
-  "Element name is invalid and should follow the HTML standard's recommendations (https://html.spec.whatwg.org/multipage/custom-elements.html#prod-potentialcustomelementname).";
+  "Element name is invalid and should follow the HTML standard's recommendations" +
+  '(https://html.spec.whatwg.org/multipage/custom-elements.html#prod-potentialcustomelementname).';
 
 const isBestPracticeElementName = (name: string): boolean =>
   !name.startsWith('xml') &&
