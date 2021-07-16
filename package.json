@@ -36,8 +36,8 @@
   },
   "homepage": "https://github.com/43081j/eslint-plugin-wc#readme",
   "dependencies": {
-    "js-levenshtein-esm": "^1.2.0",
-    "validate-element-name": "^2.1.1"
+    "is-valid-element-name": "^1.0.0",
+    "js-levenshtein-esm": "^1.2.0"
   },
   "peerDependencies": {
     "eslint": ">=5"
