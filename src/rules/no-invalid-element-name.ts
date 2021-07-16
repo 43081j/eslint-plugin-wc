@@ -30,6 +30,9 @@ const rule: Rule.RuleModule = {
       description: 'Disallows invalid custom element names',
       url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-invalid-element-name.md'
     },
+    messages: {
+      invalidElementName: errorMessage
+    },
     schema: [
       {
         type: 'object',
@@ -80,7 +83,7 @@ const rule: Rule.RuleModule = {
 
             if (!validationResult || isWarning) {
               context.report({
-                message: errorMessage,
+                messageId: 'invalidElementName',
                 node: firstArg
               });
             }
