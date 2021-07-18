@@ -11,10 +11,6 @@ import isValidElementName = require('is-valid-element-name');
 // Rule Definition
 //------------------------------------------------------------------------------
 
-export const errorMessage =
-  "Element name is invalid and should follow the HTML standard's recommendations" +
-  '(https://html.spec.whatwg.org/multipage/custom-elements.html#prod-potentialcustomelementname).';
-
 const isBestPracticeElementName = (name: string): boolean =>
   !name.startsWith('xml') &&
   !name.startsWith('polymer-') &&
@@ -31,7 +27,9 @@ const rule: Rule.RuleModule = {
       url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-invalid-element-name.md'
     },
     messages: {
-      invalidElementName: errorMessage
+      invalidElementName:
+        "Element name is invalid and should follow the HTML standard's recommendations" +
+        '(https://html.spec.whatwg.org/multipage/custom-elements.html#prod-potentialcustomelementname).'
     },
     schema: [
       {
