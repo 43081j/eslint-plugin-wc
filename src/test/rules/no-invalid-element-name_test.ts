@@ -7,7 +7,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule, {errorMessage} from '../../rules/no-invalid-element-name';
+import rule from '../../rules/no-invalid-element-name';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       customElements.define('my-App', MyApp)`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 2,
           column: 29
         }
@@ -89,7 +89,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       window.customElements.define('my-App', MyApp)`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 2,
           column: 36
         }
@@ -99,7 +99,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('my-App', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -109,7 +109,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -119,7 +119,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('1-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -129,7 +129,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -139,7 +139,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('my-app!', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -149,7 +149,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('font-face', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -159,7 +159,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('polymer-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -169,7 +169,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('x-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -179,7 +179,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('ng-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -189,7 +189,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('xml-app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -199,7 +199,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('my-app-', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
@@ -209,7 +209,7 @@ ruleTester.run('no-invalid-element-name', rule, {
       code: `customElements.define('my--app', class extends HTMLElement {})`,
       errors: [
         {
-          message: errorMessage,
+          messageId: 'invalidElementName',
           line: 1,
           column: 23
         }
