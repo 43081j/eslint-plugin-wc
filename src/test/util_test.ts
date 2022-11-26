@@ -13,9 +13,9 @@ const parseExpr = <T extends ESTree.Node = ESTree.Node>(expr: string): T => {
   return (parsed as ESTree.Program).body[0] as T;
 };
 
-const mockContext = ({
+const mockContext = {
   settings: {}
-} as unknown) as Rule.RuleContext;
+} as unknown as Rule.RuleContext;
 
 describe('util', () => {
   describe('isCustomElement', () => {

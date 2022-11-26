@@ -15,8 +15,7 @@ const rule: Rule.RuleModule = {
   meta: {
     docs: {
       description: 'Disallows attaching a shadow root outside the constructor',
-      url:
-        'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/attach-shadow-constructor.md'
+      url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/attach-shadow-constructor.md'
     },
     messages: {
       attachShadowConstructor:

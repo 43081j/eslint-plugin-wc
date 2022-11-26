@@ -1,11 +1,9 @@
 {
-  "extends": "google",
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "google",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
     "indent": "off",
     "quote-props": "off",
@@ -62,6 +60,14 @@
       {
         "selector": "typeLike",
         "format": ["PascalCase"]
+      },
+      {
+        "selector": "objectLiteralProperty",
+        "format": null
+      },
+      {
+        "selector": "objectLiteralMethod",
+        "format": null
       }
     ]
   }
