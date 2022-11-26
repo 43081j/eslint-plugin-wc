@@ -15,8 +15,7 @@ const rule: Rule.RuleModule = {
   meta: {
     docs: {
       description: 'Disallows constructor parameters in custom elements',
-      url:
-        'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-constructor-params.md'
+      url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-constructor-params.md'
     },
     messages: {
       noParams:

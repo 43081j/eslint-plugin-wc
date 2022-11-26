@@ -16,8 +16,7 @@ const rule: Rule.RuleModule = {
   meta: {
     docs: {
       description: 'Requires a guard before calling a super lifecycle hook',
-      url:
-        'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/guard-super-call.md'
+      url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/guard-super-call.md'
     },
     messages: {
       guardSuperCall:
