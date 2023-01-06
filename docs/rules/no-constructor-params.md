@@ -1,8 +1,9 @@
 # Disallows constructor parameters in custom elements (no-constructor-params)
 
 Ensures that custom element constructors have no parameters as they
-are never constructed directly but are rather constructed automatically when
-appended to the DOM (or via `createElement` etc).
+are typically not constructed directly but are instead constructed by DOM APIs
+like document.createElement, or by the HTML Parser. When constructed this way,
+no arguments are passed to the constructor.
 
 ## Rule Details
 
