@@ -20,8 +20,28 @@ const rule: Rule.RuleModule = {
     messages: {
       noTeardown:
         'Event listeners attached in `connectedCallback` should be' +
-        'torn down during `disconnectedCallback`'
-    }
+        'torn down during `disconnectedCallback`',
+      noArrowBind:
+        'Using an inline arrow function or `bind(...)` will result in ' +
+        'creating a new function each time you call add/removeEventListener. ' +
+        'This will result in the original handler not being removed as ' +
+        'expected. You should instead store a reference to the function ' +
+        'and pass that in as your handler.'
+    },
+    schema: [
+      {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          hosts: {
+            type: 'array',
+            items: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    ]
   },
 
   create(context): Rule.RuleListener {
@@ -33,10 +53,26 @@ const rule: Rule.RuleModule = {
       'MethodDefinition[key.name="disconnectedCallback"] ' +
       'CallExpression[callee.property.name="removeEventListener"]';
     const seen = new Map<string, ESTree.CallExpression>();
+    const options = context.options[0];
+    const trackedHosts = options?.hosts ?? ['this', 'window', 'document'];
 
     //----------------------------------------------------------------------
     // Helpers
     //----------------------------------------------------------------------
+    const shouldTrackListener = (node: ESTree.MemberExpression): boolean => {
+      const source = context.getSourceCode();
+
+      const text = source.getText(node.object);
+
+      return trackedHosts.includes(text);
+    };
+    const isInlineFunction = (node: ESTree.Node): boolean =>
+      node.type === 'ArrowFunctionExpression' ||
+      node.type === 'FunctionExpression' ||
+      (node.type === 'CallExpression' &&
+        node.callee.type === 'MemberExpression' &&
+        node.callee.property.type === 'Identifier' &&
+        node.callee.property.name === 'bind');
 
     //----------------------------------------------------------------------
     // Public
@@ -44,22 +80,43 @@ const rule: Rule.RuleModule = {
     const onAddListener = (node: ESTree.CallExpression): void => {
       if (
         node.callee.type === 'MemberExpression' &&
-        node.callee.object.type === 'ThisExpression'
+        shouldTrackListener(node.callee)
       ) {
-        const arg0 = node.arguments[0];
+        const source = context.getSourceCode();
+        const calleeText = source.getText(node.callee.object);
+        const [arg0, arg1] = node.arguments;
+
+        if (isInlineFunction(arg1)) {
+          context.report({
+            node: arg1,
+            messageId: 'noArrowBind'
+          });
+        }
+
         if (arg0.type === 'Literal' && typeof arg0.value === 'string') {
-          seen.set(arg0.value, node);
+          seen.set(`${calleeText}:${arg0.value}`, node);
         }
       }
     };
+
     const onRemoveListener = (node: ESTree.CallExpression): void => {
       if (
         node.callee.type === 'MemberExpression' &&
-        node.callee.object.type === 'ThisExpression'
+        shouldTrackListener(node.callee)
       ) {
-        const arg0 = node.arguments[0];
+        const source = context.getSourceCode();
+        const calleeText = source.getText(node.callee.object);
+        const [arg0, arg1] = node.arguments;
+
+        if (isInlineFunction(arg1)) {
+          context.report({
+            node: arg1,
+            messageId: 'noArrowBind'
+          });
+        }
+
         if (arg0.type === 'Literal' && typeof arg0.value === 'string') {
-          seen.delete(arg0.value);
+          seen.delete(`${calleeText}:${arg0.value}`);
         }
       }
     };

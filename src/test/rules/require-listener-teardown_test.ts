@@ -66,6 +66,18 @@ ruleTester.run('require-listener-teardown', rule, {
         this.something.addEventListener('x', console.log);
       }
     }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+      connectedCallback() {
+        this.addEventListener('foo', console.log);
+      }
+    }`,
+      options: [
+        {
+          hosts: ['window', 'document']
+        }
+      ]
     }
   ],
 
@@ -157,6 +169,69 @@ ruleTester.run('require-listener-teardown', rule, {
           messageId: 'noTeardown',
           line: 3,
           column: 11
+        }
+      ]
+    },
+    {
+      code: `class Foo extends HMTLElement {
+        connectedCallback() {
+          foo.addEventListener('x', console.log);
+        }
+      }`,
+      options: [
+        {
+          hosts: ['foo']
+        }
+      ],
+      errors: [
+        {
+          messageId: 'noTeardown',
+          line: 3,
+          column: 11
+        }
+      ]
+    },
+    {
+      code: `class Foo extends HMTLElement {
+        connectedCallback() {
+          this.addEventListener('x', this.foo.bind(this));
+        }
+        disconnectedCallback() {
+          this.removeEventListener('x', this.foo.bind(this));
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'noArrowBind',
+          line: 3,
+          column: 38
+        },
+        {
+          messageId: 'noArrowBind',
+          line: 6,
+          column: 41
+        }
+      ]
+    },
+    {
+      code: `class Foo extends HMTLElement {
+        connectedCallback() {
+          this.addEventListener('x', () => {});
+        }
+        disconnectedCallback() {
+          this.removeEventListener('x', () => {});
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'noArrowBind',
+          line: 3,
+          column: 38
+        },
+        {
+          messageId: 'noArrowBind',
+          line: 6,
+          column: 41
         }
       ]
     }
