@@ -2,6 +2,7 @@ import attachShadowConstructor from './rules/attach-shadow-constructor';
 import bestPractice from './configs/best-practice';
 import guardSuperCall from './rules/guard-super-call';
 import maxElementsPerFile from './rules/max-elements-per-file';
+import noChildInAttrChange from './rules/no-child-traversal-in-attributechangedcallback';
 import noClosedShadowRoot from './rules/no-closed-shadow-root';
 import noConstructor from './rules/no-constructor';
 import noConstructorAttrs from './rules/no-constructor-attributes';
@@ -18,6 +19,7 @@ export const rules = {
   'attach-shadow-constructor': attachShadowConstructor,
   'guard-super-call': guardSuperCall,
   'max-elements-per-file': maxElementsPerFile,
+  'no-child-traversal-in-attributechangedcallback': noChildInAttrChange,
   'no-closed-shadow-root': noClosedShadowRoot,
   'no-constructor': noConstructor,
   'no-constructor-attributes': noConstructorAttrs,
