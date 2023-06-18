@@ -9,6 +9,7 @@ import noInvalidElementName from './rules/no-invalid-element-name';
 import noSelfClass from './rules/no-self-class';
 import noTypos from './rules/no-typos';
 import requireListenerTeardown from './rules/require-listener-teardown';
+import tagMatchesClass from './rules/tag-name-matches-class';
 
 export const rules = {
   'attach-shadow-constructor': attachShadowConstructor,
@@ -19,7 +20,8 @@ export const rules = {
   'no-invalid-element-name': noInvalidElementName,
   'no-self-class': noSelfClass,
   'no-typos': noTypos,
-  'require-listener-teardown': requireListenerTeardown
+  'require-listener-teardown': requireListenerTeardown,
+  'tag-name-matches-class': tagMatchesClass
 };
 
 export const configs = {

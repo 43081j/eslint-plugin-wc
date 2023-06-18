@@ -7,6 +7,7 @@
   "rules": {
     "indent": "off",
     "quote-props": "off",
+    "operator-linebreak": "off",
     "max-len": [
       "error",
       {
