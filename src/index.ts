@@ -6,6 +6,7 @@ import noClosedShadowRoot from './rules/no-closed-shadow-root';
 import noConstructor from './rules/no-constructor';
 import noConstructorAttrs from './rules/no-constructor-attributes';
 import noConstructorParams from './rules/no-constructor-params';
+import noCustomizedBuiltInElements from './rules/no-customized-built-in-elements';
 import noInvalidElementName from './rules/no-invalid-element-name';
 import noSelfClass from './rules/no-self-class';
 import noTypos from './rules/no-typos';
@@ -21,6 +22,7 @@ export const rules = {
   'no-constructor': noConstructor,
   'no-constructor-attributes': noConstructorAttrs,
   'no-constructor-params': noConstructorParams,
+  'no-customized-built-in-elements': noCustomizedBuiltInElements,
   'no-invalid-element-name': noInvalidElementName,
   'no-self-class': noSelfClass,
   'no-typos': noTypos,
