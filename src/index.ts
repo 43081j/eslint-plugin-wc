@@ -8,6 +8,7 @@ import noConstructorAttrs from './rules/no-constructor-attributes';
 import noConstructorParams from './rules/no-constructor-params';
 import noCustomizedBuiltInElements from './rules/no-customized-built-in-elements';
 import noInvalidElementName from './rules/no-invalid-element-name';
+import noOnPrefix from './rules/no-method-prefixed-with-on';
 import noSelfClass from './rules/no-self-class';
 import noTypos from './rules/no-typos';
 import recommended from './configs/recommended';
@@ -24,6 +25,7 @@ export const rules = {
   'no-constructor-params': noConstructorParams,
   'no-customized-built-in-elements': noCustomizedBuiltInElements,
   'no-invalid-element-name': noInvalidElementName,
+  'no-method-prefixed-with-on': noOnPrefix,
   'no-self-class': noSelfClass,
   'no-typos': noTypos,
   'require-listener-teardown': requireListenerTeardown,
