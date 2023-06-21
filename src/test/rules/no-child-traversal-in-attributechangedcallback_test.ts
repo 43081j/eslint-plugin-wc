@@ -28,6 +28,7 @@ const parser = require.resolve('@typescript-eslint/parser');
 ruleTester.run('no-child-traversal-in-attributechangedcallback', rule, {
   valid: [
     'const x = 808;',
+    'class UnrelatedClass {}',
     {
       code: `class A extends HTMLElement {
         someMethod() {
@@ -150,6 +151,44 @@ ruleTester.run('no-child-traversal-in-attributechangedcallback', rule, {
           messageId: 'domProp',
           line: 3,
           column: 23
+        }
+      ]
+    },
+    {
+      code: `class A extends HTMLElement {
+        attributeChangedCallback() {
+          this.addEventListener('foo', () => {
+            const node = this.querySelector('foo');
+            if (node) {
+              node.click();
+            }
+          });
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'domMethod',
+          line: 4,
+          column: 26
+        }
+      ]
+    },
+    {
+      code: `class A extends HTMLElement {
+        attributeChangedCallback() {
+          new MutationObserver(() => {
+            const node = this.querySelector('foo');
+            if (node) {
+              node.click();
+            }
+          });
+        }
+      }`,
+      errors: [
+        {
+          messageId: 'domMethod',
+          line: 4,
+          column: 26
         }
       ]
     }
