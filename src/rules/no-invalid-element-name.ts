@@ -7,7 +7,7 @@ import {Rule} from 'eslint';
 import * as ESTree from 'estree';
 import isValidElementName = require('is-valid-element-name');
 import {knownNamespaces} from '../util/tag-names';
-import {isDefineCall} from '../util';
+import {isDefineCall} from '../util/customElements';
 
 //------------------------------------------------------------------------------
 // Rule Definition

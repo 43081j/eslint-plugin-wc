@@ -98,23 +98,3 @@ export function isNativeCustomElement(node: ESTree.Class): boolean {
 export function coerceArray<T>(val: T | T[]): T[] {
   return Array.isArray(val) ? val : [val];
 }
-
-/**
- * Determines if a call expression is a `customElements.define` call
- * @param {ESTree.CallExpression} node Node to test
- * @return {boolean}
- */
-export function isDefineCall(node: ESTree.CallExpression): boolean {
-  return (
-    node.callee.type === 'MemberExpression' &&
-    ((node.callee.object.type === 'MemberExpression' &&
-      node.callee.object.object.type === 'Identifier' &&
-      node.callee.object.object.name === 'window' &&
-      node.callee.object.property.type === 'Identifier' &&
-      node.callee.object.property.name === 'customElements') ||
-      (node.callee.object.type === 'Identifier' &&
-        node.callee.object.name === 'customElements')) &&
-    node.callee.property.type === 'Identifier' &&
-    node.callee.property.name === 'define'
-  );
-}
