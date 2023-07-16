@@ -7,6 +7,7 @@ import {Rule} from 'eslint';
 import * as ESTree from 'estree';
 import isValidElementName = require('is-valid-element-name');
 import {knownNamespaces} from '../util/tag-names';
+import {isDefineCall} from '../util';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -82,18 +83,7 @@ const rule: Rule.RuleModule = {
 
     return {
       CallExpression: (node: ESTree.CallExpression): void => {
-        if (
-          node.callee.type === 'MemberExpression' &&
-          ((node.callee.object.type === 'MemberExpression' &&
-            node.callee.object.object.type === 'Identifier' &&
-            node.callee.object.object.name === 'window' &&
-            node.callee.object.property.type === 'Identifier' &&
-            node.callee.object.property.name === 'customElements') ||
-            (node.callee.object.type === 'Identifier' &&
-              node.callee.object.name === 'customElements')) &&
-          node.callee.property.type === 'Identifier' &&
-          node.callee.property.name === 'define'
-        ) {
+        if (isDefineCall(node)) {
           const firstArg = node.arguments[0];
           if (
             firstArg &&
