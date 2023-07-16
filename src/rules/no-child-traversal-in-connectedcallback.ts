@@ -1,11 +1,11 @@
 /**
  * @fileoverview Disallows traversal of children in the
- * `AttributeChangedCallback` method
+ * `connectedCallback` method
  * @author James Garbutt <https://github.com/43081j>
  * @author Keith Cirkel <https://github.com/keithamus>
  */
 
-import {Rule} from 'eslint';
+import {Rule, Scope} from 'eslint';
 import * as ESTree from 'estree';
 import {isCustomElement} from '../util';
 import {
@@ -13,6 +13,51 @@ import {
   childMethodList,
   isThisOrShadowRoot
 } from '../util/dom';
+
+const allowedScopes = new Set<string>(['addEventListener', 'MutationObserver']);
+
+/**
+ * Determines if a scope should allow child traversal
+ * @param {Rule.Scope.Scope} scope Scope to test
+ * @return {boolean}
+ */
+function isAllowedScope(scope: Scope.Scope): boolean {
+  if (scope.type !== 'function') {
+    return false;
+  }
+
+  const blockNode = scope.block as ESTree.Node & Rule.NodeParentExtension;
+
+  if (!blockNode.parent) {
+    return false;
+  }
+
+  const parentNode = blockNode.parent;
+
+  if (
+    parentNode.type !== 'CallExpression' &&
+    parentNode.type !== 'NewExpression'
+  ) {
+    return false;
+  }
+
+  if (
+    parentNode.callee.type === 'MemberExpression' &&
+    parentNode.callee.property.type === 'Identifier' &&
+    allowedScopes.has(parentNode.callee.property.name)
+  ) {
+    return true;
+  }
+
+  if (
+    parentNode.callee.type === 'Identifier' &&
+    allowedScopes.has(parentNode.callee.name)
+  ) {
+    return true;
+  }
+
+  return false;
+}
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -23,16 +68,16 @@ const rule: Rule.RuleModule = {
     docs: {
       description:
         'Disallows traversal of children in the ' +
-        '`AttributeChangedCallback` method',
-      url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-child-traversal-in-attributechangedcallback.md'
+        '`connectedCallback` method',
+      url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/no-child-traversal-in-connectedcallback.md'
     },
     messages: {
       domMethod:
-        'Traversing children in the `attributeChangedCallback` ' +
+        'Traversing children in the `connectedCallback` ' +
         'method is error prone and should be avoided',
       domProp:
         'Accessing local DOM properties in the ' +
-        '`attributeChangedCallback` method is error prone and should be avoided'
+        '`connectedCallback` method is error prone and should be avoided'
     }
   },
 
@@ -64,7 +109,7 @@ const rule: Rule.RuleModule = {
           insideElement &&
           !node.static &&
           node.key.type === 'Identifier' &&
-          node.key.name === 'attributeChangedCallback'
+          node.key.name === 'connectedCallback'
         ) {
           insideCallback = true;
         }
@@ -91,7 +136,13 @@ const rule: Rule.RuleModule = {
           return;
         }
 
+        const scope = context.getScope();
         const name = node.property.name;
+
+        if (isAllowedScope(scope)) {
+          // some scopes, like event handlers, are fine
+          return;
+        }
 
         if (!isThisOrShadowRoot(node.object)) {
           // Only look for `this.*` or `this.shadowRoot.*`
