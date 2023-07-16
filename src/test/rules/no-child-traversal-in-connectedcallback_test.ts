@@ -28,6 +28,7 @@ const parser = require.resolve('@typescript-eslint/parser');
 ruleTester.run('no-child-traversal-in-connectedcallback', rule, {
   valid: [
     'const x = 808;',
+    'class Foo {}',
     {
       code: `class A extends HTMLElement {
         someMethod() {
