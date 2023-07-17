@@ -10,6 +10,7 @@ import noConstructor from './rules/no-constructor';
 import noConstructorAttrs from './rules/no-constructor-attributes';
 import noConstructorParams from './rules/no-constructor-params';
 import noCustomizedBuiltInElements from './rules/no-customized-built-in-elements';
+import noExports from './rules/no-exports-with-element';
 import noInvalidElementName from './rules/no-invalid-element-name';
 import noOnPrefix from './rules/no-method-prefixed-with-on';
 import noSelfClass from './rules/no-self-class';
@@ -30,6 +31,7 @@ export const rules = {
   'no-constructor-attributes': noConstructorAttrs,
   'no-constructor-params': noConstructorParams,
   'no-customized-built-in-elements': noCustomizedBuiltInElements,
+  'no-exports-with-element': noExports,
   'no-invalid-element-name': noInvalidElementName,
   'no-method-prefixed-with-on': noOnPrefix,
   'no-self-class': noSelfClass,

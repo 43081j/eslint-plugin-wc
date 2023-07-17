@@ -9,6 +9,7 @@ import {Rule} from 'eslint';
 import * as ESTree from 'estree';
 import {isCustomElement} from '../util';
 import {isDefineCall} from '../util/customElements';
+import {resolveReference} from '../util/ast';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -58,12 +59,9 @@ const rule: Rule.RuleModule = {
 
         if (isDefineCall(node)) {
           if (tagClass.type === 'Identifier') {
-            const ref = context
-              .getScope()
-              .references.find((r) => r.identifier.name === tagClass.name);
-
-            if (ref?.resolved && ref.resolved.defs.length === 1) {
-              seenClasses.delete(ref.resolved.defs[0].node);
+            const resolved = resolveReference(tagClass, context);
+            if (resolved) {
+              seenClasses.delete(resolved);
             }
           } else if (tagClass.type === 'ClassExpression') {
             seenClasses.delete(tagClass);

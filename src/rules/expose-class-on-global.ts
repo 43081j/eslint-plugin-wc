@@ -7,6 +7,7 @@
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
 import {isCustomElement} from '../util';
+import {resolveReference} from '../util/ast';
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -62,13 +63,14 @@ const rule: Rule.RuleModule = {
           node.left.property.type === 'Identifier' &&
           node.right.type === 'Identifier'
         ) {
-          const className = node.right.name;
-          const ref = context
-            .getScope()
-            .references.find((r) => r.identifier.name === className);
-          if (ref?.resolved && ref.resolved.defs.length === 1) {
-            const classDef = ref.resolved.defs[0].node;
+          const classDef = resolveReference(node.right, context);
 
+          if (
+            classDef &&
+            (classDef.type === 'ClassExpression' ||
+              classDef.type === 'ClassDeclaration') &&
+            classDef.id
+          ) {
             seenClasses.delete(classDef);
 
             if (classDef.id.name !== node.left.property.name) {
