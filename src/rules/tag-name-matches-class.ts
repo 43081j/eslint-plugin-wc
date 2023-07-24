@@ -48,7 +48,8 @@ const rule: Rule.RuleModule = {
     },
     messages: {
       nameMismatch:
-        'Custom element tag name should have been {expected} but was {actual}'
+        'Custom element tag name should have been {{expected}} but ' +
+        'was {{actual}}'
     },
     schema: [
       {

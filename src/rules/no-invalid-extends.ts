@@ -79,18 +79,18 @@ const rule: Rule.RuleModule = {
       }
     ],
     messages: {
-      invalid: 'Custom element must extend {allowedSuperNames}',
+      invalid: 'Custom element must extend {{allowedSuperNames}}',
       invalidOrMissingExtends:
-        'Custom element must extend {allowedSuperNames}, or pass ' +
-        "{extends: '{extendsProp}'} as a third argument to `define`",
+        'Custom element must extend {{allowedSuperNames}}, or pass ' +
+        "{extends: '{{expectedExtends}}'} as a third argument to `define`",
       invalidExtends:
-        'Custom element extends {superName} but the definition includes ' +
-        "{extends: '{actualExtends}'}. Either the element must extend " +
-        '{allowedSuperNames} or the definition must include ' +
-        "{extends: '{expectedExtends}'}.",
+        'Custom element extends {{superName}} but the definition includes ' +
+        "{extends: '{{actualExtends}}'}. Either the element must extend " +
+        '{{allowedSuperNames}} or the definition must include ' +
+        "{extends: '{{expectedExtends}}'}.",
       unknownExtends:
-        'Custom element extends {superName} but the definition includes ' +
-        "{extends: '{actualExtends}'}, which is an unknown built-in. " +
+        'Custom element extends {{superName}} but the definition includes ' +
+        "{extends: '{{actualExtends}}'}, which is an unknown built-in. " +
         'You should probably remove the `extends` option.'
     }
   },

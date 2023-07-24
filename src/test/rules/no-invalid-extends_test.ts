@@ -164,7 +164,7 @@ ruleTester.run('no-invalid-extends', rule, {
       code: `
         /** @customElement */
         class Foo extends Bar {}
-        customElements.define('foo', Foo, {extends: 'div'});
+        customElements.define('foo', Foo, {extends: 'nonsense'});
       `,
       errors: [
         {
@@ -183,7 +183,7 @@ ruleTester.run('no-invalid-extends', rule, {
       code: `
         /** @customElement */
         class Foo extends Bar {}
-        customElements.define('foo', Foo, {extends: \`div\`});
+        customElements.define('foo', Foo, {extends: \`nonsense\`});
       `,
       errors: [
         {
@@ -232,7 +232,7 @@ ruleTester.run('no-invalid-extends', rule, {
           line: 4,
           column: 9,
           data: {
-            allowedSuperNames: 'HTMLElement, SomeElement'
+            allowedSuperNames: 'SomeElement or HTMLElement'
           }
         }
       ]
@@ -254,7 +254,7 @@ ruleTester.run('no-invalid-extends', rule, {
           line: 4,
           column: 9,
           data: {
-            allowedSuperNames: 'HTMLElement, SomeElement or SomeOtherElement'
+            allowedSuperNames: 'SomeElement, SomeOtherElement, or HTMLElement'
           }
         }
       ]
@@ -271,7 +271,7 @@ ruleTester.run('no-invalid-extends', rule, {
           line: 4,
           column: 9,
           data: {
-            allowedSuperNames: 'HTMLDivElement',
+            allowedSuperNames: 'HTMLElement',
             expectedExtends: 'div'
           }
         }
@@ -289,7 +289,9 @@ ruleTester.run('no-invalid-extends', rule, {
           line: 4,
           column: 9,
           data: {
-            allowedSuperNames: 'HTMLDivElement',
+            allowedSuperNames: 'HTMLSpanElement',
+            superName: 'HTMLDivElement',
+            actualExtends: 'span',
             expectedExtends: 'div'
           }
         }
