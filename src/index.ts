@@ -1,5 +1,6 @@
 import attachShadowConstructor from './rules/attach-shadow-constructor';
 import bestPractice from './configs/best-practice';
+import filenameMatches from './rules/file-name-matches-element';
 import guardDefine from './rules/guard-define-call';
 import guardSuperCall from './rules/guard-super-call';
 import maxElementsPerFile from './rules/max-elements-per-file';
@@ -22,6 +23,7 @@ import tagMatchesClass from './rules/tag-name-matches-class';
 
 export const rules = {
   'attach-shadow-constructor': attachShadowConstructor,
+  'file-name-matches-element': filenameMatches,
   'guard-define': guardDefine,
   'guard-super-call': guardSuperCall,
   'max-elements-per-file': maxElementsPerFile,
