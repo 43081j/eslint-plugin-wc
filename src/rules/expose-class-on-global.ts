@@ -46,10 +46,7 @@ const rule: Rule.RuleModule = {
 
     return {
       'ClassDeclaration,ClassExpression': (node: ESTree.Class): void => {
-        if (
-          isCustomElement(context, node, source.getJSDocComment(node)) &&
-          node.id?.type === 'Identifier'
-        ) {
+        if (isCustomElement(context, node, source.getJSDocComment(node))) {
           seenClasses.add(node);
         }
       },
@@ -61,19 +58,20 @@ const rule: Rule.RuleModule = {
           node.left.object.type === 'Identifier' &&
           globalNames.has(node.left.object.name) &&
           node.left.property.type === 'Identifier' &&
-          node.right.type === 'Identifier'
+          (node.right.type === 'Identifier' ||
+            node.right.type === 'ClassExpression')
         ) {
           const classDef = resolveReference(node.right, context);
 
           if (
             classDef &&
+            seenClasses.has(classDef) &&
             (classDef.type === 'ClassExpression' ||
-              classDef.type === 'ClassDeclaration') &&
-            classDef.id
+              classDef.type === 'ClassDeclaration')
           ) {
             seenClasses.delete(classDef);
 
-            if (classDef.id.name !== node.left.property.name) {
+            if (classDef.id?.name !== node.left.property.name) {
               context.report({
                 node,
                 messageId: 'sameName'
