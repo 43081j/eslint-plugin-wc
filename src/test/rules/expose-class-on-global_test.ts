@@ -46,10 +46,21 @@ ruleTester.run('expose-class-on-global', rule, {
           elementBaseClasses: ['Bar']
         }
       }
-    }
+    },
+    'window.Foo = class Foo extends HTMLElement {}'
   ],
 
   invalid: [
+    {
+      code: `window.Foo = class extends HTMLElement {}`,
+      errors: [
+        {
+          messageId: 'sameName',
+          line: 1,
+          column: 1
+        }
+      ]
+    },
     {
       code: `class Foo extends HTMLElement {}`,
       errors: [
