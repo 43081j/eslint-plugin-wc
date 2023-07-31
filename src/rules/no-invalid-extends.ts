@@ -99,6 +99,13 @@ const rule: Rule.RuleModule = {
     const source = context.getSourceCode();
     const elementClasses = new Set<ESTree.Class>();
     const userAllowedSuperNames = context.options[0]?.allowedSuperNames ?? [];
+    const elementBaseClasses = ['HTMLElement'];
+
+    if (Array.isArray(context.settings.wc?.elementBaseClasses)) {
+      elementBaseClasses.push(
+        ...(context.settings.wc.elementBaseClasses as string[])
+      );
+    }
 
     return {
       'ClassExpression,ClassDeclaration': (node: ESTree.Class): void => {
@@ -135,7 +142,9 @@ const rule: Rule.RuleModule = {
           ]);
         } else {
           allowedSuperNames = new Set<string>(userAllowedSuperNames);
-          allowedSuperNames.add('HTMLElement');
+          for (const baseClass of elementBaseClasses) {
+            allowedSuperNames.add(baseClass);
+          }
         }
 
         const formattedSuperNames = formatNames(allowedSuperNames);

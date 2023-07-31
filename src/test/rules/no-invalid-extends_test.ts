@@ -120,6 +120,15 @@ ruleTester.run('no-invalid-extends', rule, {
       code: `@customElement('x-foo')
       class A extends SomeElement {}`,
       parser
+    },
+    {
+      code: `class A extends SomeElement {}
+      customElements.define('a', A);`,
+      settings: {
+        wc: {
+          elementBaseClasses: ['SomeElement']
+        }
+      }
     }
   ],
 
