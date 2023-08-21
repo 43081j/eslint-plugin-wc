@@ -22,12 +22,13 @@ class FooBarElement extends HTMLElement {}
 
 ### Options
 
-- `transform` can define how a class name would be transformed into a file name. You can specify multiple transforms to allow multiple options. The default is `['kebab', 'pascal']`. The options are:
+- `transform` can define how a class name would be transformed into a file name. You can specify multiple transforms to allow multiple options. The default is `['kebab', 'camel']`. The options are:
 
   - `none`: Files must be named exactly as the class name: `FooBarElement` -> `FooBarElement.js`
   - `snake`: Files must be named lowercase, separated by underscores: `FooBarElement` -> `foo_bar_element.js`
   - `kebab`: Files must be named lowercase, separated by dashes: `FooBarElement` -> `foo-bar-element.js`
-  - `pascal`: Files must match case, but the first character must be lower: `FooBarElement` -> `fooBarElement.js`
+  - `pascal`: Files must match case, but the first character must be upper: `FooBarElement` -> `FooBarElement.js`
+  - `camel`: Files must match case, but the first character must be lower: `FooBarElement` -> `fooBarElement.js`
 
 - `suffix` can allow omission of a suffix from a file name. Case insensitive.
 - `prefix` can allow omission of a prefix from a file name. Case insensitive.
