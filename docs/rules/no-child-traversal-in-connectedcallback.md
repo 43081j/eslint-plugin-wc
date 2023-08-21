@@ -1,4 +1,4 @@
-# Disallows traversal of children in the `connectedCallback` method (no-dom-traversal-in-connectedcallback)
+# Disallows traversal of children in the `connectedCallback` method (no-child-traversal-in-connectedcallback)
 
 The intent of the `connectedCallback` is to set up event listeners and instantiate state. Traversing the DOM during the `connectedCallback` phase is error-prone, because the callback might fire before an elements children have been appended. Additionally, as `connectedCallback` only fires once, any DOM mutations that happen once the element is connected will not be resolved, so any state that traversed the DOM will fall out of synchronisation.
 
