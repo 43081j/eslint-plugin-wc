@@ -199,6 +199,7 @@ export const builtInTagClassMap: Record<keyof HTMLElementTagNameMap, string> = {
   ruby: 'HTMLElement',
   s: 'HTMLElement',
   samp: 'HTMLElement',
+  search: 'HTMLElement',
   script: 'HTMLScriptElement',
   section: 'HTMLElement',
   select: 'HTMLSelectElement',
