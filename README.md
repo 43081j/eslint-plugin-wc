@@ -78,10 +78,26 @@ If you want more fine-grained configuration, you can instead add a snippet like 
 
 - [wc/attach-shadow-constructor](docs/rules/attach-shadow-constructor.md)
 - [wc/guard-super-call](docs/rules/guard-super-call.md)
+- [wc/no-child-traversal-in-attributechangedcallback](docs/rules/no-child-traversal-in-attributechangedcallback.md)
+- [wc/no-child-traversal-in-connectedcallback](docs/rules/no-child-traversal-in-connectedcallback.md)
 - [wc/no-closed-shadow-root](docs/rules/no-closed-shadow-root.md)
 - [wc/no-constructor-params](docs/rules/no-constructor-params.md)
+- [wc/no-customized-built-in-elements](docs/rules/no-customized-built-in-elements.md)
+- [wc/no-invalid-extends](docs/rules/no-invalid-extends.md)
 - [wc/no-typos](docs/rules/no-typos.md)
 - [wc/require-listener-teardown](docs/rules/require-listener-teardown.md)
+
+### Preference/convention
+
+- [wc/define-tag-after-class-definition](docs/rules/define-tag-after-class-definition.md)
+- [wc/expose-class-on-global](docs/rules/expose-class-on-global.md)
+- [wc/file-name-matches-element](docs/rules/file-name-matches-element.md)
+- [wc/guard-define-call](docs/rules/guard-define-call.md)
+- [wc/max-elements-per-file](docs/rules/max-elements-per-file.md)
+- [wc/no-constructor](docs/rules/no-constructor.md)
+- [wc/no-exports-with-element](docs/rules/no-exports-with-element.md)
+- [wc/no-method-prefixed-with-on](docs/rules/no-method-prefixed-with-on.md)
+- [wc/tag-name-matches-class](docs/rules/tag-name-matches-class.md)
 
 ## Shareable configurations
 
