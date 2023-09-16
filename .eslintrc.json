@@ -7,6 +7,7 @@
   "rules": {
     "indent": "off",
     "quote-props": "off",
+    "operator-linebreak": "off",
     "max-len": [
       "error",
       {
@@ -33,7 +34,7 @@
     "@typescript-eslint/no-array-constructor": "error",
     "@typescript-eslint/no-empty-interface": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-parameter-properties": "error",
+    "@typescript-eslint/parameter-properties": "error",
     "@typescript-eslint/naming-convention": [
       "error",
       {

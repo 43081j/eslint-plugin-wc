@@ -89,3 +89,12 @@ export function isNativeCustomElement(node: ESTree.Class): boolean {
     node.superClass.name === 'HTMLElement'
   );
 }
+
+/**
+ * Converts a literal-or-array value to an array value
+ * @param {unknown} val Value to convert
+ * @return {Array<unknown>}
+ */
+export function coerceArray<T>(val: T | T[]): T[] {
+  return Array.isArray(val) ? val : [val];
+}
