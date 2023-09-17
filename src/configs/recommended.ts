@@ -3,11 +3,6 @@ const config = {
   parserOptions: {
     sourceType: 'module'
   },
-  settings: {
-    wc: {
-      elementBaseClasses: ['LitElement']
-    }
-  },
 
   rules: {
     'wc/no-constructor-attributes': 'error',

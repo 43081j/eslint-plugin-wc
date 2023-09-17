@@ -28,6 +28,10 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
   );
 }
 
+const knownModuleBaseClasses = new Map<string, Set<string>>([
+  ['lit', new Set(['LitElement'])]
+]);
+
 /**
  * Retrieves the configured element base class list
  *
@@ -36,6 +40,19 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
  */
 export function getElementBaseClasses(context: Rule.RuleContext): string[] {
   const bases = new Set<string>(['HTMLElement']);
+
+  for (const [moduleName, moduleClasses] of knownModuleBaseClasses) {
+    try {
+      require.resolve(moduleName);
+
+      for (const moduleClass of moduleClasses) {
+        bases.add(moduleClass);
+      }
+    } catch (_err) {
+      // do nothing, lit didn't exist
+    }
+  }
+
   if (Array.isArray(context.settings.wc?.elementBaseClasses)) {
     const configuredBases = context.settings.wc.elementBaseClasses as string[];
     for (const base of configuredBases) {

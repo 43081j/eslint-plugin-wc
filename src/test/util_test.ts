@@ -64,7 +64,7 @@ describe('util', () => {
   });
 
   describe('getElementBaseClasses', () => {
-    it('should default to HTMLElement, LitElement', () => {
+    it('should default to HTMLElement', () => {
       expect(util.getElementBaseClasses(mockContext)).to.deep.equal([
         'HTMLElement'
       ]);
