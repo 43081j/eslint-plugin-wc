@@ -43,7 +43,7 @@ export function getElementBaseClasses(context: Rule.RuleContext): string[] {
 
   for (const [moduleName, moduleClasses] of knownModuleBaseClasses) {
     try {
-      require.resolve(moduleName);
+      require.resolve(moduleName, {paths: [context.cwd]});
 
       for (const moduleClass of moduleClasses) {
         bases.add(moduleClass);
