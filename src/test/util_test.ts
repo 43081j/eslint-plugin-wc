@@ -13,11 +13,15 @@ const parseExpr = <T extends ESTree.Node = ESTree.Node>(expr: string): T => {
   return (parsed as ESTree.Program).body[0] as T;
 };
 
-const mockContext = {
-  settings: {}
-} as unknown as Rule.RuleContext;
-
 describe('util', () => {
+  let mockContext: Rule.RuleContext;
+
+  beforeEach(() => {
+    mockContext = {
+      settings: {}
+    } as unknown as Rule.RuleContext;
+  });
+
   describe('isCustomElement', () => {
     it('should parse direct sub classes of HTMLElement', () => {
       const doc = parseExpr<ESTree.Class>(`class Foo extends HTMLElement {}`);
@@ -56,6 +60,26 @@ describe('util', () => {
 
       doc = parseExpr<ESTree.Class>(`class Foo {}`);
       expect(util.isCustomElement(mockContext, doc)).to.equal(false);
+    });
+  });
+
+  describe('getElementBaseClasses', () => {
+    it('should default to HTMLElement', () => {
+      expect(util.getElementBaseClasses(mockContext)).to.deep.equal([
+        'HTMLElement'
+      ]);
+    });
+
+    it('should respect user settings', () => {
+      const result = util.getElementBaseClasses({
+        ...mockContext,
+        settings: {
+          wc: {
+            elementBaseClasses: ['FooElement']
+          }
+        }
+      });
+      expect(result).to.deep.equal(['HTMLElement', 'FooElement']);
     });
   });
 });

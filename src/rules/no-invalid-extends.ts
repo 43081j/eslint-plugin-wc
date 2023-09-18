@@ -6,7 +6,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement} from '../util';
+import {isCustomElement, getElementBaseClasses} from '../util';
 import {isDefineCall} from '../util/customElements';
 import {resolveReference} from '../util/ast';
 import {builtInTagClassMap} from '../util/tag-names';
@@ -99,13 +99,7 @@ const rule: Rule.RuleModule = {
     const source = context.getSourceCode();
     const elementClasses = new Set<ESTree.Class>();
     const userAllowedSuperNames = context.options[0]?.allowedSuperNames ?? [];
-    const elementBaseClasses = ['HTMLElement'];
-
-    if (Array.isArray(context.settings.wc?.elementBaseClasses)) {
-      elementBaseClasses.push(
-        ...(context.settings.wc.elementBaseClasses as string[])
-      );
-    }
+    const elementBaseClasses = getElementBaseClasses(context);
 
     return {
       'ClassExpression,ClassDeclaration': (node: ESTree.Class): void => {

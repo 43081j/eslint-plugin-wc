@@ -28,6 +28,41 @@ export function isCustomElementDecorator(node: DecoratorNode): boolean {
   );
 }
 
+const knownModuleBaseClasses = new Map<string, Set<string>>([
+  ['lit', new Set(['LitElement'])]
+]);
+
+/**
+ * Retrieves the configured element base class list
+ *
+ * @param {Rule.RuleContext} context ESLint rule context
+ * @return {string[]}
+ */
+export function getElementBaseClasses(context: Rule.RuleContext): string[] {
+  const bases = new Set<string>(['HTMLElement']);
+
+  for (const [moduleName, moduleClasses] of knownModuleBaseClasses) {
+    try {
+      require.resolve(moduleName);
+
+      for (const moduleClass of moduleClasses) {
+        bases.add(moduleClass);
+      }
+    } catch (_err) {
+      // do nothing, lit didn't exist
+    }
+  }
+
+  if (Array.isArray(context.settings.wc?.elementBaseClasses)) {
+    const configuredBases = context.settings.wc.elementBaseClasses as string[];
+    for (const base of configuredBases) {
+      bases.add(base);
+    }
+  }
+
+  return [...bases];
+}
+
 /**
  * Determines if a node is an element class or not.
  *
@@ -42,17 +77,11 @@ export function isCustomElement(
   jsdoc?: ESTree.Comment | null
 ): boolean {
   const asDecorated = node as WithDecorators<ESTree.Node>;
-  const customElementBases: string[] = ['HTMLElement'];
+  const customElementBases = getElementBaseClasses(context);
   const cached = customElementsCache.get(node);
 
   if (cached !== undefined) {
     return cached;
-  }
-
-  if (Array.isArray(context.settings.wc?.elementBaseClasses)) {
-    customElementBases.push(
-      ...(context.settings.wc.elementBaseClasses as string[])
-    );
   }
 
   if (
