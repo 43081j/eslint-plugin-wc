@@ -1,5 +1,7 @@
 import attachShadowConstructor from './rules/attach-shadow-constructor';
 import bestPractice from './configs/best-practice';
+import defineTagAfterClassDef from './rules/define-tag-after-class-definition';
+import exposeClassOnGlobal from './rules/expose-class-on-global';
 import filenameMatches from './rules/file-name-matches-element';
 import guardDefine from './rules/guard-define-call';
 import guardSuperCall from './rules/guard-super-call';
@@ -23,8 +25,10 @@ import tagMatchesClass from './rules/tag-name-matches-class';
 
 export const rules = {
   'attach-shadow-constructor': attachShadowConstructor,
+  'define-tag-after-class-definition': defineTagAfterClassDef,
+  'expose-class-on-global': exposeClassOnGlobal,
   'file-name-matches-element': filenameMatches,
-  'guard-define': guardDefine,
+  'guard-define-call': guardDefine,
   'guard-super-call': guardSuperCall,
   'max-elements-per-file': maxElementsPerFile,
   'no-child-traversal-in-attributechangedcallback': noChildInAttrChange,
