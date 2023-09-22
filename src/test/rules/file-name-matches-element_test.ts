@@ -196,6 +196,15 @@ ruleTester.run('file-name-matches-element', rule, {
           suffix: 'Bar'
         }
       ]
+    },
+    {
+      code: 'class SomeElement extends HTMLElement {}',
+      filename: 'SomeElement.js',
+      options: [
+        {
+          transform: 'none'
+        }
+      ]
     }
   ],
 
