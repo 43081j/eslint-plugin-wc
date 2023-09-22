@@ -54,7 +54,7 @@ export function toCamelCase(str: string): string {
  */
 export function toCaseByType(
   str: string,
-  type: 'kebab' | 'camel' | 'snake' | 'pascal'
+  type: 'kebab' | 'camel' | 'snake' | 'pascal' | 'none'
 ): string {
   switch (type) {
     case 'kebab':
@@ -65,5 +65,7 @@ export function toCaseByType(
       return toSnakeCase(str);
     case 'pascal':
       return toPascalCase(str);
+    case 'none':
+      return str;
   }
 }
