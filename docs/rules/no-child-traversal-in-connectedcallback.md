@@ -31,7 +31,7 @@ class FooBarElement extends HTMLElement {
       if (button) {
         button.disabled = true
       }
-    }).observe(this)
+    }).observe(this, {childList: true})
   }
 }
 ```
@@ -52,3 +52,5 @@ class FooBarElement extends HTMLElement {
 ## When Not To Use It
 
 If you are comfortable with the edge cases of DOM traversal directly in the `connectedCallback` then you can disable this rule.
+
+It may also be necessary to disable the rule when the custom element is appended to the DOM via JavaScript like for instance the Vue framework, which appends the element including all children at once and a `MutationObserver` would not receive any `childList` mutations in such cases.
