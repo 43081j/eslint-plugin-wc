@@ -53,4 +53,4 @@ class FooBarElement extends HTMLElement {
 
 If you are comfortable with the edge cases of DOM traversal directly in the `connectedCallback` then you can disable this rule.
 
-It may also be necessary to disable the rule when the custom element is appended to the DOM via JavaScript like for instance the Vue framework, which appends the element including all children at once and a `MutationObserver` would not receive any `childList` mutations in such cases.
+If your element is appended to the DOM via `.innerHTML` or similar methods, you may need to disable this rule because in such a case, the children are are available during `connectedCallback` and no mutations events will fire.
