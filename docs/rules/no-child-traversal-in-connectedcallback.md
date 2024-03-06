@@ -53,4 +53,4 @@ class FooBarElement extends HTMLElement {
 
 If you are comfortable with the edge cases of DOM traversal directly in the `connectedCallback` then you can disable this rule.
 
-If your element is appended to the DOM via `.innerHTML` or similar methods, you may need to disable this rule because in such a case, the children are are available during `connectedCallback` and no mutations events will fire.
+If your element is appended to the DOM via `.innerHTML` or similar methods, you should disable this rule because in such a case, the children are are available during `connectedCallback` and no mutations events will fire.
