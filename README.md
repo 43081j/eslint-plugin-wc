@@ -36,6 +36,22 @@ Then extend the recommended eslint config:
 }
 ```
 
+Or if you're using ESLint flat configs, add this to your `eslint.config.js`:
+
+```ts
+import {configs} from 'eslint-plugin-wc';
+
+export default [
+  configs.recommended,
+
+  // or if you want to specify `files`, or other options
+  {
+    ...configs.recommended,
+    files: ['test/**/*.js']
+  }
+];
+```
+
 You should also specify settings that will be shared across all the plugin rules. ([More about eslint shared settings](https://eslint.org/docs/user-guide/configuring/configuration-files#adding-shared-settings))
 
 ```jsonc

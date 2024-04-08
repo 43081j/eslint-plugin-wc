@@ -1,7 +1,8 @@
-const config = {
-  plugins: ['wc'],
-  parserOptions: {
-    sourceType: 'module'
+import type {ESLint, Linter} from 'eslint';
+
+export const configFactory = (plugin: ESLint.Plugin): Linter.FlatConfig => ({
+  plugins: {
+    wc: plugin
   },
 
   rules: {
@@ -9,6 +10,4 @@ const config = {
     'wc/no-invalid-element-name': 'error',
     'wc/no-self-class': 'error'
   }
-};
-
-export default config;
+});

@@ -1,5 +1,5 @@
+import type {ESLint} from 'eslint';
 import attachShadowConstructor from './rules/attach-shadow-constructor';
-import bestPractice from './configs/best-practice';
 import defineTagAfterClassDef from './rules/define-tag-after-class-definition';
 import exposeClassOnGlobal from './rules/expose-class-on-global';
 import filenameMatches from './rules/file-name-matches-element';
@@ -19,7 +19,10 @@ import noInvalidExtends from './rules/no-invalid-extends';
 import noOnPrefix from './rules/no-method-prefixed-with-on';
 import noSelfClass from './rules/no-self-class';
 import noTypos from './rules/no-typos';
-import recommended from './configs/recommended';
+import {configFactory as configRecommended} from './configs/recommended';
+import {configFactory as configBestPractice} from './configs/best-practice';
+import {config as configLegacyRecommended} from './configs/legacy-recommended';
+import {config as configLegacyBestPractice} from './configs/legacy-best-practice';
 import requireListenerTeardown from './rules/require-listener-teardown';
 import tagMatchesClass from './rules/tag-name-matches-class';
 
@@ -48,7 +51,11 @@ export const rules = {
   'tag-name-matches-class': tagMatchesClass
 };
 
+const plugin: ESLint.Plugin = {rules};
+
 export const configs = {
-  recommended,
-  'best-practice': bestPractice
+  recommended: configLegacyRecommended,
+  'best-practice': configLegacyBestPractice,
+  'flat/recommended': configRecommended(plugin),
+  'flat/best-practice': configBestPractice(plugin)
 };
