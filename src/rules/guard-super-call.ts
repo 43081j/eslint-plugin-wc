@@ -21,13 +21,18 @@ const rule: Rule.RuleModule = {
     messages: {
       guardSuperCall:
         'Super calls to lifecycle callbacks should be guarded in case the base class does not implement them'
-    }
+    },
+    schema: [{
+      requireTypeCheck: {type: 'boolean'}
+    }]
   },
 
   create(context): Rule.RuleListener {
     let insideNonNativeElement = false;
     let errNode = null;
     const source = context.getSourceCode();
+    const options = context.options?.[0] ?? {};
+    const requireTypeCheck = options.requireTypeCheck ?? false;
 
     const nativeHooks = [
       'connectedCallback',
@@ -91,6 +96,20 @@ const rule: Rule.RuleModule = {
     }
 
     /**
+     * Determines if an if statement is a correct super hook guard
+     * @param {ESTree.IfStatement} node Node to test
+     * @param {string} hook hook to test
+     * @return {boolean}
+     */
+    function isCorrectSuperHookGuard(node, hook) {
+      return node.test.type === 'BinaryExpression' &&
+        node.test.left.operator === 'typeof' &&
+        isSuperHook(node.test.left.argument, hook) &&
+        node.test.right.type === 'Literal' &&
+        node.test.right.value === 'function';
+    }
+
+    /**
      * Determines if a statement is an unguarded super hook
      * @param {ESTree.Statement} node Node to test
      * @param {string} hook hook to test
@@ -100,7 +119,11 @@ const rule: Rule.RuleModule = {
       if (isSuperHookExpression(node, hook)) {
         errNode = node;
         return true;
-      } else if (node.type === 'IfStatement' && !isSuperHook(node.test, hook)) {
+      } else if (
+        node.type === 'IfStatement' &&
+        !isCorrectSuperHookGuard(node, hook) &&
+        !(!requireTypeCheck && isSuperHook(node.test, hook))
+      ) {
         return isUnguardedSuperHook(node.consequent, hook);
       } else if (
         node.type === 'BlockStatement' &&
