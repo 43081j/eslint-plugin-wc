@@ -15,7 +15,7 @@ const rule: Rule.RuleModule = {
     docs: {
       description: 'Requires that listeners be cleaned up on DOM disconnect.',
       category: 'Best Practices',
-      url: 'https://github.com/43081j/eslint-plugin-lit/blob/master/docs/rules/require-listener-teardown.md'
+      url: 'https://github.com/43081j/eslint-plugin-wc/blob/master/docs/rules/require-listener-teardown.md'
     },
     messages: {
       noTeardown:
