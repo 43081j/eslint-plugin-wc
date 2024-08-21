@@ -28,7 +28,7 @@ const rule: Rule.RuleModule = {
     // variables should be defined here
     let insideElement = false;
     const bannedClassListMethods = ['add', 'remove', 'toggle', 'replace'];
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     //----------------------------------------------------------------------
     // Helpers

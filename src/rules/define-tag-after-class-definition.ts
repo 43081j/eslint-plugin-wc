@@ -35,7 +35,7 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     const seenClasses = new Set<ESTree.Node>();
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     //----------------------------------------------------------------------
     // Helpers

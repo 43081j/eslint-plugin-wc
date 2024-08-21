@@ -96,7 +96,7 @@ const rule: Rule.RuleModule = {
   },
 
   create(context): Rule.RuleListener {
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
     const elementClasses = new Set<ESTree.Class>();
     const userAllowedSuperNames = context.options[0]?.allowedSuperNames ?? [];
     const elementBaseClasses = getElementBaseClasses(context);

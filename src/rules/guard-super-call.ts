@@ -27,7 +27,7 @@ const rule: Rule.RuleModule = {
   create(context): Rule.RuleListener {
     let insideNonNativeElement = false;
     let errNode = null;
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     const nativeHooks = [
       'connectedCallback',

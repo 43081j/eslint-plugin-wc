@@ -116,14 +116,14 @@ const rule: Rule.RuleModule = {
   },
 
   create(context): Rule.RuleListener {
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
     const options = context.options?.[0] ?? {};
     const userSuffixes = coerceArray(options.suffix ?? []);
     const userPrefixes = coerceArray(options.prefix ?? []);
     const transforms = coerceArray(options.transform ?? ['kebab', 'camel']);
     const matchDirectory = options.matchDirectory === true;
 
-    const filename = context.getFilename();
+    const filename = context.filename;
 
     // We don't want to match stdin and what not
     if (!filename || filename === '<input>' || filename === '<text>') {

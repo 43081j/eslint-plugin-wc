@@ -30,7 +30,7 @@ const rule: Rule.RuleModule = {
     const seenClasses = new Set<ESTree.Node>();
     const exportedNodes = new Set<ESTree.Node>();
     let hasElement = false;
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     return {
       'ClassDeclaration,ClassExpression': (node: ESTree.Class): void => {

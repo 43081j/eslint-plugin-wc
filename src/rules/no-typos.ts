@@ -29,7 +29,7 @@ const rule: Rule.RuleModule = {
   create(context): Rule.RuleListener {
     // variables should be defined here
     let insideElement = false;
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
     const lifecycleMethods = [
       'connectedCallback',
       'disconnectedCallback',

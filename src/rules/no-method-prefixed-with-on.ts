@@ -29,7 +29,7 @@ const rule: Rule.RuleModule = {
   create(context): Rule.RuleListener {
     // variables should be defined here
     let insideElement = false;
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     //----------------------------------------------------------------------
     // Helpers
@@ -52,7 +52,7 @@ const rule: Rule.RuleModule = {
         if (insideElement) {
           const name = getMethodName(node);
 
-          if (name && name.startsWith('on')) {
+          if (name?.startsWith('on')) {
             context.report({
               node,
               messageId: 'noPrefix'
