@@ -136,7 +136,7 @@ const rule: Rule.RuleModule = {
           return;
         }
 
-        const scope = context.getScope();
+        const scope = context.sourceCode.getScope(node);
         const name = node.property.name;
 
         if (isAllowedScope(scope)) {
