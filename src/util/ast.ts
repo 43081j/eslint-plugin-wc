@@ -35,8 +35,7 @@ export function resolveReference(
     return node;
   }
 
-  const ref = context
-    .getSourceCode()
+  const ref = context.sourceCode
     .getScope(node)
     .references.find((r) => r.identifier.name === node.name);
 

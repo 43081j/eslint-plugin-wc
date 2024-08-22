@@ -29,7 +29,7 @@ const rule: Rule.RuleModule = {
       'ClassBody > MethodDefinition[kind="constructor"]' +
       '[value.params.length > 0]';
     let insideElement = false;
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     //----------------------------------------------------------------------
     // Helpers

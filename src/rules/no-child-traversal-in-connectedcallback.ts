@@ -85,7 +85,7 @@ const rule: Rule.RuleModule = {
     // variables should be defined here
     let insideCallback = false;
     let insideElement = false;
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     //----------------------------------------------------------------------
     // Helpers
@@ -136,7 +136,7 @@ const rule: Rule.RuleModule = {
           return;
         }
 
-        const scope = context.getScope();
+        const scope = context.sourceCode.getScope(node);
         const name = node.property.name;
 
         if (isAllowedScope(scope)) {

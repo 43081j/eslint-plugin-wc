@@ -27,7 +27,7 @@ const rule: Rule.RuleModule = {
     // variables should be defined here
     let insideNonConstructor = false;
     let insideElement = false;
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     //----------------------------------------------------------------------
     // Helpers

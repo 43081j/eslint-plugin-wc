@@ -36,7 +36,7 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     // variables should be defined here
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
     const maxElements = context.options[0]?.max ?? 1;
     let elementCount = 0;
 

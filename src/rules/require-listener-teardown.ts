@@ -60,7 +60,7 @@ const rule: Rule.RuleModule = {
     // Helpers
     //----------------------------------------------------------------------
     const shouldTrackListener = (node: ESTree.MemberExpression): boolean => {
-      const source = context.getSourceCode();
+      const source = context.sourceCode;
 
       const text = source.getText(node.object);
 
@@ -82,7 +82,7 @@ const rule: Rule.RuleModule = {
         node.callee.type === 'MemberExpression' &&
         shouldTrackListener(node.callee)
       ) {
-        const source = context.getSourceCode();
+        const source = context.sourceCode;
         const calleeText = source.getText(node.callee.object);
         const [arg0, arg1] = node.arguments;
 
@@ -104,7 +104,7 @@ const rule: Rule.RuleModule = {
         node.callee.type === 'MemberExpression' &&
         shouldTrackListener(node.callee)
       ) {
-        const source = context.getSourceCode();
+        const source = context.sourceCode;
         const calleeText = source.getText(node.callee.object);
         const [arg0, arg1] = node.arguments;
 

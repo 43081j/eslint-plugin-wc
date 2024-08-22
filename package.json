@@ -41,7 +41,7 @@
     "js-levenshtein-esm": "^1.2.0"
   },
   "peerDependencies": {
-    "eslint": ">=5"
+    "eslint": ">=8.40.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",

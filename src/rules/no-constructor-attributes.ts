@@ -72,7 +72,7 @@ const rule: Rule.RuleModule = {
       'title',
       'translate'
     ];
-    const source = context.getSourceCode();
+    const source = context.sourceCode;
 
     //----------------------------------------------------------------------
     // Helpers
