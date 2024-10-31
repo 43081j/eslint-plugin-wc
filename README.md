@@ -42,11 +42,11 @@ Or if you're using ESLint flat configs, add this to your `eslint.config.js`:
 import {configs} from 'eslint-plugin-wc';
 
 export default [
-  configs.recommended,
+  configs['flat/recommended'],
 
   // or if you want to specify `files`, or other options
   {
-    ...configs.recommended,
+    ...configs['flat/recommended'],
     files: ['test/**/*.js']
   }
 ];
