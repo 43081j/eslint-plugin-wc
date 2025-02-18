@@ -27,7 +27,7 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     const definedCustomElements = new Set<string>();
-
+    const sourceCode = context.sourceCode ?? context.getSourceCode();
     //----------------------------------------------------------------------
     // Helpers
     //----------------------------------------------------------------------
@@ -63,8 +63,9 @@ const rule: Rule.RuleModule = {
         }
 
         if (isGetCall(node) && tagName) {
-          // TODO (43081j): use source.getAncestors(node)
-          const ancestors = context.getAncestors();
+          const ancestors = sourceCode.getAncestors
+            ? sourceCode.getAncestors(node)
+            : context.getAncestors();
           const isInsideIfStatement = ancestors.some(
             (ancestor): boolean =>
               ancestor.type === 'IfStatement' &&
