@@ -64,7 +64,6 @@ const rule: Rule.RuleModule = {
 
         if (isGetCall(node) && tagName) {
           const ancestors = source.getAncestors(node);
-            : context.getAncestors();
           const isInsideIfStatement = ancestors.some(
             (ancestor): boolean =>
               ancestor.type === 'IfStatement' &&
