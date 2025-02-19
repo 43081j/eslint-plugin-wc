@@ -27,7 +27,7 @@ const rule: Rule.RuleModule = {
 
   create(context): Rule.RuleListener {
     const definedCustomElements = new Set<string>();
-    const sourceCode = context.sourceCode ?? context.getSourceCode();
+    const source = context.sourceCode;
     //----------------------------------------------------------------------
     // Helpers
     //----------------------------------------------------------------------
