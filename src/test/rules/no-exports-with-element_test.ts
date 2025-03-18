@@ -4,7 +4,7 @@
  * @author Keith Cirkel <https://github.com/keithamus>
  */
 
-import rule from '../../rules/no-exports-with-element';
+import rule from '../../rules/no-exports-with-element.js';
 import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({

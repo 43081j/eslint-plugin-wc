@@ -9,7 +9,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/define-tag-after-class-definition';
+import rule from '../../rules/define-tag-after-class-definition.js';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------

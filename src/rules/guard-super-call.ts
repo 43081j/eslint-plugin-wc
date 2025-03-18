@@ -6,7 +6,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement, isNativeCustomElement} from '../util';
+import {isCustomElement, isNativeCustomElement} from '../util.js';
 
 //------------------------------------------------------------------------------
 // Rule Definition

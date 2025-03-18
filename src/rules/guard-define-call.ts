@@ -6,7 +6,7 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isDefineCall, isGetCall} from '../util/customElements';
+import {isDefineCall, isGetCall} from '../util/customElements.js';
 
 //------------------------------------------------------------------------------
 // Rule Definition

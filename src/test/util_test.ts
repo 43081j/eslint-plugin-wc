@@ -1,4 +1,4 @@
-import * as util from '../util';
+import * as util from '../util.js';
 import {parse} from 'espree';
 import {expect} from 'chai';
 import * as ESTree from 'estree';

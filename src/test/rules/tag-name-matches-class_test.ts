@@ -9,7 +9,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/tag-name-matches-class';
+import rule from '../../rules/tag-name-matches-class.js';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------

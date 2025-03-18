@@ -7,7 +7,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/require-listener-teardown';
+import rule from '../../rules/require-listener-teardown.js';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------

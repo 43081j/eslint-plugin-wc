@@ -7,7 +7,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/no-closed-shadow-root';
+import rule from '../../rules/no-closed-shadow-root.js';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------

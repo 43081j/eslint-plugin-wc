@@ -7,9 +7,9 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement} from '../util';
-import {isDefineCall} from '../util/customElements';
-import {resolveReference} from '../util/ast';
+import {isCustomElement} from '../util.js';
+import {isDefineCall} from '../util/customElements.js';
+import {resolveReference} from '../util/ast.js';
 
 //------------------------------------------------------------------------------
 // Rule Definition

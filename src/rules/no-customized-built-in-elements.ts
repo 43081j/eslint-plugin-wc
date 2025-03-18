@@ -6,8 +6,8 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement} from '../util';
-import {builtInTagClassList} from '../util/tag-names';
+import {isCustomElement} from '../util.js';
+import {builtInTagClassList} from '../util/tag-names.js';
 
 //------------------------------------------------------------------------------
 // Rule Definition
