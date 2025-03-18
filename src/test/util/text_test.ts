@@ -1,4 +1,4 @@
-import * as text from '../../util/text';
+import * as text from '../../util/text.js';
 import {expect} from 'chai';
 
 describe('text utils', () => {

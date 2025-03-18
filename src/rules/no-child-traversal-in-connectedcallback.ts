@@ -7,12 +7,12 @@
 
 import {Rule, Scope} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement} from '../util';
+import {isCustomElement} from '../util.js';
 import {
   childPropertyList,
   childMethodList,
   isThisOrShadowRoot
-} from '../util/dom';
+} from '../util/dom.js';
 
 const allowedScopes = new Set<string>(['addEventListener', 'MutationObserver']);
 

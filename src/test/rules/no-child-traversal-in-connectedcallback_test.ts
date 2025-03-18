@@ -9,7 +9,8 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/no-child-traversal-in-connectedcallback';
+import {fileURLToPath} from 'node:url';
+import rule from '../../rules/no-child-traversal-in-connectedcallback.js';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------
@@ -23,7 +24,7 @@ const ruleTester = new RuleTester({
   }
 });
 
-const parser = require.resolve('@typescript-eslint/parser');
+const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-child-traversal-in-connectedcallback', rule, {
   valid: [

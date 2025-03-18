@@ -7,7 +7,8 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/no-constructor-params';
+import {fileURLToPath} from 'node:url';
+import rule from '../../rules/no-constructor-params.js';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------
@@ -21,7 +22,7 @@ const ruleTester = new RuleTester({
   }
 });
 
-const parser = require.resolve('@typescript-eslint/parser');
+const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-constructor-params', rule, {
   valid: [

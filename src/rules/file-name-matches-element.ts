@@ -7,9 +7,9 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement, coerceArray} from '../util';
+import {isCustomElement, coerceArray} from '../util.js';
 import * as path from 'path';
-import {toCaseByType} from '../util/text';
+import {toCaseByType} from '../util/text.js';
 
 /**
  * Computes a set of prefixed/suffixed names for a given name

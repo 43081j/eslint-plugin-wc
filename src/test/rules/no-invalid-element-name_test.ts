@@ -7,9 +7,9 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/no-invalid-element-name';
+import rule from '../../rules/no-invalid-element-name.js';
 import {RuleTester} from 'eslint';
-import {knownNamespaces} from '../../util/tag-names';
+import {knownNamespaces} from '../../util/tag-names.js';
 
 //------------------------------------------------------------------------------
 // Tests

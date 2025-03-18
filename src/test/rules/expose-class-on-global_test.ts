@@ -9,7 +9,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import rule from '../../rules/expose-class-on-global';
+import rule from '../../rules/expose-class-on-global.js';
 import {RuleTester} from 'eslint';
 
 //------------------------------------------------------------------------------

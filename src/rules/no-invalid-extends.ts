@@ -6,10 +6,10 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {isCustomElement, getElementBaseClasses} from '../util';
-import {isDefineCall} from '../util/customElements';
-import {resolveReference} from '../util/ast';
-import {builtInTagClassMap} from '../util/tag-names';
+import {isCustomElement, getElementBaseClasses} from '../util.js';
+import {isDefineCall} from '../util/customElements.js';
+import {resolveReference} from '../util/ast.js';
+import {builtInTagClassMap} from '../util/tag-names.js';
 
 /**
  * Computes the `extends` option from a `customElements.define` third

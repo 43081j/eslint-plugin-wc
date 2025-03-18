@@ -5,7 +5,7 @@
  * @author Keith Cirkel <https://github.com/keithamus>
  */
 
-import rule from '../../rules/file-name-matches-element';
+import rule from '../../rules/file-name-matches-element.js';
 import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({

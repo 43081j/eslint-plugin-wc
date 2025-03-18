@@ -7,8 +7,8 @@
 
 import {Rule} from 'eslint';
 import * as ESTree from 'estree';
-import {coerceArray} from '../util';
-import {toKebabCase} from '../util/text';
+import {coerceArray} from '../util.js';
+import {toKebabCase} from '../util/text.js';
 
 /**
  * Removes a set of prefixes and suffixes from a string if it contains them
