@@ -8,22 +8,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/no-customized-built-in-elements.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-customized-built-in-elements', rule, {
   valid: [
@@ -67,7 +67,7 @@ ruleTester.run('no-customized-built-in-elements', rule, {
     },
     {
       code: `@customElement('x-foo') class A extends HTMLBodyElement {}`,
-      parser,
+      languageOptions: {parser},
       errors: [
         {
           messageId: 'noBuiltIn',

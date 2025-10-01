@@ -32,6 +32,14 @@ const knownModuleBaseClasses = new Map<string, Set<string>>([
   ['lit', new Set(['LitElement'])]
 ]);
 
+export interface Settings {
+  elementBaseClasses?: string[];
+}
+
+export function getSettings(context: Rule.RuleContext): Settings | undefined {
+  return context.settings.wc as Settings;
+}
+
 /**
  * Retrieves the configured element base class list
  *
@@ -53,8 +61,10 @@ export function getElementBaseClasses(context: Rule.RuleContext): string[] {
     }
   }
 
-  if (Array.isArray(context.settings.wc?.elementBaseClasses)) {
-    const configuredBases = context.settings.wc.elementBaseClasses as string[];
+  const settings = getSettings(context);
+
+  if (Array.isArray(settings?.elementBaseClasses)) {
+    const configuredBases = settings.elementBaseClasses;
     for (const base of configuredBases) {
       bases.add(base);
     }

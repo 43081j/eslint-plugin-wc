@@ -7,22 +7,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/no-self-class.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-self-class', rule, {
   valid: [
@@ -221,7 +221,7 @@ ruleTester.run('no-self-class', rule, {
           this.className += 'test';
         }
       }`,
-      parser,
+      languageOptions: {parser},
       errors: [
         {
           messageId: 'selfClass',

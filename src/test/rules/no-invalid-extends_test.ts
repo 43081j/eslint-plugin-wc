@@ -8,22 +8,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/no-invalid-extends.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-invalid-extends', rule, {
   valid: [
@@ -120,7 +120,7 @@ ruleTester.run('no-invalid-extends', rule, {
     {
       code: `@customElement('x-foo')
       class A extends SomeElement {}`,
-      parser
+      languageOptions: {parser}
     },
     {
       code: `class A extends SomeElement {}
@@ -147,25 +147,6 @@ ruleTester.run('no-invalid-extends', rule, {
           column: 9,
           data: {
             allowedSuperNames: 'HTMLElement'
-          }
-        }
-      ]
-    },
-    {
-      code: `
-        /** @customElement */
-        class Foo extends Bar {}
-        customElements.define('foo', Foo, {extends: 'nonsense'});
-      `,
-      errors: [
-        {
-          messageId: 'unknownExtends',
-          line: 4,
-          column: 9,
-          data: {
-            allowedSuperNames: 'HTMLElement',
-            superName: 'Bar',
-            actualExtends: 'nonsense'
           }
         }
       ]

@@ -7,22 +7,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/no-constructor-params.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-constructor-params', rule, {
   valid: [
@@ -51,7 +51,7 @@ ruleTester.run('no-constructor-params', rule, {
       class Foo extends Bar {
         constructor() {}
       }`,
-      parser
+      languageOptions: {parser}
     }
   ],
 
@@ -86,7 +86,7 @@ ruleTester.run('no-constructor-params', rule, {
       class Foo extends Bar {
         constructor(param1) {}
       }`,
-      parser,
+      languageOptions: {parser},
       errors: [
         {
           messageId: 'noParams',

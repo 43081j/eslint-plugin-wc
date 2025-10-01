@@ -8,22 +8,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/no-method-prefixed-with-on.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-method-prefixed-with-on', rule, {
   valid: [
@@ -128,7 +128,7 @@ ruleTester.run('no-method-prefixed-with-on', rule, {
         onFoo() {
         }
       }`,
-      parser,
+      languageOptions: {parser},
       errors: [
         {
           messageId: 'noPrefix',
@@ -155,7 +155,7 @@ ruleTester.run('no-method-prefixed-with-on', rule, {
         #onFoo() {
         }
       }`,
-      parser,
+      languageOptions: {parser},
       errors: [
         {
           messageId: 'noPrefix',

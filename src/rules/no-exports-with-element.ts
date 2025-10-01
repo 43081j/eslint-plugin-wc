@@ -73,7 +73,9 @@ const rule: Rule.RuleModule = {
           declaration = declaration.right;
         }
 
-        exportedNodes.add(declaration);
+        // TODO (jg): this cast sucks but ESTree.Node doesn't include
+        // these `MaybeNamed*` nodes which causes issues
+        exportedNodes.add(declaration as ESTree.Node);
       },
       'Program:exit': (): void => {
         if (!hasElement) {
