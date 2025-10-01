@@ -110,7 +110,8 @@ const rule: Rule.RuleModule = {
           matchDirectory: {
             type: 'boolean'
           }
-        }
+        },
+        additionalProperties: false
       }
     ]
   },

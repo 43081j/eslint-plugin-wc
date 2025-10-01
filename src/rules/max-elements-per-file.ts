@@ -29,7 +29,8 @@ const rule: Rule.RuleModule = {
             type: 'integer',
             minimum: 1
           }
-        }
+        },
+        additionalProperties: false
       }
     ]
   },
