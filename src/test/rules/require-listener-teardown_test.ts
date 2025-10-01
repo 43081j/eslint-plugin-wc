@@ -78,6 +78,34 @@ ruleTester.run('require-listener-teardown', rule, {
           hosts: ['window', 'document']
         }
       ]
+    },
+    {
+      code: `class Foo extends HTMLElement {
+      constructor() {
+        this.controller = new AbortController();
+        this.signal = this.controller.signal;
+      }
+      connectedCallback() {
+        this.addEventListener('x', console.log, { signal: this.signal });
+      }
+      disconnectedCallback() {
+        this.controller.abort();
+      }
+    }`
+    },
+    {
+      code: `class Foo extends HTMLElement {
+      constructor() {
+        this.controller = new AbortController();
+      }
+      connectedCallback() {
+        const {signal} = this.controller;
+        this.addEventListener('x', console.log, { signal });
+      }
+      disconnectedCallback() {
+        this.controller.abort();
+      }
+    }`
     }
   ],
 

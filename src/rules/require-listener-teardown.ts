@@ -73,6 +73,13 @@ const rule: Rule.RuleModule = {
         node.callee.type === 'MemberExpression' &&
         node.callee.property.type === 'Identifier' &&
         node.callee.property.name === 'bind');
+    const hasSignal = (node: ESTree.ObjectExpression): boolean =>
+      node.properties.some(
+        (prop) =>
+          prop.type === 'Property' &&
+          ((prop.key.type === 'Identifier' && prop.key.name === 'signal') ||
+            (prop.key.type === 'Literal' && prop.key.value === 'signal'))
+      );
 
     //----------------------------------------------------------------------
     // Public
@@ -84,7 +91,11 @@ const rule: Rule.RuleModule = {
       ) {
         const source = context.sourceCode;
         const calleeText = source.getText(node.callee.object);
-        const [arg0, arg1] = node.arguments;
+        const [arg0, arg1, arg3] = node.arguments;
+
+        if (arg3 && arg3.type === 'ObjectExpression' && hasSignal(arg3)) {
+          return;
+        }
 
         if (isInlineFunction(arg1)) {
           context.report({
