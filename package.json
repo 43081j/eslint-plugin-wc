@@ -17,8 +17,7 @@
     "dev": "npm run lint && npm run build && npm run test",
     "test": "c8 --reporter=html --reporter=text-summary --reporter=lcov mocha \"lib/test/**/*_test.js\"",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run lint && npm run test"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
