@@ -8,22 +8,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/no-constructor.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-constructor', rule, {
   valid: [
@@ -100,7 +100,7 @@ ruleTester.run('no-constructor', rule, {
           super();
         }
       }`,
-      parser,
+      languageOptions: {parser},
       errors: [
         {
           messageId: 'noConstructor',

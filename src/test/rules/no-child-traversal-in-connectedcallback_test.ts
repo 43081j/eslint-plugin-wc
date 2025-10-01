@@ -9,22 +9,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/no-child-traversal-in-connectedcallback.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('no-child-traversal-in-connectedcallback', rule, {
   valid: [
@@ -73,7 +73,7 @@ ruleTester.run('no-child-traversal-in-connectedcallback', rule, {
           foo;
         }
       }`,
-      parser
+      languageOptions: {parser}
     },
     {
       code: `class A extends HTMLElement {

@@ -8,22 +8,22 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/max-elements-per-file.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('max-elements-per-file', rule, {
   valid: [
@@ -59,7 +59,7 @@ ruleTester.run('max-elements-per-file', rule, {
     {
       code: `@customElement('x-foo')
       class A extends SomeElement {}`,
-      parser
+      languageOptions: {parser}
     }
   ],
 
@@ -139,7 +139,7 @@ ruleTester.run('max-elements-per-file', rule, {
         class A extends SomeElement {}
         class B extends HTMLElement {}
       `,
-      parser,
+      languageOptions: {parser},
       errors: [
         {
           messageId: 'tooMany',

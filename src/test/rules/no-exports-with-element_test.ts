@@ -8,9 +8,11 @@ import rule from '../../rules/no-exports-with-element.js';
 import {RuleTester} from 'eslint';
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
 

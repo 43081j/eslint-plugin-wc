@@ -4,18 +4,18 @@
  * @author Keith Cirkel <https://github.com/keithamus>
  */
 
-import {fileURLToPath} from 'node:url';
 import rule from '../../rules/guard-define-call.js';
 import {RuleTester} from 'eslint';
+import {parser} from 'typescript-eslint';
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    sourceType: 'module',
-    ecmaVersion: 2015
+  languageOptions: {
+    parserOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2015
+    }
   }
 });
-
-const parser = fileURLToPath(import.meta.resolve('@typescript-eslint/parser'));
 
 ruleTester.run('guard-define-call', rule, {
   valid: [
@@ -44,7 +44,7 @@ ruleTester.run('guard-define-call', rule, {
       code: `try {
         customElements.define('foo', Foo);
       } catch {}`,
-      parser
+      languageOptions: {parser}
     },
     `if (window.customElements && !window.customElements.get('foo')) {
       window.customElements.define('foo', Foo);
