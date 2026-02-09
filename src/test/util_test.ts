@@ -25,8 +25,8 @@ describe('util', () => {
   describe('isCustomElement', () => {
     it('should parse direct sub classes of HTMLElement', () => {
       const doc = parseExpr<ESTree.Class>(`class Foo extends HTMLElement {}`);
-      util.isCustomElement(mockContext, doc); // Primes the cache
-      expect(util.isCustomElement(mockContext, doc)).to.equal(true);
+      util.isCustomElement(mockContext, doc, []); // Primes the cache
+      expect(util.isCustomElement(mockContext, doc, [])).to.equal(true);
     });
 
     it('should parse direct sub classes of custom bases', () => {
@@ -36,7 +36,7 @@ describe('util', () => {
           elementBaseClasses: ['MyBase']
         }
       };
-      expect(util.isCustomElement(mockContext, doc)).to.equal(true);
+      expect(util.isCustomElement(mockContext, doc, [])).to.equal(true);
     });
 
     it('should parse annotated classes', () => {
@@ -51,15 +51,15 @@ describe('util', () => {
       };
       const doc = parseExpr<ESTree.Class>(`/** @customElement **/
         class Foo extends Bar {}`);
-      expect(util.isCustomElement(mockContext, doc, jsdoc)).to.equal(true);
+      expect(util.isCustomElement(mockContext, doc, [jsdoc])).to.equal(true);
     });
 
     it('should be false for normal classes', () => {
       let doc = parseExpr<ESTree.Class>(`class Foo extends Bar {}`);
-      expect(util.isCustomElement(mockContext, doc)).to.equal(false);
+      expect(util.isCustomElement(mockContext, doc, [])).to.equal(false);
 
       doc = parseExpr<ESTree.Class>(`class Foo {}`);
-      expect(util.isCustomElement(mockContext, doc)).to.equal(false);
+      expect(util.isCustomElement(mockContext, doc, [])).to.equal(false);
     });
   });
 

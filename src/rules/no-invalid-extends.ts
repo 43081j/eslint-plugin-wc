@@ -103,7 +103,7 @@ const rule: Rule.RuleModule = {
 
     return {
       'ClassExpression,ClassDeclaration': (node: ESTree.Class): void => {
-        if (isCustomElement(context, node, source.getJSDocComment(node))) {
+        if (isCustomElement(context, node, source.getCommentsBefore(node))) {
           elementClasses.add(node);
         }
       },

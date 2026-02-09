@@ -52,7 +52,7 @@ const rule: Rule.RuleModule = {
     return {
       'ClassDeclaration,ClassExpression': (node: ESTree.Class): void => {
         if (
-          isCustomElement(context, node, source.getJSDocComment(node)) &&
+          isCustomElement(context, node, source.getCommentsBefore(node)) &&
           ++elementCount > maxElements
         ) {
           context.report({
