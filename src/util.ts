@@ -78,13 +78,13 @@ export function getElementBaseClasses(context: Rule.RuleContext): string[] {
  *
  * @param {Rule.RuleContext} context ESLint rule context
  * @param {ESTree.Class} node Node to test
- * @param {AST.Token=} jsdoc JSDoc to parse
+ * @param {ESTree.Comment[]} comments Comments before the node
  * @return {boolean}
  */
 export function isCustomElement(
   context: Rule.RuleContext,
   node: ESTree.Class,
-  jsdoc?: ESTree.Comment | null
+  comments: ESTree.Comment[]
 ): boolean {
   const asDecorated = node as WithDecorators<ESTree.Node>;
   const customElementBases = getElementBaseClasses(context);
@@ -102,7 +102,7 @@ export function isCustomElement(
     return true;
   }
 
-  if (jsdoc?.value.includes('@customElement')) {
+  if (comments.some((c) => c.value.includes('@customElement'))) {
     customElementsCache.set(node, true);
     return true;
   }

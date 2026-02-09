@@ -51,7 +51,7 @@ const rule: Rule.RuleModule = {
       [`ClassExpression > ${constructorQuery}`]: visitConstructor,
       [`ClassDeclaration > ${constructorQuery}`]: visitConstructor,
       'ClassDeclaration,ClassExpression': (node: ESTree.Class): void => {
-        if (isCustomElement(context, node, source.getJSDocComment(node))) {
+        if (isCustomElement(context, node, source.getCommentsBefore(node))) {
           insideElement = true;
         }
       },
