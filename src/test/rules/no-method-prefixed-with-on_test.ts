@@ -58,6 +58,20 @@ ruleTester.run('no-method-prefixed-with-on', rule, {
         [onSomethingButImAConst]() {
         }
       }`
+    },
+    {
+      code: `class A extends HTMLElement {
+        #onFoo() {
+        }
+      }`,
+      languageOptions: {parser}
+    },
+    {
+      code: `class A extends HTMLElement {
+        #onfoo() {
+        }
+      }`,
+      languageOptions: {parser}
     }
   ],
 
@@ -142,20 +156,6 @@ ruleTester.run('no-method-prefixed-with-on', rule, {
         ['onFoo']() {
         }
       }`,
-      errors: [
-        {
-          messageId: 'noPrefix',
-          line: 2,
-          column: 9
-        }
-      ]
-    },
-    {
-      code: `class A extends HTMLElement {
-        #onFoo() {
-        }
-      }`,
-      languageOptions: {parser},
       errors: [
         {
           messageId: 'noPrefix',
