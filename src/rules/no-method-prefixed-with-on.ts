@@ -49,15 +49,14 @@ const rule: Rule.RuleModule = {
         insideElement = false;
       },
       MethodDefinition: (node: ESTree.MethodDefinition): void => {
-        if (insideElement) {
-          const name = getMethodName(node);
+        if (!insideElement || node.key.type === 'PrivateIdentifier') {
+          return;
+        }
 
-          if (name?.startsWith('on')) {
-            context.report({
-              node,
-              messageId: 'noPrefix'
-            });
-          }
+        const name = getMethodName(node);
+
+        if (name?.startsWith('on')) {
+          context.report({node, messageId: 'noPrefix'});
         }
       }
     };
