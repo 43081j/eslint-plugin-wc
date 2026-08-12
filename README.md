@@ -101,6 +101,7 @@ If you want more fine-grained configuration, you can instead add a snippet like 
 - [wc/no-customized-built-in-elements](docs/rules/no-customized-built-in-elements.md)
 - [wc/no-invalid-extends](docs/rules/no-invalid-extends.md)
 - [wc/no-typos](docs/rules/no-typos.md)
+- [wc/no-unused-scoped-elements](docs/rules/no-unused-scoped-elements.md)
 - [wc/require-listener-teardown](docs/rules/require-listener-teardown.md)
 
 ### Preference/convention
