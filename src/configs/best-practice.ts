@@ -16,6 +16,7 @@ export const configFactory = (plugin: ESLint.Plugin): Linter.FlatConfig => {
       'wc/no-customized-built-in-elements': 'error',
       'wc/no-invalid-extends': 'error',
       'wc/no-typos': 'error',
+      'wc/no-unused-scoped-elements': 'error',
       'wc/require-listener-teardown': 'error'
     }
   };
