@@ -19,6 +19,7 @@ import noInvalidExtends from './rules/no-invalid-extends.js';
 import noOnPrefix from './rules/no-method-prefixed-with-on.js';
 import noSelfClass from './rules/no-self-class.js';
 import noTypos from './rules/no-typos.js';
+import noUnusedScopedElements from './rules/no-unused-scoped-elements.js';
 import {configFactory as configRecommended} from './configs/recommended.js';
 import {configFactory as configBestPractice} from './configs/best-practice.js';
 import {config as configLegacyRecommended} from './configs/legacy-recommended.js';
@@ -47,6 +48,7 @@ export const rules = {
   'no-method-prefixed-with-on': noOnPrefix,
   'no-self-class': noSelfClass,
   'no-typos': noTypos,
+  'no-unused-scoped-elements': noUnusedScopedElements,
   'require-listener-teardown': requireListenerTeardown,
   'tag-name-matches-class': tagMatchesClass
 };
